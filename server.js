@@ -1,7 +1,7 @@
 import express from "express";
-import db from "./db.js";
+// import db from "./db.js";
 import cors from "cors";
-import router from "./API.js";
+// import router from "./API.js";
 
 const app = express();
 const PORT = 5000;
@@ -40,6 +40,7 @@ app.post("/login", async (req, res) => {
     res.status(200).json({ message: "Login successful", username });
   } catch (err) {
     res.status(400).json({ message: err.message });
+  
   }
 });
 
@@ -117,7 +118,7 @@ app.delete("/transactions/:id", async (req, res) => {
   }
 });
 
-app.use("/api", router);
+// app.use("/api", router);
 
 
 app.post("/accounts", async (req, res) => {

@@ -32,62 +32,59 @@ function Dashboard() {
   return (
     <div className='dashboard-container'>
       <Sidebar />
+
+      <div className='dashboard-content'>
+        <h1>Welcome, {userName}!</h1>
+        <h1 className='dashboard-subtitle'>Here's an overview of your financial health:</h1>
+        </div>
       <div className='main-dashboard'>
-        <h1 className='welcome-message'>Welcome back, {userName}!</h1>
-          <div className='main-container'>
-            <label className='total-balance'>Total balance</label>
-            <label className='balance-amount'>KES 250,000</label>
-            <div className='more-details'>
-            <button className='add-amount'>+ Detail Received Amount</button>
-            <button className='Send-amunt'> - Detail send Amount</button>
-            </div>
-<hr />
-            <div className='all-accounts'>
-              <label className='accounts-label'>Your Accounts</label>
-              <div className='cards-container'>
-                <div className='card-details'>
-                  <label>Saving account</label>
-                  <FontAwesomeIcon icon={faUser} className='user-icon'/>
-                </div>
-                <div className='card-details'>
-                  <label>Business account </label>
-                  <FontAwesomeIcon icon={faUser} className='user-icon'/>
-                </div>
-                <div className='card-details'>
-                  <label>Personal account </label>
-                  <FontAwesomeIcon icon={faUser} className='user-icon'/>
-                </div>
-                </div>
-            </div>
+        <div className='console'>
+        <div className="chart-console">
+         {/* <Chart /> */}
           </div>
+       <div className="card-console-accounts">
+       <h1>charts !!!</h1>
+          
+        </div>
+  
+
+         <div className="card-console">
+
+       <div className="card-console-balance-one">
+         <h1>Total Deposite</h1>
+         <label>$</label>
+         </div>
+         <div className="card-console-balance-one">
+         <h1>Total Withdraw</h1>
+         <label>$</label>
+         </div>
+         
+        </div>
+         <div className="card-console">
+         <div className="card-console-balance-one">
+         <h1>Total Investment</h1>
+         <label>$</label>
+         </div>
+         <div className="card-console-balance-one">
+         <h1>Total Income</h1>
+         <label>$</label>
+         </div>
         </div>
 
-        <div className='more-details-container'>
-          <div className='details'> 
-            <label>Income</label>
-            <FontAwesomeIcon icon={faWallet} className='wallet-icon'/>
-          </div>
-          <div className='details'> 
-            <label>Expenditure</label>
-            <FontAwesomeIcon icon={faWallet} className='wallet-icon'/>
-           
-          </div>
-          <div className='details'> 
-            <label>Investment</label>
-            <FontAwesomeIcon icon={faWallet} className='wallet-icon'/>
-          </div>
-          <div className='details'>
-            <label>Transactions</label>
-            <FontAwesomeIcon icon={faWallet} className='wallet-icon'/>s
-             </div>
-          </div>
-               <div className='new-container'>
-                <div className='news'>
-                  News
-                </div>
-               </div>
-
+        
         </div>
+        <div className="card-console-investment-listing">
+         <button className='investment-listing-btn'>Investment</button>
+        </div>
+
+        <div className="card-console-transaction-listing">
+         <h2>Transaction-Listing</h2>
+         <button className='trans-widrawal-listing-btn'>Withdrawals</button>
+         <button className='trans-deposite-listing-btn'>Deposite</button>
+        </div>
+       </div>
+
+      </div>
    
   );
 }

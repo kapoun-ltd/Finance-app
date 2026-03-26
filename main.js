@@ -1,5 +1,5 @@
 import express from "express";
-import db from "./db.js";          // or wherever your db lives
+// import db from "./db.js";          // or wherever your db lives
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";

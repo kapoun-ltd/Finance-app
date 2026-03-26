@@ -1,8 +1,21 @@
 {
   "name": "finance",
-  "private": true,
   "version": "0.0.0",
+  "private": true,
+  "description": "This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.",
+  "keywords": [],
+  "homepage": "https://github.com/Kapoun/Finance-app#readme",
+  "bugs": {
+    "url": "https://github.com/Kapoun/Finance-app/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kapoun/Finance-app.git"
+  },
+  "license": "ISC",
+  "author": "",
   "type": "module",
+  "main": "eslint.config.js",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -24,7 +37,7 @@
     "pg": "^8.16.3",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
-    "react-router-dom": "^7.9.6",
+    "react-router-dom": "^7.13.2",
     "recharts": "^3.4.1",
     "yahoo-finance2": "^3.10.2"
   },
@@ -38,18 +51,5 @@
     "eslint-plugin-react-refresh": "^0.4.22",
     "globals": "^16.4.0",
     "vite": "^7.1.7"
-  },
-  "description": "This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.",
-  "main": "eslint.config.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Kapoun/Finance-app.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Kapoun/Finance-app/issues"
-  },
-  "homepage": "https://github.com/Kapoun/Finance-app#readme"
+  }
 }
