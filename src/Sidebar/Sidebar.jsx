@@ -11,7 +11,8 @@ function Sidebar({ currentPage, setCurrentPage }) {
     "Investments",
     "Transactions",
     "Reports",
-    "Settings",
+    "Profile",
+    "Deposit",
 
   ];
 
@@ -19,13 +20,9 @@ function Sidebar({ currentPage, setCurrentPage }) {
     <div className="sidebar">
       <h2>Finance Tracker</h2>
       <Link to="/dashboard">Dashboard</Link>
-      <Link to="/Accounts">Accounts</Link>
-      <Link to="/investments">investments</Link>
-      <Link to="/income">Income</Link>
-      <Link to="/expenditure">Expense</Link>
+      <Link to ="/deposit">Deposit</Link>
       <Link to="/transactions">Transactions</Link>
-      <Link to="/Reports">Reports</Link>
-      <Link to="/settings">Settings</Link>
+      <Link to="/Profile">Profile</Link>
 
     </div>
   );

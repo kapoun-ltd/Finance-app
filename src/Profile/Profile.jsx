@@ -1,10 +1,10 @@
 import React from  'react';
-import "./Setting.css";
+import "./Profile.css";
 import Sidebar from '../Sidebar/Sidebar';
 
 
 
-function Setting() {    
+function Profile() {    
     return (
         <div className="setting">
 
@@ -37,4 +37,4 @@ function Setting() {
     );
 }
 
-export default Setting;
+export default Profile;
