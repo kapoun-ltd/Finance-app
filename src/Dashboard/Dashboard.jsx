@@ -21,6 +21,7 @@ import Transactions from '../Transactions/transactions';
 import TransactionList from '../TransactionList/TransactionList'
 import { useEffect } from 'react';
 import { useMemo } from 'react';
+import { useBalance } from "../BalanceContext/BalanceContext";
 
 
 const userName = "Kapoun";
@@ -36,56 +37,57 @@ function Dashboard() {
       <div className='dashboard-content'>
         <h1>Welcome, {userName}!</h1>
         <h1 className='dashboard-subtitle'>Here's an overview of your financial health:</h1>
-        </div>
+      </div>
       <div className='main-dashboard'>
         <div className='console'>
-        <div className="chart-console">
-         {/* <Chart /> */}
+          <div className="chart-console">
+
           </div>
-       <div className="card-console-accounts">
-       <h1>charts !!!</h1>
-          
-        </div>
-  
+          <div className="card-console-accounts">
+            <h1>Account balance</h1>
+            {/* <label>$ {balance.toLocaleString()}</label> */}
 
-         <div className="card-console">
+          </div>
 
-       <div className="card-console-balance-one">
-         <h1>Total Deposite</h1>
-         <label>$</label>
-         </div>
-         <div className="card-console-balance-one">
-         <h1>Total Withdraw</h1>
-         <label>$</label>
-         </div>
-         
-        </div>
-         <div className="card-console">
-         <div className="card-console-balance-one">
-         <h1>Total Investment</h1>
-         <label>$</label>
-         </div>
-         <div className="card-console-balance-one">
-         <h1>Total Income</h1>
-         <label>$</label>
-         </div>
-        </div>
 
-        
+          <div className="card-console">
+
+            <div className="card-console-balance-one">
+              <h1>Total Deposite</h1>
+              <label>$</label>
+            </div>
+            <div className="card-console-balance-one">
+              <h1>Total Withdraw</h1>
+              <label>$</label>
+            </div>
+
+          </div>
+          <div className="card-console">
+            <div className="card-console-balance-one">
+              <h1>Total Investment</h1>
+              <label>$</label>
+            </div>
+            <div className="card-console-balance-one">
+              <h1>Total Income</h1>
+              <label>$</label>
+            </div>
+          </div>
+
+
         </div>
         <div className="card-console-investment-listing">
-         <button className='investment-listing-btn'>Investment</button>
+          <button className='investment-listing-btn'>Investment</button>
         </div>
 
         <div className="card-console-transaction-listing">
-         <h2>Transaction-Listing</h2>
-         <button className='trans-widrawal-listing-btn'>Withdrawals</button>
-         <button className='trans-deposite-listing-btn'>Deposite</button>
+          <h1 className='transaction-listing-title'>Transaction-Listing</h1>
+          <button className='trans-widrawal-listing-btn'>Withdrawals</button>
+          <button className='trans-deposite-listing-btn'>Deposite</button>
         </div>
-       </div>
-
       </div>
-   
+
+    </div>
+
   );
 }
 

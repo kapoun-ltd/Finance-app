@@ -20,7 +20,7 @@ function Sidebar({ currentPage, setCurrentPage }) {
     <div className="sidebar">
       <h2>Finance Tracker</h2>
       <Link to="/dashboard">Dashboard</Link>
-      <Link to ="/deposit">Deposit</Link>
+      <Link to="/deposit">Deposit</Link>
       <Link to="/transactions">Transactions</Link>
       <Link to="/Profile">Profile</Link>
 

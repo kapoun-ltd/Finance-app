@@ -10,10 +10,11 @@ import Login from "../Login/Login.jsx";
 import Register from "../Register/Register.jsx";
 import Transactions from "../Transactions/transactions";
 import Reports from "../Reports/Reports.jsx";
-import deposit from "../Deposit/deposit.jsx";
+import Deposit from "../Deposit/deposit.jsx";
 
 function AppRouter() {
   return (
+
     <BrowserRouter>
       <Routes>
         <Route path="/dashboard" element={<Dashboard />} />
@@ -24,9 +25,10 @@ function AppRouter() {
         <Route path="/register" element={<Register />} />
         <Route path="/transactions" element={<Transactions />} />
         <Route path="/Reports" element={<Reports />} />
-        <Route path="/deposit" element = {<deposit />} />
+        <Route path="/Deposit" element={<Deposit />} />
       </Routes>
     </BrowserRouter>
+
   );
 }
 

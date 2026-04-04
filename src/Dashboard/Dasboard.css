@@ -1,134 +1,113 @@
-body{
-  background-color: rgb(23, 24, 23);
+body {
+  background: #121212;
+  font-family: "Poppins", sans-serif;
 }
 
+/* main dashboard wrapper */
 .main-dashboard {
   display: flex;
-  flex-wrap: wrap; /* allows items to move to next row */
-  background-color: rgb(62, 68, 62);
-  height: 1000px;
-  width: 1100px;
-  border: 1px solid white;
-  border-radius: 10px;
-  float: right;
-  margin-top: 140px;
+  flex-direction: column;
+  gap: 20px;
+  padding: 30px;
+  margin-left: 260px;
+  /* space for sidebar */
 }
 
+/* headings */
 h1 {
-  color: rgb(226, 214, 214);
-  font-family: "Poppins", sans-serif;
-  font-size: 20px;
+  color: #fff;
+  font-size: 22px;
   font-weight: 600;
-  margin-left: 20px;
 }
 
-
-.card-console-accounts{
-  width: 400px;
-  height: 220px;
-  margin: 20px;
-  background: linear-gradient(to right, rgb(0, 0, 0), rgb(40, 40, 40));
-  border: 1px solid white;
-  border-radius: 10px;
-}
-
-
+/* console cards row */
 .console {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin-top: 100px;
+  gap: 20px;
+  flex-wrap: wrap;
 }
 
+/* reusable card style */
+.card-console-accounts,
+.card-console-balance-one,
+.card-console-investment-listing,
+.card-console-transaction-listing {
+  background: #1e1f25;
+  border-radius: 16px;
+  padding: 20px;
+  color: #fff;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+  gap: 2px;
+}
 
+/* account card */
+.card-console-accounts {
+  flex: 1;
+  min-width: 280px;
+  height: 180px;
+}
+
+/* balance cards */
 .card-console-balance-one {
-  background: linear-gradient(to right, rgb(0, 0, 0), rgb(40, 40, 40));
-  width: 280px;
-  height: 100px;
-  border: 1px solid white;
-  border-radius: 10px;
-  margin: 20px;
-}
-
-.card-console-investment-listing {
-  background: linear-gradient(to right, rgb(0, 0, 0), rgb(40, 40, 40));
-  flex-direction: row;
-  width: 100%;
-  height: 200px;
-  border: 1px solid white;
-  border-radius: 10px;
-  margin: 20px;
-  color: white;
-}
-
-.investment-listing-btn {
-  background-color: rgb(62, 68, 62);
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-family: "Poppins", sans-serif;
-  font-size: 14px;
-  margin: 20px;
-  align-items: center;
+  flex: 1;
+  min-width: 200px;
+  height: 120px;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
 }
 
-.investment-listing-btn:hover {
-  background-color: rgb(62, 204, 62);
-}
-
+/* full width sections */
+.card-console-investment-listing,
 .card-console-transaction-listing {
-  background: linear-gradient(to right, rgb(0, 0, 0), rgb(40, 40, 40));
-  flex-direction: row;
   width: 100%;
-  height: 200px;
-  border: 1px solid white;
-  border-radius: 10px;
-  margin: 20px;
-  color: white;
+  min-height: 200px;
 }
 
-label {
-  font-family: "Poppins", sans-serif;
+/* buttons */
+.investment-listing-btn,
+.trans-widrawal-listing-btn,
+.trans-deposite-listing-btn {
+  background: #2c2f36;
+  color: #fff;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
   font-size: 14px;
-  color: white;
-  margin-left: 20px;
+  transition: 0.2s ease;
 }
 
+/* hover effect */
+.investment-listing-btn:hover,
+.trans-widrawal-listing-btn:hover,
+.trans-deposite-listing-btn:hover {
+  background: #4caf50;
+  transform: translateY(-2px);
+}
+
+/* dashboard content alignment */
 .dashboard-content {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  padding: 20px;
-  justify-content: center;
-  align-items: center;
+}
+
+/* labels */
+label {
+  font-size: 14px;
+  color: #aaa;
+}
+
+/* subtle section titles */
+.transaction-listing-title {
+  padding-bottom: 10px;
+  font-size: 16px;
+  color: #ccc;
 }
 
 .dashboard-content h1 {
-  margin: 0;
-  align-items: center;
-}
-
-.trans-widrawal-listing-btn ,.trans-deposite-listing-btn {
-  background-color: rgb(62, 68, 62);
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-family: "Poppins", sans-serif;
-  font-size: 14px;
-  margin: 20px;
   align-items: center;
   justify-content: center;
-}
-
-.trans-deposite-listing-btn:hover {
-  background-color: rgb(62, 204, 62);
-}
-
-.trans-widrawal-listing-btn:hover {
-  background-color: rgb(62, 204, 62);
+  display: flex;
 }

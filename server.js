@@ -2,6 +2,7 @@ import express from "express";
 // import db from "./db.js";
 import cors from "cors";
 // import router from "./API.js";
+import supabase from "./supabase.js"
 
 const app = express();
 const PORT = 5000;
@@ -11,12 +12,23 @@ app.use(cors({ origin: 'http://localhost:5173' }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.get("/users", async (req, res) => {
+  const { data, error } = await supabase
+    .from("users")
+    .select("*")
+
+  if (error) return res.status(500).json({ error })
+
+  res.json(data)
+})
+
+
 
 async function validateUserInput(username, password, db) {
   if (!username || !password) {
     throw new Error("Username and password are required");
   }
- 
+
   const result = await db.query(
     "SELECT * FROM Register WHERE email = $1",
     [username]
@@ -31,6 +43,26 @@ async function validateUserInput(username, password, db) {
 }
 
 
+app.post("/deposit", async (req, res) => {
+  const { amount, account_deposit, deposit_method } = req.body;
+
+  try {
+    const result = await supabase
+      .from("deposit")
+      .insert([{
+        amount,
+        account_deposit,
+        deposit_method
+      }])
+      .select()
+
+    res.json(result)
+  } catch (error) {
+    console.error("Error depositing:", error);
+    res.status(500).json({ message: "Failed to deposit" });
+  }
+})
+
 app.post("/login", async (req, res) => {
   console.log(req.body);
   const { username, password } = req.body;
@@ -40,7 +72,7 @@ app.post("/login", async (req, res) => {
     res.status(200).json({ message: "Login successful", username });
   } catch (err) {
     res.status(400).json({ message: err.message });
-  
+
   }
 });
 
@@ -49,17 +81,23 @@ app.post("/register", async (req, res) => {
   console.log("📥 Incoming data:", req.body);
 
   try {
-    const result = await db.query(
+    const result = await supabase
+      .from("registration")
+      .insert([{
+        full_name,
+        email,
+        phone_number,
+        password,
+        confirm_password
+      }])
+      .select()
 
-      "INSERT INTO register (full_name, email, phone_number, password, confirm_password) VALUES ($1, $2, $3, $4, $5)",
-      [full_name, email, phone_number, password, confirm_password]
-    );
-    res.status(201).json({ message: "User registered successfully" });
+    res.json(result)
   } catch (error) {
-    console.error("Error registering user:", error);
-    res.status(500).json({ message: "Failed to register user" });
+    console.error("Error depositing:", error);
+    res.status(500).json({ message: "Failed to deposit" });
   }
-});
+})
 
 app.post("/transactions", async (req, res) => {
   const {
@@ -118,23 +156,8 @@ app.delete("/transactions/:id", async (req, res) => {
   }
 });
 
-// app.use("/api", router);
 
 
-app.post("/accounts", async (req, res) => {
-   console.log("REQ BODY 👉", req.body);
-  const { user_id, name, type } = req.body;
-try {
-    const result = await db.query(
-      "INSERT INTO accounts (user_id, name, type) VALUES ($1, $2, $3) RETURNING *",
-      [user_id, name, type]
-    );
-    res.status(201).json(result.rows[0]);
-  } catch (error) {
-    console.error("Error creating account:", error);
-    res.status(500).json({ message: "Failed to create account" });
-  }
-});
 
 
 

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate, Link } from 'react-router-dom';
+import supabase from "../../supabase";
 import './Register.css';
 import logo from '../assets/logo.png';
 
@@ -7,105 +8,84 @@ function Register() {
   const navigate = useNavigate();
 
   const [user, setUser] = useState({
-    full_name: "",
-    email: "",
-    phone_number: "",
-    password: "",
-    confirm_password: ""
+    full_name: '',
+    email: '',
+    phone_number: '',
+    password: '',
+    confirm_password: ''
   });
 
-  async function registerUser(e) {
+  const [errorMessage, setErrorMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setUser(prev => ({ ...prev, [name]: value }));
+  };
+
+  const registerUser = async (e) => {
     e.preventDefault();
 
-    console.log("🚀 Sending:", user);
+    if (user.password !== user.confirm_password) {
+      setErrorMessage("Passwords do not match!");
+      return;
+    }
 
     try {
-      const response = await fetch("http://localhost:5000/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(user),
+
+      const { data, error } = await supabase.auth.signUp({
+        email: user.email,
+        password: user.password
       });
+      if (error) throw error;
 
-      const data = await response.json();
+      // Insert profile info into your RLS-safe table
+      const { error: profileError } = await supabase
+        .from('registration')
+        .insert({
+          id: data.user.id,
+          full_name: user.full_name,
+          phone_number: user.phone_number
+        });
 
-      if (!response.ok) {
-        throw new Error(data.message);
-      }
+      if (profileError) throw profileError;
 
-      navigate('/');
+      setSuccessMessage("Registration successful!");
+      setErrorMessage('');
+      navigate('/'); // redirect to login or dashboard
+
     } catch (err) {
-      console.error("Registration error:", err);
+      console.error(err);
+      setErrorMessage(err.message);
+      setSuccessMessage('');
     }
-  }
-
-  function handleChange(e) {
-    const { name, value } = e.target;
-    setUser(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  }
+  };
 
   return (
     <div className='register-container'>
       <img src={logo} alt="Finance Tracker Logo" className='logo' />
-
       <h2>Register Page</h2>
 
       <form onSubmit={registerUser}>
         <label>Full Name</label>
-        <input
-          placeholder="Enter your full name"
-          type="text"
-          name="full_name"
-          value={user.full_name}
-          onChange={handleChange}
-          required
-        />
+        <input type="text" name="full_name" value={user.full_name} onChange={handleChange} placeholder='Enter your full name' required />
 
         <label>Email</label>
-        <input
-          placeholder="Enter your email"
-          type="email"
-          name="email"
-          value={user.email}
-          onChange={handleChange}
-          required
-        />
+        <input type="email" name="email" value={user.email} onChange={handleChange} placeholder='Enter your email' required />
 
         <label>Phone Number</label>
-        <input
-          placeholder="Enter your phone number"
-          type="text"
-          name="phone_number"
-          value={user.phone_number}
-          onChange={handleChange}
-          required
-        />
+        <input type="text" name="phone_number" value={user.phone_number} onChange={handleChange} required />
 
         <label>Password</label>
-        <input
-          placeholder="Enter your password"
-          type="password"
-          name="password"
-          value={user.password}
-          onChange={handleChange}
-          required
-        />
+        <input type="password" name="password" value={user.password} onChange={handleChange} required />
 
         <label>Confirm Password</label>
-        <input
-          placeholder="Enter your confirm password"
-          type="password"
-          name="confirm_password"
-          value={user.confirm_password}
-          onChange={handleChange}
-          required
-        />
+        <input type="password" name="confirm_password" value={user.confirm_password} onChange={handleChange} required />
 
         <button type="submit">Register</button>
+
+        {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
+        {successMessage && <p style={{ color: 'green' }}>{successMessage}</p>}
       </form>
 
       <label>If you already have an account</label>

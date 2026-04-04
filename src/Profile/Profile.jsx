@@ -1,10 +1,10 @@
-import React from  'react';
+import React from 'react';
 import "./Profile.css";
 import Sidebar from '../Sidebar/Sidebar';
 
 
 
-function Profile() {    
+function Profile() {
     return (
         <div className="setting">
 
@@ -20,7 +20,7 @@ function Profile() {
             </div>
             <div className="setting-option">
                 <label>Theme</label>
-                <select>    
+                <select>
                     <option>Light</option>
                     <option>Dark</option>
                 </select>
@@ -34,6 +34,7 @@ function Profile() {
                 </select>
             </div>
         </div>
+
     );
 }
 

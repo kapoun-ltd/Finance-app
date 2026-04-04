@@ -1,4 +1,9 @@
-.register-container{
+body {
+    background-color: white;
+
+}
+
+.register-container {
     display: flex;
     flex-direction: column;
     width: 400px;
@@ -10,25 +15,25 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.register-container h2{
+.register-container h2 {
     text-align: center;
     margin-bottom: 20px;
 }
 
-.register-container label{
+.register-container label {
     margin-bottom: 5px;
     font-weight: lighter;
     color: rgb(99, 103, 107);
 }
 
-.register-container input{
+.register-container input {
     margin-bottom: 15px;
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 3px;
 }
 
-.register-container button{
+.register-container button {
     padding: 10px;
     background-color: #28a745;
     color: white;
@@ -37,14 +42,14 @@
     cursor: pointer;
 }
 
-.register-container a{
+.register-container a {
     margin-top: 10px;
     text-align: center;
     color: #007bff;
     text-decoration: none;
 }
 
-.register-container img.logo{
+.register-container img.logo {
     display: block;
     justify-content: center;
     align-items: center;

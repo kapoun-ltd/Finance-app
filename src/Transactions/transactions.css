@@ -1,62 +1,67 @@
-.transaction-container button {
-    padding: 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-.transaction-container button:hover {
-    background-color: #0069d9;
-}
-
-/* 🌫️ Background overlay */
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.5); /* translucent dark */
-    backdrop-filter: blur(4px);    /* glass effect */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-}
-
-/* 📦 Modal box */
-.modal-content {
-    background: #fff;
-    padding: 25px;
+.transaction-mini-container {
+    background: #1e1f25;
+    padding: 20px;
     border-radius: 12px;
-    width: 90%;
-    max-width: 500px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-    animation: popIn 0.25s ease-out;
-}
-
-/* ✨ Soft entrance animation */
-@keyframes popIn {
-    from {
-        transform: scale(0.95);
-        opacity: 0;
-    }
-    to {
-        transform: scale(1);
-        opacity: 1;
-    }
-}
-
-
-.trans-container {
-    display: flex;
-    align-items: center;
-    margin-left: 250px;
+    width: 1000px;
     margin-top: 20px;
-    font-size: 24px;
-    color: #333;
-    background-color: rgb(168, 128, 76);
+    color: #fff;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.transaction-mini-container h2 {
+    margin-bottom: 15px;
+    font-size: 20px;
+}
+
+.transaction-listing {
+    overflow-x: auto;
+    /* mobile friendly */
+}
+
+table {
+    width: 1000px;
+    border-collapse: collapse;
+    font-size: 14px;
+    float: left;
+}
+
+th {
+    text-align: left;
+    padding: 12px;
+    background: #2c2f36;
+    color: #aaa;
+    font-weight: 500;
+}
+
+td {
+    padding: 12px;
+    border-bottom: 1px solid #2c2f36;
+}
+
+/* zebra stripes */
+tr:nth-child(even) {
+    background: #24262c;
+}
+
+/* hover effect */
+tr:hover {
+    background: #32343b;
+    transition: 0.2s ease;
+}
+
+/* amount styling */
+td:nth-child(3) {
+    font-weight: bold;
+    color: #4caf50;
+    /* green for income */
+}
+
+/* type badge style */
+td:nth-child(4) {
+    font-size: 12px;
+    padding: 6px 10px;
+    border-radius: 6px;
+    background: rgba(76, 175, 80, 0.1);
+    color: #4caf50;
+    display: inline-block;
 }
