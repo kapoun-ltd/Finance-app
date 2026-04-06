@@ -1,0 +1,101 @@
+.login-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+}
+
+.auth-box h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    background: linear-gradient(to right, #00c6ff, #0072ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.auth-box {
+    width: 350px;
+    padding: 30px;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+    color: white;
+}
+
+
+.auth-box input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    outline: none;
+}
+
+.auth-box input:focus {
+    border: 1px solid #00c6ff;
+}
+
+.auth-box input:focus {
+    border: 1px solid #00c6ff;
+}
+
+
+.auth-box p {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.auth-box a {
+    color: #00c6ff;
+    text-decoration: none;
+}
+
+.login-container label:last-of-type {
+    margin-top: 15px;
+    font-weight: normal;
+}
+
+.login-container input:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+
+.login-container p {
+    justify-items: center;
+    align-items: center;
+    text-align: center;
+}
+
+
+.login-container img.logo {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 20px;
+    display: block;
+    border-radius: 50%;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.auth-box button {
+    margin-top: 20px;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #00c6ff, #0072ff);
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}

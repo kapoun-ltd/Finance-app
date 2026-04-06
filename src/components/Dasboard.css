@@ -1,0 +1,137 @@
+body {
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* main dashboard wrapper */
+.main-dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 30px;
+  margin-left: 260px;
+  /* space for sidebar */
+  background: linear-gradient(145deg, #1f2933, #111827);
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* headings */
+h1 {
+  color: #fff;
+  font-size: 22px;
+  font-weight: 600;
+  padding: 1rem;
+}
+
+/* console cards row */
+.card-console {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding: 20px;
+}
+
+/* reusable card style */
+.card-console-accounts,
+.card-console-balance-one,
+.card-console-investment-listing,
+.card-console-transaction-listing {
+  background: linear-gradient(145deg, #243949, #141e30);
+  color: white;
+  margin: 1rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  transition: all 0.3s ease;
+  border-radius: 10px;
+}
+
+.card-console-accounts:hover,
+.card-console-balance-one:hover,
+.card-console-investment-listing:hover,
+.card-console-transaction-listing:hover {
+  transform: translateY(-5px) scale(1.02);
+  background: linear-gradient(145deg, #2b5876, #4e4376);
+}
+
+
+
+/* account card */
+.card-console-accounts {
+  flex: 1;
+  min-width: 280px;
+  height: 180px;
+}
+
+/* balance cards */
+.card-console-balance-one {
+  flex: 1;
+  min-width: 200px;
+  height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* full width sections */
+.card-console-investment-listing,
+.card-console-transaction-listing {
+  width: 100%;
+  min-height: 200px;
+}
+
+/* buttons */
+
+.investment-listing-btn,
+.trans-widrawal-listing-btn,
+.trans-deposite-listing-btn {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  border: none;
+  padding: 10px 15px;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+  margin: 1rem;
+}
+
+.investment-listing-btn:hover,
+.trans-widrawal-listing-btn:hover,
+.trans-deposite-listing-btn:hover {
+  background: linear-gradient(135deg, #764ba2, #667eea);
+  transform: scale(1.05);
+}
+
+/* hover effect */
+.investment-listing-btn:hover,
+.trans-widrawal-listing-btn:hover,
+.trans-deposite-listing-btn:hover {
+  background: #4caf50;
+  transform: translateY(-2px);
+}
+
+/* dashboard content alignment */
+.dashboard-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* labels */
+label {
+  font-size: 14px;
+  color: #aaa;
+  padding: 1rem;
+}
+
+/* subtle section titles */
+.transaction-listing-title {
+  padding-bottom: 10px;
+  font-size: 16px;
+  color: #ccc;
+}
+
+.dashboard-content h1 {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}

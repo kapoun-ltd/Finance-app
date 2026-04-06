@@ -1,8 +1,6 @@
 import express from "express";
-// import db from "./db.js";
 import cors from "cors";
-// import router from "./API.js";
-import supabase from "./supabase.js"
+import supabase from "./src/services/supabase.js"
 
 const app = express();
 const PORT = 5000;
