@@ -2,9 +2,8 @@
     background: #1e1f25;
     padding: 40px;
     border-radius: 12px;
-    width: 1000px;
-    margin-top: 20px;
-    margin-left: 220px;
+    width: 800px;
+    margin-left: 300px;
     color: #fff;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 
@@ -15,37 +14,7 @@
     font-size: 20px;
 }
 
-.transaction-listing {
-    overflow-x: auto;
-    /* mobile friendly */
-}
 
-table {
-    width: 1000px;
-    border-collapse: collapse;
-    font-size: 14px;
-
-}
-
-th {
-    text-align: left;
-    padding: 12px;
-    background: #2c2f36;
-    color: #aaa;
-    font-weight: 500;
-}
-
-td {
-    padding: 12px;
-    border-bottom: 1px solid #2c2f36;
-}
-
-/* zebra stripes */
-tr:nth-child(even) {
-    background: #24262c;
-}
-
-/* hover effect */
 tr:hover {
     background: #32343b;
     transition: 0.2s ease;
@@ -66,4 +35,68 @@ td:nth-child(4) {
     background: rgba(76, 175, 80, 0.1);
     color: #4caf50;
     display: inline-block;
+}
+
+.trans-btn {
+    background: #4caf50;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: 0.2s ease;
+}
+
+.transaction-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.transaction-form input {
+    padding: 10px;
+    border-radius: 6px;
+    border: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: 0.2s ease;
+    margin: 10px;
+}
+
+.transaction-form input:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px #4caf50;
+}
+
+.transaction-form button {
+    background: #4caf50;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: 0.2s ease;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    border-radius: 2rem;
+}
+
+table th {
+    background-color: #4caf50;
+    color: #fff;
+    padding: 10px;
+    text-align: left;
+}
+
+table td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
 }

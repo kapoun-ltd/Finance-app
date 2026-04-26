@@ -85,6 +85,17 @@
     border-radius: 12px;
 }
 
+.transaction-listing table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.transaction-listing th,
+.transaction-listing td {
+    padding: 10px;
+    border-bottom: 1px solid #2c2f36;
+}
+
 .transaction-item {
     display: flex;
     justify-content: space-between;

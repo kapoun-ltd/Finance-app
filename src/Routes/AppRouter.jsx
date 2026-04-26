@@ -11,6 +11,7 @@ import Login from "../pages/Login.jsx";
 import Register from "../pages/Register.jsx";
 import Transactions from "../pages/transactions";
 import Reports from "../pages/Reports.jsx";
+import Payment from "../pages/Payment.jsx";
 
 
 function AppRouter() {
@@ -30,6 +31,7 @@ function AppRouter() {
             <Route path="/accounts" element={<Accounts />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/transactions" element={<Transactions />} />
+            <Route path="/payment" element={<Payment />} />
             <Route path="/reports" element={<Reports />} />
             <Route path="/deposit" element={<Deposit />} />
             <Route path="/withdrawal" element={<Withdrawal />} />

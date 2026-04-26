@@ -39,7 +39,6 @@ function Deposit() {
     }, []);
 
 
-
     const handleDeposit = async (e) => {
         e.preventDefault();
         const { amount, account_deposit, deposit_method } = formData;
@@ -146,9 +145,10 @@ function Deposit() {
                                 <div className="recent-transaction-listing">
                                     {deposits.map((item, index) => (
                                         <div key={index} className="transaction-item">
-                                            <span>{item.id}</span> -
-                                            <span>${item.amount}</span> -
-                                            <span>{item.deposit_method}</span> -
+                                            <span>{item.id}</span>
+                                            <span>${item.amount}</span>
+                                            <span>{item.account_deposit}</span>
+                                            <span>{item.deposit_method}</span>
                                             <span>{new Date(item.created_at).toLocaleString()}</span>
                                         </div>
                                     ))}
