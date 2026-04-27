@@ -1,7 +1,9 @@
-import dotenv from "dotenv";
-dotenv.config();
+import serverConfig from "../configs/serverConfig.js";
 
-const consumerKey = process.env.SAFARICOM_CONSUMER_KEY;
-const consumerSecret = process.env.SAFARICOM_CONSUMER_SECRET;
+const { safaricom } = serverConfig;
 
-console.log(consumerKey, consumerSecret);
+if (!safaricom?.consumerKey || !safaricom?.consumerSecret) {
+    throw new Error("Missing Safaricom credentials");
+}
+
+export default safaricom;

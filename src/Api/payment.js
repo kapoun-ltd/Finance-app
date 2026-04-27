@@ -1,6 +1,9 @@
+import config from "../configs/clientConfig.js";
+
+
 const handlePayment = async () => {
     try {
-        const res = await fetch("http://localhost:5000/api/pay", {
+        const res = await fetch(`${config.app.baseURL}/api/pay`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -20,3 +23,5 @@ const handlePayment = async () => {
         console.error(err);
     }
 };
+
+export default handlePayment;

@@ -6,6 +6,7 @@ import Deposit from "./pages/deposit";
 import Transactions from "./pages/transactions";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Payment from "./pages/Payment";
 
 
 export default function App() {
@@ -17,6 +18,7 @@ export default function App() {
       <Route path="/transactions" element={<Transactions />} />
       <Route path="/" element={<Login />} />
       <Route path="/register" element={<Register />} />
+      <Route path="/payment" element={<Payment />} />
     </Routes>
   );
 }

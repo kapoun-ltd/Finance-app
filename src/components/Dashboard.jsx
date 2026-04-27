@@ -35,7 +35,7 @@ function Dashboard() {
     const loadTransactions = async () => {
       setLoading(true);
 
-      const data = await fetchTransactions(); // 👈 always all
+      const data = await fetchTransactions();
 
       if (data) {
         setTransactions(data);
@@ -57,7 +57,7 @@ function Dashboard() {
     };
 
     loadTransactions();
-    // console.log("DATA:", data);
+
   }, []);
 
 
@@ -157,7 +157,7 @@ function Dashboard() {
           <button className='trans-all-listing-btn' onClick={() => setType("")}>
             All
           </button>
-          <div className='transaction-listing'>
+          {/* <div className='transaction-listing'>
             <table>
               <thead>
                 <tr>
@@ -181,8 +181,8 @@ function Dashboard() {
                   </tr>
                 ))}
               </tbody>
-            </table>
-          </div>
+            </table> */}
+          {/* </div> */}
 
         </div>
       </div>
