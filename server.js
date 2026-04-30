@@ -3,11 +3,17 @@ import cors from "cors";
 import supabase from "./src/services/supabase.js"
 import mpesaRoutes from "./src/Routes/mpesaRoutes.js";
 import stkPush from "./src/services/mpesaService.js";
+import cors from "cors";
+
+app.use(cors({
+    origin: "https://your-frontend.vercel.app",
+    credentials: true
+}));
 
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
-app.use(cors({ origin: 'http://localhost:5173' }));
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -36,4 +42,7 @@ app.post("/api/pay", async (req, res) => {
         });
     }
 });
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});
