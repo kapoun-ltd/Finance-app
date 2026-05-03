@@ -21,7 +21,7 @@ function Sidebar({ currentPage, setCurrentPage }) {
 
   return (
     <div className="sidebar">
-      <h2>Finance Tracker</h2>
+      <h2>Tracker</h2>
       <Link to="/dashboard">Dashboard</Link>
       <Link to="/deposit">Deposit</Link>
       <Link to="/transactions">Transactions</Link>

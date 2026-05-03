@@ -66,12 +66,12 @@ function Dashboard() {
     <div>
       <Sidebar />
       <div className='dashboard-container'>
-        <h1>Welcome, {userName}!</h1>
+        <label>Welcome, {userName}!</label>
 
         <div className='main-dashboard'>
           <div className='console'>
             <div className="card-console-accounts">
-              <h1>Accounts</h1>
+              <label>Dashboard</label>
             </div>
 
             <div className="card-console">
@@ -84,7 +84,7 @@ function Dashboard() {
                   </div>
                 </div>
               </div>
-              <div className="card-console-balance">
+              <div className="card-console-balance-expence">
                 <FontAwesomeIcon icon={faWallet} />
                 <div>
                   <label htmlFor="">Total Expences</label>
@@ -93,7 +93,7 @@ function Dashboard() {
                   </div>
                 </div>
               </div>
-              <div className="card-console-balance">
+              <div className="card-console-balance-balance">
                 <FontAwesomeIcon icon={faWallet} />
                 <div>
                   <label htmlFor="">Total Net Balance</label>
@@ -157,32 +157,7 @@ function Dashboard() {
           <button className='trans-all-listing-btn' onClick={() => setType("")}>
             All
           </button>
-          {/* <div className='transaction-listing'>
-            <table>
-              <thead>
-                <tr>
-                  <th>Date</th>
-                  <th>Description</th>
-                  <th>Amount</th>
-                  <th>Type</th>
-                  <th>Account</th>
-                  <th>Method</th>
-                </tr>
-              </thead>
-              <tbody>
-                {filteredTransactions.map((tx) => (
-                  <tr key={tx.id}>
-                    <td>{new Date(tx.created_at).toLocaleDateString()}</td>
-                    <td>{tx.description || 'Deposit'}</td>
-                    <td>{tx.amount}</td>
-                    <td>{tx.account}</td>
-                    <td>{tx.method}</td>
-                    <td>{tx.type}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table> */}
-          {/* </div> */}
+
 
         </div>
       </div>

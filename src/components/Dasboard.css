@@ -2,11 +2,9 @@
   flex-direction: column;
   gap: 20px;
   padding: 30px;
-  margin-left: 260px;
-  /* space for sidebar */
-  background: #c2c1c1;
-  color: rgb(95, 94, 94);
-  border-radius: 15px;
+  margin-left: 120px;
+  background: white;
+  color: rgb(1, 0, 0);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
   height: 1400px;
 }
@@ -17,28 +15,73 @@
 }
 
 .card-console-balance {
-  background-color: #f5f5f5;
+  width: 320px;
+  height: 190px;
+  border-radius: 16px;
   padding: 20px;
-  width: 300px;
-  height: 150px;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  color: white;
+
+  background: linear-gradient(135deg, #1661f7, #44c5e5);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  font-family: 'Poppins', sans-serif;
+}
+
+.card-console-balance-expence {
+  width: 320px;
+  height: 190px;
+  border-radius: 16px;
+  padding: 20px;
+  color: white;
+
+  background: linear-gradient(135deg, #4eaceb, #f52626);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  font-family: 'Poppins', sans-serif;
+}
+
+.card-console-balance-balance {
+  width: 320px;
+  height: 190px;
+  border-radius: 16px;
+  padding: 20px;
+  color: white;
+
+  background: linear-gradient(135deg, #1e3c72, #3be74c);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  font-family: 'Poppins', sans-serif;
 }
 
 
 .income-balance {
   color: #5adb4f;
-  font-size: 20px;
+  font-size: 1.5rem;
+  font-weight: bold;
 }
 
 .net-balance {
   color: #dba009;
-  font-size: 20px;
+  font-size: 1.5rem;
+  font-weight: bold;
 }
 
 .expence-balance {
   color: #f21111;
-  font-size: 20px;
+  font-size: 1.5rem;
+  font-weight: bold;
 }
 
 .card-console-other-container {
