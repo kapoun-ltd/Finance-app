@@ -10,6 +10,7 @@ import Sidebar from './Sidebar';
 import './Dasboard.css';
 import ErrorBoundary from "./ErrorBoundary";
 import { fetchTransactions } from "../Api/transaction";
+import IncomeChart from '../charts/charts';
 
 
 const userName = "Kapoun";
@@ -112,8 +113,8 @@ function Dashboard() {
         </div>
         <div className="card-console-other-container">
           <div className="card-console-other">
-            <label>Other</label>
-            <label>$ 0</label>
+
+            <IncomeChart transactions={transactions} />
           </div>
 
           <div className="card-console-other-pending">

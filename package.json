@@ -24,8 +24,11 @@
     "start": "node server.js"
   },
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
     "@fortawesome/free-solid-svg-icons": "^7.1.0",
     "@fortawesome/react-fontawesome": "^3.1.1",
+    "@mui/x-charts": "^9.0.4",
     "@supabase/supabase-js": "^2.101.1",
     "axios": "^1.13.2",
     "bcrypt": "^6.0.0",
