@@ -48,12 +48,12 @@ function Dashboard() {
         setTransactions(resData);
 
         const income = resData
-          .filter((tx) => tx.type === "income")
+          .filter((tx) => tx.type === "Income")
           .reduce((sum, tx) => sum + Number(tx.amount), 0);
 
         // Standardized to catch both spellings just in case
         const expense = resData
-          .filter((tx) => tx.type === "expense")
+          .filter((tx) => tx.type === "Expense")
           .reduce((sum, tx) => sum + Number(tx.amount), 0);
 
         setIncomeTotal(income);
@@ -99,7 +99,7 @@ function Dashboard() {
                   </div>
                 </div>
               </div>
-              <div className="card-console-balance-expence">
+              <div className="card-console-balance-expense">
                 <FontAwesomeIcon icon={faWallet} />
                 <div>
                   <label htmlFor="">Total Expenses</label>
