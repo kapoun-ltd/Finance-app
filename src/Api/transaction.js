@@ -1,5 +1,21 @@
 import supabase from "../services/supabase";
 
+// 🔄 SUBSCRIBE to real-time transaction updates
+export const subscribeToTransactions = (onUpdate) => {
+    return supabase
+        .channel('realtime-transactions')
+        .on(
+            'postgres_changes',
+            { event: '*', scheme: 'public', table: 'transactions' },
+            (payload) => {
+                // This callback runs whenever a row is INSERTED, UPDATED, or DELETED
+                console.log('Change received!', payload);
+                onUpdate(payload);
+            }
+        )
+        .subscribe();
+};
+
 // ➕ ADD transaction
 export const addTransaction = async (formData) => {
 

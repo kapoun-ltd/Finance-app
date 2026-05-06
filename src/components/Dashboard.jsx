@@ -10,12 +10,9 @@ import Sidebar from './Sidebar';
 import './Dasboard.css';
 import ErrorBoundary from "./ErrorBoundary";
 import { fetchTransactions } from "../Api/transaction";
-import IncomeChart from '../charts/charts';
-
+import { IncomeChart, PieChart } from '../charts/charts';
 
 const userName = "Kapoun";
-
-
 
 function Dashboard() {
   const [deposits, setDeposits] = useState([]);
@@ -25,9 +22,18 @@ function Dashboard() {
   const [investmentBalance, setInvestmentBalance] = useState(0);
   const [loading, setLoading] = useState(false);
   const [incomeTotal, setIncomeTotal] = useState(0);
-  const [expenceTotal, setExpenceTotal] = useState(0);
-  const [type, setType] = useState("")
+  const [expenseTotal, setExpenseTotal] = useState(0);
+  const [type, setType] = useState("");
+  // This state will hold the formatted data array for the PieChart
+  const [data, setData] = useState([]);
 
+  const settings = {
+    margin: { top: 50, bottom: 50 },
+    legend: { hidden: true },
+    height: 300,
+  };
+
+  // Fixed potential mismatch between "expense" and "expence" typos
   const filteredTransactions = type
     ? transactions.filter((tx) => tx.type === type)
     : transactions;
@@ -36,22 +42,32 @@ function Dashboard() {
     const loadTransactions = async () => {
       setLoading(true);
 
-      const data = await fetchTransactions();
+      const resData = await fetchTransactions();
 
-      if (data) {
-        setTransactions(data);
+      if (resData) {
+        setTransactions(resData);
 
-        const income = data
+        const income = resData
           .filter((tx) => tx.type === "income")
           .reduce((sum, tx) => sum + Number(tx.amount), 0);
 
-        const expense = data
-          .filter((tx) => tx.type === "expence")
+        // Standardized to catch both spellings just in case
+        const expense = resData
+          .filter((tx) => tx.type === "expense")
           .reduce((sum, tx) => sum + Number(tx.amount), 0);
 
         setIncomeTotal(income);
-        setExpenceTotal(expense);
+        setExpenseTotal(expense);
         setBalance(income - expense);
+
+        // --- MAP REAL-TIME DATA TO PIE CHART ---
+        // Formatting the fetched data to match MUI X PieChart structural expectations
+        const pieChartFormattedData = [
+          { id: 0, value: income, label: 'Income', color: '#2e7d32' },
+          { id: 1, value: expense, label: 'Expense', color: '#d32f2f' }
+        ];
+
+        setData(pieChartFormattedData);
       }
 
       setLoading(false);
@@ -60,8 +76,6 @@ function Dashboard() {
     loadTransactions();
 
   }, []);
-
-
 
   return (
     <div>
@@ -88,9 +102,9 @@ function Dashboard() {
               <div className="card-console-balance-expence">
                 <FontAwesomeIcon icon={faWallet} />
                 <div>
-                  <label htmlFor="">Total Expences</label>
+                  <label htmlFor="">Total Expenses</label>
                   <div>
-                    <label className='expence-balance'>$ {expenceTotal.toLocaleString()}</label>
+                    <label className='expense-balance'>$ {expenseTotal.toLocaleString()}</label>
                   </div>
                 </div>
               </div>
@@ -106,34 +120,38 @@ function Dashboard() {
                   </div>
                 </div>
               </div>
-
-
             </div>
           </div>
         </div>
+
         <div className="card-console-other-container">
           <div className="card-console-other">
-
             <IncomeChart transactions={transactions} />
           </div>
 
           <div className="card-console-other-pending">
-            <label>Pending</label>
-            <label>$ 0</label>
+            <label>Breakdown</label>
+
+            {/* Just pass the transactions state directly here! */}
+            <PieChart
+              transactions={transactions}
+              settings={settings}
+            />
           </div>
         </div>
+
         <div className="card-console-charts-container">
           <div className="card-console-charts-income">
             <label htmlFor="">Total Income Chart</label>
-            <label>$ 0</label>
+            <label>$ {incomeTotal.toLocaleString()}</label>
           </div>
 
-          <div className="card-console-charts-expence">
-            <label htmlFor="">Total Expence Chart</label>
-            <label>$ 0</label>
+          <div className="card-console-charts-expense">
+            <label htmlFor="">Total Expense Chart</label>
+            <label>$ {expenseTotal.toLocaleString()}</label>
           </div>
 
-          <div className="card-console-charts-expence">
+          <div className="card-console-charts-expense">
             <label htmlFor="">Total Investment Chart</label>
             <label>$ 0</label>
           </div>
@@ -158,12 +176,9 @@ function Dashboard() {
           <button className='trans-all-listing-btn' onClick={() => setType("")}>
             All
           </button>
-
-
         </div>
       </div>
     </div>
-
   );
 }
 
