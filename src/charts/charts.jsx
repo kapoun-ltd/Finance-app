@@ -20,7 +20,7 @@ function IncomeChart({ transactions = [] }) {
       monthlyIncome[month] += Number(tx.amount);
     }
 
-    if (tx.type?.toLowerCase() === "expense") {
+    if (tx.type?.toLowerCase() === "expence") {
       monthlyExpense[month] += Number(tx.amount);
     }
   });

@@ -42,11 +42,11 @@ function Dashboard() {
         setTransactions(data);
 
         const income = data
-          .filter((tx) => tx.type === "Income")
+          .filter((tx) => tx.type === "income")
           .reduce((sum, tx) => sum + Number(tx.amount), 0);
 
         const expense = data
-          .filter((tx) => tx.type === "Expence")
+          .filter((tx) => tx.type === "expence")
           .reduce((sum, tx) => sum + Number(tx.amount), 0);
 
         setIncomeTotal(income);
