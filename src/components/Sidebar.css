@@ -1,8 +1,8 @@
+/* --- Desktop Sidebar (Unchanged) --- */
 .sidebar {
   height: 100vh;
   padding: 20px;
   position: fixed;
-  /* stays on the left */
   top: 0;
   left: 0;
   display: flex;
@@ -10,8 +10,11 @@
   background-color: white;
   gap: 20px;
   color: rgb(5, 5, 5);
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
+  /* Optional: nice separator line */
+  z-index: 1000;
+  /* Keeps it above the dashboard content */
 }
-
 
 .sidebar a {
   text-decoration: none;
@@ -19,6 +22,7 @@
   transition: 0.3s ease;
   font-size: 1rem;
   display: block;
+  color: inherit;
 }
 
 .sidebar a:hover {
@@ -29,4 +33,48 @@
 .sidebar a.active {
   color: #fbbf24;
   font-weight: bold;
+}
+
+
+/* --- 📱 Mobile Responsiveness (Screens under 1024px wide) --- */
+@media (max-width: 1024px) {
+  .sidebar {
+    /* 1. Transform the sidebar into a bottom navigation bar */
+    height: 60px;
+    /* Fixed height at the bottom */
+    width: 100%;
+    /* Stretch fully across the screen */
+    position: fixed;
+    top: auto;
+    /* Release the top constraint */
+    bottom: 0;
+    /* Stick it to the very bottom */
+    left: 0;
+
+    /* 2. Change layout direction from vertical to horizontal */
+    flex-direction: row;
+    justify-content: space-around;
+    /* Space links evenly across the screen */
+    align-items: center;
+
+    padding: 0 10px;
+    gap: 0;
+    box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.1);
+    /* Shadow shifts upwards */
+    border-top: 1px solid #eee;
+  }
+
+  .sidebar a {
+    padding: 10px;
+    font-size: 0.9rem;
+    /* Slightly smaller text for phone layouts */
+    text-align: center;
+    flex: 1;
+  }
+
+  /* Adjust hover animation for horizontal alignment instead of vertical */
+  .sidebar a:hover {
+    transform: translateY(-2px);
+    color: #49f049;
+  }
 }

@@ -1,12 +1,16 @@
 .dashboard-container {
+  display: flex;
+  /* Added display flex to make alignment properties work */
   flex-direction: column;
   gap: 20px;
   padding: 30px;
   margin-left: 120px;
+  /* Moves dashboard away from sidebar */
   background: white;
   color: rgb(1, 0, 0);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-  height: 1400px;
+  min-height: 100vh;
+  /* Changed from fixed 1400px to dynamic viewport height */
 }
 
 .card-console {
@@ -14,57 +18,34 @@
   gap: 20px;
 }
 
-.card-console-balance {
-  width: 320px;
-  height: 190px;
-  border-radius: 16px;
-  padding: 20px;
-  color: white;
-
-  background: linear-gradient(135deg, #1661f7, #44c5e5);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-
-  font-family: 'Poppins', sans-serif;
-}
-
-.card-console-balance-expense {
-  width: 320px;
-  height: 190px;
-  border-radius: 16px;
-  padding: 20px;
-  color: white;
-
-  background: linear-gradient(135deg, #4eaceb, #f52626);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-
-  font-family: 'Poppins', sans-serif;
-}
-
+/* Base style shared across all upper console balance cards */
+.card-console-balance,
+.card-console-balance-expense,
+/* Fixed spelling to match your JSX markup */
 .card-console-balance-balance {
   width: 320px;
   height: 190px;
   border-radius: 16px;
   padding: 20px;
   color: white;
-
-  background: linear-gradient(135deg, #1e3c72, #3be74c);
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-
   font-family: 'Poppins', sans-serif;
 }
 
+.card-console-balance {
+  background: linear-gradient(135deg, #1661f7, #44c5e5);
+}
+
+.card-console-balance-expense {
+  background: linear-gradient(135deg, #4eaceb, #f52626);
+}
+
+.card-console-balance-balance {
+  background: linear-gradient(135deg, #1e3c72, #3be74c);
+}
 
 .income-balance {
   color: #5adb4f;
@@ -103,15 +84,6 @@
 .card-console-other-pending {
   padding: 20px;
   background-color: #fefefe;
-  width: 300px;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  height: 450px;
-}
-
-.card-console-charts-income {
-  padding: 20px;
-  background-color: #f5f5f5;
   width: 300px;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -158,11 +130,62 @@
   margin-right: 10px;
 }
 
-
-.trans-deposite-listing-btn:hover {
+.trans-deposite-listing-btn:hover,
+.trans-widrawal-listing-btn:hover {
   background-color: #5adb4f;
 }
 
-.trans-widrawal-listing-btn:hover {
-  background-color: #5adb4f;
+
+/* --- 📱 RESPONSIVE MEDIA QUERY FOR SMARTPHONES & TABLETS --- */
+@media (max-width: 1024px) {
+  .dashboard-container {
+    margin-left: 0;
+    /* Remove left margin on mobile since Sidebars collapse/move */
+    padding: 15px;
+  }
+
+  /* 1. Stacks the Total Income, Expenses, and Net Balance cards vertically */
+  .card-console {
+    flex-direction: column;
+  }
+
+  .card-console-balance,
+  .card-console-balance-expense,
+  .card-console-balance-balance {
+    width: 100%;
+    /* Spans across the full screen width seamlessly */
+    max-width: 100%;
+  }
+
+  /* 2. Stacks your main line/bar charts and the Pie chart vertically */
+  .card-console-other-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .card-console-other,
+  .card-console-other-pending {
+    width: 100%;
+    /* Strips away the fixed 700px/300px widths */
+    height: auto;
+    /* Allows charts to scale gracefully instead of squishing */
+  }
+
+  /* 3. Stacks the footer overview panels vertically */
+  .card-console-charts-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .card-console-charts-expense,
+  .card-console-charts-income {
+    width: 100%;
+  }
+
+  /* Cleans up the listing buttons to stack comfortably on small touch screens */
+  .card-console-transaction-listing button {
+    width: 100%;
+    margin-bottom: 10px;
+    margin-right: 0;
+  }
 }
