@@ -59,12 +59,14 @@ function TransactionPieChart({ transactions = [], settings = {} }) {
   // Format data strictly matching MUI X PieChart requirements
   const chartData = [
     { id: 0, value: totalIncome, label: 'Income', color: '#2e7d32' },
-    { id: 1, value: totalExpense, label: 'Expenses', color: '#d32f2f' },
+    { id: 1, value: totalExpense, label: 'Expense', color: '#d32f2f' },
   ];
 
   return (
     <MuiPieChart
-      series={[{ innerRadius: 50, outerRadius: 100, data: chartData, arcLabel: 'label' }]}
+      series={[{ innerRadius: 40, outerRadius: 100, data: chartData, arcLabel: 'label' }]}
+      width={200}
+      height={200}
       {...settings}
     />
   );
