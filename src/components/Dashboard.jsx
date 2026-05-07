@@ -6,26 +6,47 @@ import {
   faChartLine,
   faBuildingColumns
 } from '@fortawesome/free-solid-svg-icons';
+// 1. ADDED THESE IMPORTS FROM MUI
+import { Modal, Box, Button } from '@mui/material';
+
 import Sidebar from './Sidebar';
 import './Dasboard.css';
 import ErrorBoundary from "./ErrorBoundary";
 import { fetchTransactions } from "../Api/transaction";
 import { IncomeChart, PieChart } from '../charts/charts';
+import BudgetCard from '../pages/budget';
+import BudgetModel from '../pages/module';
 
 const userName = "Kapoun";
 
 function Dashboard() {
-  const [deposits, setDeposits] = useState([]);
   const [transactions, setTransactions] = useState([]);
-  const [investment, setInvestment] = useState([]);
   const [balance, setBalance] = useState(0);
-  const [investmentBalance, setInvestmentBalance] = useState(0);
   const [loading, setLoading] = useState(false);
   const [incomeTotal, setIncomeTotal] = useState(0);
   const [expenseTotal, setExpenseTotal] = useState(0);
   const [type, setType] = useState("");
-  // This state will hold the formatted data array for the PieChart
   const [data, setData] = useState([]);
+
+  // 2. MODAL STATE AND HANDLERS
+  const [isBudgetModalOpen, setIsBudgetModalOpen] = useState(false);
+  const handleOpen = () => setIsBudgetModalOpen(true);
+  const handleClose = () => setIsBudgetModalOpen(false);
+
+  // 3. MODAL STYLING
+  const modalStyle = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: 'none',
+    boxShadow: 24,
+    p: 4,
+    borderRadius: '16px',
+    outline: 'none'
+  };
 
   const settings = {
     margin: { top: 50, bottom: 50 },
@@ -33,25 +54,15 @@ function Dashboard() {
     height: 300,
   };
 
-  // Fixed potential mismatch between "expense" and "expence" typos
-  const filteredTransactions = type
-    ? transactions.filter((tx) => tx.type === type)
-    : transactions;
-
   useEffect(() => {
     const loadTransactions = async () => {
       setLoading(true);
-
       const resData = await fetchTransactions();
-
       if (resData) {
         setTransactions(resData);
-
         const income = resData
           .filter((tx) => tx.type === "Income")
           .reduce((sum, tx) => sum + Number(tx.amount), 0);
-
-        // Standardized to catch both spellings just in case
         const expense = resData
           .filter((tx) => tx.type === "Expense")
           .reduce((sum, tx) => sum + Number(tx.amount), 0);
@@ -60,21 +71,14 @@ function Dashboard() {
         setExpenseTotal(expense);
         setBalance(income - expense);
 
-        // --- MAP REAL-TIME DATA TO PIE CHART ---
-        // Formatting the fetched data to match MUI X PieChart structural expectations
-        const pieChartFormattedData = [
+        setData([
           { id: 0, value: income, label: 'Income', color: '#2e7d32' },
           { id: 1, value: expense, label: 'Expense', color: '#d32f2f' }
-        ];
-
-        setData(pieChartFormattedData);
+        ]);
       }
-
       setLoading(false);
     };
-
     loadTransactions();
-
   }, []);
 
   return (
@@ -93,35 +97,92 @@ function Dashboard() {
               <div className="card-console-balance">
                 <FontAwesomeIcon icon={faWallet} />
                 <div>
-                  <label htmlFor="">Total Income</label>
+                  <label>Total Income</label>
                   <div>
-                    <label className='income-balance'>$ {incomeTotal.toLocaleString()}</label>
+                    <label className='income-balance'>$ {(incomeTotal || 0).toLocaleString()}</label>
                   </div>
                 </div>
               </div>
+
               <div className="card-console-balance-expense">
                 <FontAwesomeIcon icon={faWallet} />
                 <div>
-                  <label htmlFor="">Total Expenses</label>
+                  <label>Total Expenses</label>
                   <div>
-                    <label className='expense-balance'>$ {expenseTotal.toLocaleString()}</label>
+                    <label className='expense-balance'>$ {(expenseTotal || 0).toLocaleString()}</label>
                   </div>
                 </div>
               </div>
+
               <div className="card-console-balance-balance">
                 <FontAwesomeIcon icon={faWallet} />
                 <div>
-                  <label htmlFor="">Total Net Balance</label>
-                  <div>
-                    <div className="card-console-balance-investment">
-                      <FontAwesomeIcon icon={faChartLine} />
-                      <label className='net-balance'>$ {balance.toLocaleString()}</label>
-                    </div>
+                  <label>Total Net Balance</label>
+                  <div className="card-console-balance-investment">
+                    <FontAwesomeIcon icon={faChartLine} />
+                    <label className='net-balance'>$ {(balance || 0).toLocaleString()}</label>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+        </div>
+
+        {/* 4. BUDGET SECTION WITH MODAL TRIGGER */}
+        <div className='budget-container' style={{ marginTop: '20px' }}>
+          <div className="card-console-other-pending">
+            <label style={{ display: 'flex', marginBottom: '10px', fontWeight: 'bold' }}>Budgets</label>
+
+            <Button
+              variant="contained"
+              onClick={handleOpen}
+              style={{ backgroundColor: '#1e3c72', color: 'white' }}
+            >
+              Add Budget
+            </Button>
+
+            <Modal
+              open={isBudgetModalOpen}
+              onClose={handleClose}
+              aria-labelledby="modal-title"
+            >
+              <Box sx={modalStyle}>
+                <BudgetModel onBudgetAdded={handleClose} />
+              </Box>
+            </Modal>
+          </div>
+
+          <BudgetCard
+            category="Housing"
+            limit={2000}
+            spent={1500}
+          />
+          <BudgetCard
+            category="Groceries"
+            limit={500}
+            spent={620}
+          />
+          <BudgetCard
+            category="Entertainment"
+            limit={300}
+            spent={100}
+          />
+          <BudgetCard
+            category="Transportation"
+            limit={200}
+            spent={250}
+          />
+          <BudgetCard
+            category="Utilities"
+            limit={150}
+            spent={120}
+          />
+          <BudgetCard
+            category="Miscellaneous"
+            limit={100}
+            spent={80}
+          />
+
         </div>
 
         <div className="card-console-other-container">
@@ -131,8 +192,6 @@ function Dashboard() {
 
           <div className="card-console-other-pending">
             <label>Breakdown</label>
-
-            {/* Just pass the transactions state directly here! */}
             <PieChart
               transactions={transactions}
               settings={settings}
@@ -140,42 +199,12 @@ function Dashboard() {
           </div>
         </div>
 
-        <div className="card-console-charts-container">
-          <div className="card-console-charts-income">
-            <label htmlFor="">Total Income Chart</label>
-            <label>$ {incomeTotal.toLocaleString()}</label>
-          </div>
-
-          <div className="card-console-charts-expense">
-            <label htmlFor="">Total Expense Chart</label>
-            <label>$ {expenseTotal.toLocaleString()}</label>
-          </div>
-
-          <div className="card-console-charts-expense">
-            <label htmlFor="">Total Investment Chart</label>
-            <label>$ 0</label>
-          </div>
-        </div>
-
+        {/* ... Rest of your charts and listing ... */}
         <div className="card-console-transaction-listing">
           <h1 className='transaction-listing-title'>Transaction-Listing</h1>
-          <button
-            className='trans-widrawal-listing-btn'
-            onClick={() => setType("expense")}
-          >
-            Withdrawals
-          </button>
-
-          <button
-            className='trans-deposite-listing-btn'
-            onClick={() => setType("income")}
-          >
-            Deposit
-          </button>
-
-          <button className='trans-all-listing-btn' onClick={() => setType("")}>
-            All
-          </button>
+          <button className='trans-widrawal-listing-btn' onClick={() => setType("expense")}>Withdrawals</button>
+          <button className='trans-deposite-listing-btn' onClick={() => setType("income")}>Deposit</button>
+          <button className='trans-all-listing-btn' onClick={() => setType("")}>All</button>
         </div>
       </div>
     </div>

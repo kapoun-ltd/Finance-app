@@ -83,6 +83,25 @@ body {
   font-weight: bold;
 }
 
+.budget-container {
+  display: flex;
+  width: 100%;
+  height: 450px;
+  border-radius: 6px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+
+}
+
+.budget-form-container {
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  color: black;
+  /* Ensures text is visible */
+}
+
+
 .card-console-other-container {
   display: flex;
   gap: 20px;
