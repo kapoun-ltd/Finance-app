@@ -1,16 +1,34 @@
 import React from 'react';
+import { useState } from 'react';
+import { addBudget } from '../Api/budget';
 import { LinearProgress, Typography, Box } from '@mui/material';
 
-function BudgetCard({ category, limit, spent }) {
+function BudgetCard() {
+    const [limit, setlimit] = useState(limit);
+    const [spent, setspent] = useState(spent);
+    const [category, setcategory] = useState(category);
+
     const progress = (spent / limit) * 100;
     const isOverBudget = spent > limit;
+
+    const handlechange = (e) => {
+        const { name, value } = e.target;
+        setbudgetdata((prevdata) => {
+            return {
+                ...prevdata,
+                [name]: value
+            }
+        })
+
+    }
+
 
     return (
         <Box sx={{ mb: 3, p: 2, borderRadius: 2, bgcolor: '#f9f9f9' }}>
             <Typography variant="h6">{category}</Typography>
             <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
                 <Typography variant="body2">
-                    {/* ${spent.toLocaleString()} of ${limit.toLocaleString()} */}
+                    ${spent.toLocaleString()} of ${limit.toLocaleString()}
                 </Typography>
                 <Typography variant="body2" color={isOverBudget ? 'error' : 'textSecondary'}>
                     {Math.round(progress)}%

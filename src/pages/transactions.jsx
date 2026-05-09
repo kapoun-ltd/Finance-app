@@ -126,12 +126,17 @@ function Transactions() {
                             <datalist id="method">
                                 <option value="Income" />
                                 <option value="Expense" />
-                                <option value="investment" />
                             </datalist>
                             <input type="text" list="account" placeholder="Account" name="account" value={formData.account} onChange={handleChange} required />
                             <datalist id="account">
                                 <option value="Main" />
-
+                                <option value="Rental" />
+                                <option value="Investment" />
+                                <option value="Food" />
+                                <option value="Transportation" />
+                                <option value="Utilites" />
+                                <option value="Misc" />
+                                <option value="Subscription" />
                             </datalist>
                             <input type="number" placeholder="Amount" name="amount" value={formData.amount} onChange={handleChange} required />
                             <input type="text" list="method-mode" placeholder="Method" name="method" value={formData.method} onChange={handleChange} required />

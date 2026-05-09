@@ -1,10 +1,18 @@
 import React, { useState } from "react";
 import { Box, Typography, TextField, Button, Stack } from "@mui/material";
 import "./module.css"; // Ensure this file exists in the same folder!
+import { addBudget } from "../Api/budget";
 
 function BudgetModel({ onAddBudget }) {
     const [category, setCategory] = useState("");
     const [limit, setLimit] = useState("");
+    const [month, setMonth] = useState("");
+    const [budgetdata, setbudgetdata] = useState({
+        category: "",
+        limit: 0,
+        spent: 0,
+        month: "",
+    })
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -14,13 +22,14 @@ function BudgetModel({ onAddBudget }) {
 
         const newBudget = {
             category,
-            limit_amount: Number(limit),
-            spent_amount: 0, // Usually starts at 0
-            month: new Date().toISOString().slice(0, 7), // e.g., "2023-10"
+            limit: Number(limit),
+            amount: 0, // Changed from spent: 0
+            month: month.slice(0, 7),
         };
 
         console.log("Submitting Budget:", newBudget);
-        // onAddBudget(newBudget); // You will connect this to your Supabase function later
+        addBudget(newBudget);
+        setbudgetdata(newBudget)
 
         // Clear form
         setCategory("");
@@ -66,6 +75,24 @@ function BudgetModel({ onAddBudget }) {
                         placeholder="Max Amount"
                         value={limit}
                         onChange={(e) => setLimit(e.target.value)}
+                    />
+
+                    <TextField
+                        label="Start Month"
+                        variant="outlined"
+                        type="date"
+                        fullWidth
+                        value={month}
+                        onChange={(e) => setMonth(e.target.value)}
+                    />
+
+                    <TextField
+                        label="End Month"
+                        variant="outlined"
+                        type="date"
+                        fullWidth
+                        value={month}
+                        onChange={(e) => setMonth(e.target.value)}
                     />
 
                     <Button

@@ -129,61 +129,14 @@ function Dashboard() {
         </div>
 
         {/* 4. BUDGET SECTION WITH MODAL TRIGGER */}
-        <div className='budget-container' style={{ marginTop: '20px' }}>
-          <div className="card-console-other-pending">
-            <label style={{ display: 'flex', marginBottom: '10px', fontWeight: 'bold' }}>Budgets</label>
-
-            <Button
-              variant="contained"
-              onClick={handleOpen}
-              style={{ backgroundColor: '#1e3c72', color: 'white' }}
-            >
-              Add Budget
-            </Button>
-
-            <Modal
-              open={isBudgetModalOpen}
-              onClose={handleClose}
-              aria-labelledby="modal-title"
-            >
-              <Box sx={modalStyle}>
-                <BudgetModel onBudgetAdded={handleClose} />
-              </Box>
-            </Modal>
+        <div className='main-budget-container'>
+          <div className='budget-container'>
+            <div className='budget'>
+              <BudgetModel />
+            </div>
           </div>
-
-          <BudgetCard
-            category="Housing"
-            limit={2000}
-            spent={1500}
-          />
-          <BudgetCard
-            category="Groceries"
-            limit={500}
-            spent={620}
-          />
-          <BudgetCard
-            category="Entertainment"
-            limit={300}
-            spent={100}
-          />
-          <BudgetCard
-            category="Transportation"
-            limit={200}
-            spent={250}
-          />
-          <BudgetCard
-            category="Utilities"
-            limit={150}
-            spent={120}
-          />
-          <BudgetCard
-            category="Miscellaneous"
-            limit={100}
-            spent={80}
-          />
-
         </div>
+
 
         <div className="card-console-other-container">
           <div className="card-console-other">
