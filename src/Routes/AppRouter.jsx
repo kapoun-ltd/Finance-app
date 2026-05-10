@@ -33,7 +33,6 @@ function AppRouter() {
             <Route path="/transactions" element={<Transactions />} />
             <Route path="/payment" element={<Payment />} />
             <Route path="/reports" element={<Reports />} />
-            <Route path="/deposit" element={<Deposit />} />
             <Route path="/withdrawal" element={<Withdrawal />} />
 
           </Route>

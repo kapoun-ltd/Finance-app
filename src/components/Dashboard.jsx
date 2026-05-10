@@ -155,9 +155,6 @@ function Dashboard() {
         {/* ... Rest of your charts and listing ... */}
         <div className="card-console-transaction-listing">
           <h1 className='transaction-listing-title'>Transaction-Listing</h1>
-          <button className='trans-widrawal-listing-btn' onClick={() => setType("expense")}>Withdrawals</button>
-          <button className='trans-deposite-listing-btn' onClick={() => setType("income")}>Deposit</button>
-          <button className='trans-all-listing-btn' onClick={() => setType("")}>All</button>
         </div>
       </div>
     </div>
