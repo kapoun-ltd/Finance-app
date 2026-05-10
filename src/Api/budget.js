@@ -2,7 +2,7 @@ import supabase from "../services/supabase";
 
 export const addBudget = async (budgetData) => {
     // 1. Destructure with default values to prevent undefined errors
-    const { limit = 0, amount = 0, category, start_month, end_month } = budgetData;
+    const { budget_limit = 0, category, start_date, end_date } = budgetData;
 
     // 2. Perform the insert
     const { data, error } = await supabase
@@ -10,10 +10,10 @@ export const addBudget = async (budgetData) => {
         .insert([
             {
                 category,
-                limit,
-                amount,
-                start_month,
-                end_month,
+                budget_limit,
+                start_date,
+                end_date,
+
             }
         ])
         .select()

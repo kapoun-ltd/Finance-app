@@ -5,29 +5,25 @@ import { addBudget } from "../Api/budget";
 
 function BudgetModel({ onAddBudget }) {
     const [category, setCategory] = useState("");
-    const [limit, setLimit] = useState("");
-    const [start_month, setstart_month] = useState("");
-    const [end_month, setend_month] = useState("");
-    const [amount, setAmount] = useState("");
+    const [budget_limit, setbudget_limit] = useState("");
+    const [start_date, setstart_date] = useState("");
+    const [end_date, setend_date] = useState("");
     const [budgetdata, setbudgetdata] = useState({
         category: "",
-        limit: 0,
-        spent: 0,
-        amount: 0,
-        start_month: "",
+        budget_limit: 0,
+        start_date: "",
         end_month: ""
     })
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (!category || !limit) return;
+        if (!category || !budget_limit) return;
 
         const newBudget = {
             category,
-            limit: Number(limit),
-            amount: 0,
-            start_month,
-            end_month
+            budget_limit: Number(budget_limit),
+            start_date,
+            end_date
         };
 
         console.log("Submitting Budget:", newBudget);
@@ -36,7 +32,7 @@ function BudgetModel({ onAddBudget }) {
 
         // Clear form
         setCategory("");
-        setLimit("");
+        setbudget_limit("");
     };
 
     const modalStyle = {
@@ -76,19 +72,11 @@ function BudgetModel({ onAddBudget }) {
                         type="number"
                         fullWidth
                         placeholder="Max Amount"
-                        value={limit}
-                        onChange={(e) => setLimit(e.target.value)}
+                        value={budget_limit}
+                        onChange={(e) => setbudget_limit(e.target.value)}
                     />
 
-                    <TextField
-                        label="amount"
-                        variant="outlined"
-                        type="number"
-                        fullWidth
-                        placeholder="Max Amount"
-                        value={amount}
-                        onChange={(e) => setAmount(e.target.value)}
-                    />
+
 
                     <TextField
                         label=""
@@ -96,11 +84,11 @@ function BudgetModel({ onAddBudget }) {
                         type="date"
                         fullWidth
                         // We convert slashes back to dashes so the input can read it
-                        value={start_month.replace(/\//g, '-')}
+                        value={start_date.replace(/\//g, '-')}
                         onChange={(e) => {
                             const dateValue = e.target.value; // This comes as YYYY-MM-DD
                             const formattedDate = dateValue.replace(/-/g, '/');
-                            setstart_month(formattedDate);
+                            setstart_date(formattedDate);
                         }}
                         InputLabelProps={{ shrink: true }}
                     />
@@ -110,11 +98,11 @@ function BudgetModel({ onAddBudget }) {
                         variant="outlined"
                         type="date"
                         fullWidth
-                        value={end_month.replace(/\//g, '-')}
+                        value={end_date.replace(/\//g, '-')}
                         onChange={(e) => {
                             const dateValue = e.target.value; // This comes as YYYY-MM-DD
                             const formattedDate = dateValue.replace(/-/g, '/');
-                            setend_month(formattedDate);
+                            setend_date(formattedDate);
                         }}
                         InputLabelProps={{ shrink: true }}
                     />

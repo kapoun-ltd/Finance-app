@@ -5,11 +5,12 @@ import { LinearProgress, Typography, Box } from '@mui/material';
 
 function BudgetCard() {
     const [budgetData, setbudgetId] = useState({
-        limit: 0,
-        spent: 0,
-        category: "",
-        start_month: "",
-        end_month: ""
+
+        category,
+        budget_limit,
+        start_date,
+        end_date,
+        user_id
     });
 
     const progress = (spent / limit) * 100;
