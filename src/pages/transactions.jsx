@@ -12,12 +12,16 @@ function Transactions() {
     const [balance, setBalance] = useState(0);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [date, setDate] = useState("");
+    const [category, setCategory] = useState("");
     const [formData, setFormData] = useState({
         description: "",
         amount: "",
         type: "",
+        category: "",
         account: "",
         method: "",
+        date: "",
         user_id: ""
     })
     const filteredTransactions = type
@@ -45,8 +49,10 @@ function Transactions() {
                 description: "",
                 amount: "",
                 type: "",
+                category: "",
                 account: "",
                 method: "",
+                date: "",
                 user_id: ""
             });
         }
@@ -122,31 +128,41 @@ function Transactions() {
                             <div className='transaction-form-title'>
                                 <label className='transaction-form-title-label'>Add Transaction</label>
                             </div>
-                            <input type="text" list="method" placeholder="Type" name="type" value={formData.type} onChange={handleChange} required />
-                            <datalist id="method">
-                                <option value="Income" />
-                                <option value="Expense" />
-                            </datalist>
+                            <select name="type" value={formData.type} onChange={handleChange} required>
+                                <option value="">Select Type</option>
+                                <option value="Income">Income</option>
+                                <option value="Expense">Expense</option>
+                            </select>
                             <input type="text" list="account" placeholder="Account" name="account" value={formData.account} onChange={handleChange} required />
                             <datalist id="account">
-                                <option value="Main" />
-                                <option value="Rental" />
-                                <option value="Investment" />
-                                <option value="Food" />
-                                <option value="Transportation" />
-                                <option value="Utilites" />
-                                <option value="Misc" />
-                                <option value="Subscription" />
+                                <option value="Main Wallet" />
+                                <option value="Saving Wallet" />
+                                <option value="Mpesa" />
+                                <option value="Bank" />
+                                <option value="Cash" />
+                                <option value="Card" />
                             </datalist>
                             <input type="number" placeholder="Amount" name="amount" value={formData.amount} onChange={handleChange} required />
-                            <input type="text" list="method-mode" placeholder="Method" name="method" value={formData.method} onChange={handleChange} required />
-                            <datalist id="method-mode">
+                            <input type="text" list="method" placeholder="Method" name="method" value={formData.method} onChange={handleChange} required />
+                            <datalist id="method">
                                 <option value="Cash" />
                                 <option value="Card" />
                                 <option value="Bank Transfer" />
                                 <option value="Mobile Money" />
                             </datalist>
+                            <input type="text" list="category" placeholder="Category" name="category" value={formData.category} onChange={handleChange} required />
+                            <datalist id="category">
+                                <option value="Food" />
+                                <option value="Transportation" />
+                                <option value="Utilites" />
+                                <option value="Entertainment" />
+                                <option value="Shopping" />
+                                <option value="Bills" />
+                                <option value="Subscription" />
+                            </datalist>
                             <input type="text" placeholder="Description" name="description" value={formData.description} onChange={handleChange} required />
+
+                            <input type="date" placeholder="Date" name="date" value={formData.date} onChange={handleChange} required />
                             <button className='trans-btn'>Submit</button>
                         </form>
 
