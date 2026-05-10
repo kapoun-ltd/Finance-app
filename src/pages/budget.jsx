@@ -4,9 +4,13 @@ import { addBudget } from '../Api/budget';
 import { LinearProgress, Typography, Box } from '@mui/material';
 
 function BudgetCard() {
-    const [limit, setlimit] = useState(limit);
-    const [spent, setspent] = useState(spent);
-    const [category, setcategory] = useState(category);
+    const [budgetData, setbudgetId] = useState({
+        limit: 0,
+        spent: 0,
+        category: "",
+        start_month: "",
+        end_month: ""
+    });
 
     const progress = (spent / limit) * 100;
     const isOverBudget = spent > limit;

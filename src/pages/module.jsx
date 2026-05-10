@@ -6,25 +6,28 @@ import { addBudget } from "../Api/budget";
 function BudgetModel({ onAddBudget }) {
     const [category, setCategory] = useState("");
     const [limit, setLimit] = useState("");
-    const [month, setMonth] = useState("");
+    const [start_month, setstart_month] = useState("");
+    const [end_month, setend_month] = useState("");
+    const [amount, setAmount] = useState("");
     const [budgetdata, setbudgetdata] = useState({
         category: "",
         limit: 0,
         spent: 0,
-        month: "",
+        amount: 0,
+        start_month: "",
+        end_month: ""
     })
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
-        // Safety check: Don't submit if empty
         if (!category || !limit) return;
 
         const newBudget = {
             category,
             limit: Number(limit),
-            amount: 0, // Changed from spent: 0
-            month: month.slice(0, 7),
+            amount: 0,
+            start_month,
+            end_month
         };
 
         console.log("Submitting Budget:", newBudget);
@@ -78,21 +81,42 @@ function BudgetModel({ onAddBudget }) {
                     />
 
                     <TextField
-                        label="Start Month"
+                        label="amount"
                         variant="outlined"
-                        type="date"
+                        type="number"
                         fullWidth
-                        value={month}
-                        onChange={(e) => setMonth(e.target.value)}
+                        placeholder="Max Amount"
+                        value={amount}
+                        onChange={(e) => setAmount(e.target.value)}
                     />
 
                     <TextField
-                        label="End Month"
+                        label=""
                         variant="outlined"
                         type="date"
                         fullWidth
-                        value={month}
-                        onChange={(e) => setMonth(e.target.value)}
+                        // We convert slashes back to dashes so the input can read it
+                        value={start_month.replace(/\//g, '-')}
+                        onChange={(e) => {
+                            const dateValue = e.target.value; // This comes as YYYY-MM-DD
+                            const formattedDate = dateValue.replace(/-/g, '/');
+                            setstart_month(formattedDate);
+                        }}
+                        InputLabelProps={{ shrink: true }}
+                    />
+
+                    <TextField
+                        label=""
+                        variant="outlined"
+                        type="date"
+                        fullWidth
+                        value={end_month.replace(/\//g, '-')}
+                        onChange={(e) => {
+                            const dateValue = e.target.value; // This comes as YYYY-MM-DD
+                            const formattedDate = dateValue.replace(/-/g, '/');
+                            setend_month(formattedDate);
+                        }}
+                        InputLabelProps={{ shrink: true }}
                     />
 
                     <Button
