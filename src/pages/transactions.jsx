@@ -72,7 +72,7 @@ function Transactions() {
                     .reduce((sum, tx) => sum + Number(tx.amount), 0);
 
                 const expense = data
-                    .filter((tx) => tx.type === "Expence")
+                    .filter((tx) => tx.type === "Expense")
                     .reduce((sum, tx) => sum + Number(tx.amount), 0);
 
                 setIncomeTotal(income);
