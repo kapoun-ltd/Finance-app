@@ -28,7 +28,6 @@ function Dashboard() {
   const [expenseTotal, setExpenseTotal] = useState(0);
   const [type, setType] = useState("");
   const [data, setData] = useState([]);
-  const [budget, setBudget] = useState([]);
   const [budgets, setBudgets] = useState([]);
 
 
@@ -85,31 +84,27 @@ function Dashboard() {
     loadTransactions();
   }, []);
 
-  useEffect(() => {
-    fetchBudget();
-  }, []);
 
-  const fetchBudget = async () => {
-    const data = await getBudget("Food", "May");
+
+  const fetchBudgets = async () => {
+
+    const today = new Date()
+      .toISOString()
+      .split("T")[0];
+
+    const data = await getActiveBudgets(today);
 
     if (data) {
-      setBudget(data);
+      setBudgets(data);
     }
   }
 
-  const totalExpenses = transactions
-    .filter(
-      (item) =>
-        item.category === "Food" &&
-        item.type === "expense"
-    )
-    .reduce(
-      (acc, item) => acc + Number(item.amount),
-      0
-    );
+  useEffect(() => {
+    fetchBudgets();
+  }, []);
 
   const remaining =
-    budget?.budget_limit - totalExpenses;
+    budgets?.budgets_limit - expenseTotal;
 
   const icons = {
     Food: "🍔",
@@ -117,6 +112,49 @@ function Dashboard() {
     Transport: "🚗",
     Subscriptions: "📺"
   }
+
+  const budgetChartData = budgets.map(
+    (budgets, index) => {
+
+      const consumed = transactions
+        .filter(
+          (item) =>
+            item.category === budgets.category &&
+            item.type === "expense"
+        )
+        .reduce(
+          (acc, item) =>
+            acc + Number(item.amount),
+          0
+        );
+
+      const colors = [
+        '#2e7d32',
+        '#d32f2f',
+        '#1976d2',
+        '#ed6c02',
+        '#9c27b0'
+      ];
+
+      return {
+        id: index,
+        value: consumed,
+        label: budgets.category,
+        color: colors[index % colors.length]
+      };
+    }
+  );
+
+  const foodBudget = budgets.find(
+    (item) => item.category === "food"
+  );
+
+  console.log("Food Budget Data:", foodBudget);
+
+  const rentBudget = budgets.find(
+    (item) => item.category === "rent"
+
+  );
 
   return (
     <div>
@@ -171,62 +209,97 @@ function Dashboard() {
             <div className='budget'>
               <BudgetModel />
             </div>
-
             <div className="budget-list-container">
 
-              <h3>Budget List</h3>
+              <div className="budget-header">
+                <h3>Budget Overview</h3>
+              </div>
 
-              {budgets.map((budget) => {
+              <div className="budget-grid">
 
-                const consumed = transactions
-                  .filter(
-                    (item) =>
-                      item.category === budget.category &&
-                      item.type === "expense"
-                  )
-                  .reduce(
-                    (acc, item) =>
-                      acc + Number(item.amount),
-                    0
+                {budgets.map((budget) => {
+
+                  const consumed = transactions
+                    .filter(
+                      (item) =>
+                        item.category === budget.category &&
+                        item.type === "Expense"
+                    )
+                    .reduce(
+                      (acc, item) =>
+                        acc + Number(item.amount),
+                      0
+                    );
+
+                  const remaining =
+                    budget.budget_limit - consumed;
+
+                  const percentage =
+                    budget.budget_limit > 0
+                      ? (consumed / budget.budget_limit) * 100
+                      : 0;
+
+                  return (
+
+                    <div
+                      className="budget-card"
+                      key={budget.id}
+                    >
+
+                      <div className="budget-card-top">
+
+                        <h2>
+                          {budget.category}
+                        </h2>
+
+                        <span>
+                          {percentage.toFixed(0)}%
+                        </span>
+
+                      </div>
+
+                      <div className="budget-money">
+
+                        <div>
+                          <label>Total</label>
+                          <h3>
+                            Ksh {budget.budget_limit}
+                          </h3>
+                        </div>
+
+                        <div>
+                          <label>Used</label>
+                          <h3>
+                            Ksh {consumed}
+                          </h3>
+                        </div>
+
+                        <div>
+                          <label>Left</label>
+                          <h3>
+                            Ksh {remaining}
+                          </h3>
+                        </div>
+
+                      </div>
+
+                      <div className="progress-bar">
+
+                        <div
+                          className="progress"
+                          style={{
+                            width: `${percentage}%`
+                          }}
+                        ></div>
+
+                      </div>
+
+                    </div>
+
                   );
+                })}
 
-                const remaining =
-                  budget.budget_limit - consumed;
-
-                return (
-
-                  <div
-                    className='budget-card'
-                    key={budget.id}
-                  >
-
-                    <h2>{budget.category}</h2>
-
-                    <div>
-                      <label>Total Budget</label>
-                      <h2>
-                        Ksh {budget.budget_limit}
-                      </h2>
-                    </div>
-
-                    <div>
-                      <label>Consumed</label>
-                      <h2>
-                        Ksh {consumed}
-                      </h2>
-                    </div>
-
-                    <div>
-                      <label>Remaining</label>
-                      <h2>
-                        Ksh {remaining}
-                      </h2>
-                    </div>
-
-                  </div>
-
-                );
-              })}
+              </div>
 
             </div>
 

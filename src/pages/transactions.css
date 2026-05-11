@@ -1,208 +1,388 @@
+/* ================================
+   MAIN CONTAINER
+================================ */
+
 .container {
     flex-grow: 1;
-    overflow-y: auto;
-    background-color: #d9c4c4;
-    height: 1200px;
-    margin-left: 18%;
+
+    min-height: 100vh;
+
+    margin-left: 120px;
+
+    padding: 30px;
+
+    background: #f5f7fb;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 24px;
+
+    overflow-x: hidden;
 }
+
+/* ================================
+   TITLE SECTION
+================================ */
 
 .transaction-title-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem;
 
+    margin-bottom: 10px;
 }
 
-.transaction-balance-container {
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem;
+.transaction-title-container h1 {
+    font-size: 32px;
+    font-weight: 700;
+
+    color: #111827;
 }
+
+/* ================================
+   BUTTON SECTION
+================================ */
 
 .transaction-btn-container {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem;
-    gap: 1rem;
+    gap: 12px;
+
+    flex-wrap: wrap;
 }
 
 .transaction-btn-container button {
-    padding: 10px;
     border: none;
-    border-radius: 5px;
-    height: 30px;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #4caf50;
+
+    padding: 12px 20px;
+
+    border-radius: 14px;
+
+    background:
+        linear-gradient(135deg,
+            #2563eb,
+            #60a5fa);
+
+    color: white;
+
+    font-weight: 600;
+
     cursor: pointer;
+
     transition: all 0.3s ease;
-    width: 50px;
+
+    box-shadow:
+        0 4px 12px rgba(37, 99, 235, 0.2);
 }
 
 .transaction-btn-container button:hover {
-    background-color: #4caf50;
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 10px 20px rgba(37, 99, 235, 0.25);
 }
+
+/* ================================
+   BALANCE CARDS CONTAINER
+================================ */
 
 .transaction-balance-all-container {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    align-items: center;
-    gap: 1rem;
-    margin-left: 10%;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(220px, 1fr));
+
+    gap: 20px;
 }
 
-.transaction-balance-container {
-    padding: 1rem;
-    background-color: white;
-    border-radius: 10px;
-    padding: 2rem;
-    width: 150px;
-    height: 100px;
+/* ================================
+   BALANCE CARDS
+================================ */
+
+.transaction-balance-container,
+.transaction-expense-container,
+.transaction-income-container {
+    background: white;
+
+    border-radius: 24px;
+
+    padding: 24px;
+
+    box-shadow:
+        0 4px 20px rgba(0, 0, 0, 0.08);
+
+    min-height: 160px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    transition: all 0.3s ease;
 }
 
-.net-balance {
-    font-size: 2rem;
-    font-weight: bold;
-    color: #22e122;
+.transaction-balance-container:hover,
+.transaction-expense-container:hover,
+.transaction-income-container:hover {
+    transform: translateY(-5px);
+
+    box-shadow:
+        0 12px 30px rgba(0, 0, 0, 0.1);
 }
 
-.income-value {
-    font-size: 2rem;
-    font-weight: bold;
-    color: #4caf50;
-}
-
-.investment-value {
-    font-size: 2rem;
-    font-weight: bold;
-    color: #b07f08;
-}
-
-.expense-value {
-    font-size: 2rem;
-    font-weight: bold;
-    color: #de1212;
-}
+/* ================================
+   CARD LABELS
+================================ */
 
 .investment-label,
 .expense-label,
 .balance-label {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: black;
+    font-size: 16px;
+    font-weight: 600;
+
+    color: #6b7280;
+
+    margin-bottom: 12px;
 }
 
+/* ================================
+   VALUES
+================================ */
 
-
-.transaction-expense-container {
-    padding: 2rem;
-    width: 150px;
-    height: 100px;
-    background-color: white;
-    border-radius: 10px;
-
+.net-balance,
+.income-value,
+.investment-value,
+.expense-value {
+    font-size: 32px;
+    font-weight: 700;
 }
 
-.transaction-income-container {
-    padding: 2rem;
-    background-color: white;
-    border-radius: 10px;
-    width: 150px;
-    height: 100px;
+.net-balance {
+    color: #16a34a;
 }
+
+.income-value {
+    color: #2563eb;
+}
+
+.investment-value {
+    color: #f59e0b;
+}
+
+.expense-value {
+    color: #dc2626;
+}
+
+/* ================================
+   TRANSACTION FORM CONTAINER
+================================ */
 
 .transaction-container {
-    flex-direction: column;
-    width: 70%;
-    background-color: white;
+    background: white;
+
+    border-radius: 24px;
+
+    padding: 30px;
+
+    box-shadow:
+        0 4px 20px rgba(0, 0, 0, 0.08);
+
+    width: 100%;
 }
 
+/* ================================
+   FORM TITLE
+================================ */
+
 .transaction-form-title {
-    padding: 2rem;
+    margin-bottom: 24px;
 }
 
 .transaction-form-title-label {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: black;
+    font-size: 26px;
+    font-weight: 700;
+
+    color: #111827;
 }
 
+/* ================================
+   FORM
+================================ */
+
 .transaction-form {
-    display: inline-block;
-    padding: 2rem;
-    border-radius: 10px;
-    align-items: center;
-    width: 90%;
+    width: 100%;
 }
 
 .transaction-form form {
-    display: inline-block;
-    gap: 1rem;
-    flex-direction: row;
-    align-items: center;
-    flex-wrap: wrap;
-    min-width: 20%;
-    justify-content: center;
-    background-color: #ffffff;
-    position: absolute;
-    top: 35%;
-    left: 20%;
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    align-items: center;
+    display: grid;
 
+    grid-template-columns:
+        repeat(auto-fit, minmax(220px, 1fr));
+
+    gap: 20px;
+
+    width: 100%;
 }
 
-.transaction-form form input {
-    border: 1px solid black;
-    border-radius: 5px;
-    height: 25px;
-    padding: 5px;
-}
+/* ================================
+   INPUTS
+================================ */
 
-.transaction-form form button {
-    padding: 10px;
-    margin: 1rem;
-    border: none;
-    border-radius: 10px;
-    height: 30px;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #dfb612;
-    color: white;
-    cursor: pointer;
+.transaction-form form input,
+.transaction-form form select {
+    width: 100%;
+
+    padding: 14px;
+
+    border-radius: 14px;
+
+    border: 1px solid #d1d5db;
+
+    outline: none;
+
+    font-size: 15px;
+
     transition: all 0.3s ease;
 
+    background: #f9fafb;
 }
+
+.transaction-form form input:focus,
+.transaction-form form select:focus {
+    border-color: #2563eb;
+
+    box-shadow:
+        0 0 0 4px rgba(37, 99, 235, 0.1);
+
+    background: white;
+}
+
+/* ================================
+   SUBMIT BUTTON
+================================ */
+
+.transaction-form form button {
+    border: none;
+
+    padding: 14px 20px;
+
+    border-radius: 14px;
+
+    background:
+        linear-gradient(135deg,
+            #16a34a,
+            #4ade80);
+
+    color: white;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: all 0.3s ease;
+}
+
+.transaction-form form button:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 10px 20px rgba(22, 163, 74, 0.2);
+}
+
+/* ================================
+   TRANSACTION LIST
+================================ */
 
 .transaction-listing {
-    position: absolute;
-    top: 90%;
-    left: 20%;
-    width: 80%;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    background-color: #dfb612;
+    background: white;
+
+    border-radius: 24px;
+
+    padding: 24px;
+
+    box-shadow:
+        0 4px 20px rgba(0, 0, 0, 0.08);
+
+    overflow-x: auto;
 }
 
-.transaction-listing table {
-    margin: 0 auto;
-    width: 80%;
-    border-collapse: collapse;
+/* ================================
+   TABLE
+================================ */
 
+.transaction-listing table {
+    width: 100%;
+
+    border-collapse: collapse;
+}
+
+.transaction-listing thead {
+    background: #111827;
 }
 
 .transaction-listing th {
-    background-color: black;
     color: white;
-    padding: 10px;
+
+    padding: 18px;
+
     text-align: left;
+
+    font-size: 14px;
+    font-weight: 600;
 }
 
 .transaction-listing td {
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
+    padding: 18px;
+
+    border-bottom:
+        1px solid #e5e7eb;
+
+    color: #374151;
+}
+
+.transaction-listing tr {
+    transition: all 0.2s ease;
+}
+
+.transaction-listing tbody tr:hover {
+    background: #f9fafb;
+}
+
+/* ================================
+   RESPONSIVE DESIGN
+================================ */
+
+@media (max-width: 1024px) {
+
+    .container {
+        margin-left: 0;
+
+        padding: 16px;
+    }
+
+    .transaction-title-container {
+        flex-direction: column;
+        align-items: flex-start;
+
+        gap: 16px;
+    }
+
+    .transaction-btn-container {
+        width: 100%;
+    }
+
+    .transaction-btn-container button {
+        width: 100%;
+    }
+
+    .transaction-form form {
+        grid-template-columns: 1fr;
+    }
+
+    .transaction-listing {
+        overflow-x: scroll;
+    }
+
+    .transaction-listing table {
+        min-width: 700px;
+    }
 }
