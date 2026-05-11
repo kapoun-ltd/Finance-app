@@ -16,6 +16,7 @@ import { fetchTransactions } from "../Api/transaction";
 import { IncomeChart, PieChart } from '../charts/charts';
 import BudgetCard from '../pages/budget';
 import BudgetModel from '../pages/module';
+import { getActiveBudgets } from '../Api/budget';
 
 const userName = "Kapoun";
 
@@ -27,6 +28,9 @@ function Dashboard() {
   const [expenseTotal, setExpenseTotal] = useState(0);
   const [type, setType] = useState("");
   const [data, setData] = useState([]);
+  const [budget, setBudget] = useState([]);
+  const [budgets, setBudgets] = useState([]);
+
 
   // 2. MODAL STATE AND HANDLERS
   const [isBudgetModalOpen, setIsBudgetModalOpen] = useState(false);
@@ -81,6 +85,39 @@ function Dashboard() {
     loadTransactions();
   }, []);
 
+  useEffect(() => {
+    fetchBudget();
+  }, []);
+
+  const fetchBudget = async () => {
+    const data = await getBudget("Food", "May");
+
+    if (data) {
+      setBudget(data);
+    }
+  }
+
+  const totalExpenses = transactions
+    .filter(
+      (item) =>
+        item.category === "Food" &&
+        item.type === "expense"
+    )
+    .reduce(
+      (acc, item) => acc + Number(item.amount),
+      0
+    );
+
+  const remaining =
+    budget?.budget_limit - totalExpenses;
+
+  const icons = {
+    Food: "🍔",
+    Rent: "🏠",
+    Transport: "🚗",
+    Subscriptions: "📺"
+  }
+
   return (
     <div>
       <Sidebar />
@@ -134,6 +171,68 @@ function Dashboard() {
             <div className='budget'>
               <BudgetModel />
             </div>
+
+            <div className="budget-list-container">
+
+              <h3>Budget List</h3>
+
+              {budgets.map((budget) => {
+
+                const consumed = transactions
+                  .filter(
+                    (item) =>
+                      item.category === budget.category &&
+                      item.type === "expense"
+                  )
+                  .reduce(
+                    (acc, item) =>
+                      acc + Number(item.amount),
+                    0
+                  );
+
+                const remaining =
+                  budget.budget_limit - consumed;
+
+                return (
+
+                  <div
+                    className='budget-card'
+                    key={budget.id}
+                  >
+
+                    <h2>{budget.category}</h2>
+
+                    <div>
+                      <label>Total Budget</label>
+                      <h2>
+                        Ksh {budget.budget_limit}
+                      </h2>
+                    </div>
+
+                    <div>
+                      <label>Consumed</label>
+                      <h2>
+                        Ksh {consumed}
+                      </h2>
+                    </div>
+
+                    <div>
+                      <label>Remaining</label>
+                      <h2>
+                        Ksh {remaining}
+                      </h2>
+                    </div>
+
+                  </div>
+
+                );
+              })}
+
+            </div>
+
+
+
+
           </div>
         </div>
 

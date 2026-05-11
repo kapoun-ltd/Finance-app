@@ -18,7 +18,7 @@ function BudgetCard() {
 
     const handlechange = (e) => {
         const { name, value } = e.target;
-        setbudgetdata((prevdata) => {
+        setbudgetId((prevdata) => {
             return {
                 ...prevdata,
                 [name]: value
@@ -26,7 +26,6 @@ function BudgetCard() {
         })
 
     }
-
 
     return (
         <Box sx={{ mb: 3, p: 2, borderRadius: 2, bgcolor: '#f9f9f9' }}>

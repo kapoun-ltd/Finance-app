@@ -158,6 +158,9 @@ function Transactions() {
                                 <option value="Entertainment" />
                                 <option value="Shopping" />
                                 <option value="Bills" />
+                                <option value="Salary" />
+                                <option value="Other income" />
+                                <option value="Other expense" />
                                 <option value="Subscription" />
                             </datalist>
                             <input type="text" placeholder="Description" name="description" value={formData.description} onChange={handleChange} required />

@@ -1,5 +1,25 @@
 import supabase from "../services/supabase";
 
+export const getActiveBudgets = async (
+    currentDate
+) => {
+
+    const { data, error } = await supabase
+        .from("budget")
+        .select("*")
+        .lte("start_date", currentDate)
+        .gte("end_date", currentDate);
+
+    if (error) {
+        console.error(error);
+        return [];
+    }
+
+    return data;
+}
+
+
+
 export const addBudget = async (budgetData) => {
     // 1. Destructure with default values to prevent undefined errors
     const { budget_limit = 0, category, start_date, end_date } = budgetData;

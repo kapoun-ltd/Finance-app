@@ -235,3 +235,113 @@ body {
     margin-right: 0;
   }
 }
+
+
+
+
+/* ... (Your existing styles) ... */
+
+/* 4. FIX FOR THE BUDGET SECTION LAYOUT */
+.main-budget-container {
+  /* Establishes a flex column context for the two main items */
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  /* Adds a gap between the 'Budget' panel and the 'Budget List' panel */
+}
+
+.budget-container {
+  display: flex;
+  /* Arranges the two children horizontally */
+  gap: 20px;
+  /* Adds space between the model card and the list card */
+  width: 100%;
+}
+
+.budget {
+  flex: 1;
+  /* Allows the Budget Model card to take up available space */
+  /* You can adjust width or keep it relative */
+  width: 300px;
+}
+
+.budget-list-container {
+  flex: 2;
+  /* Allows the Budget List to take up more space than the model */
+  /* You can adjust width or keep it relative */
+  width: 700px;
+  padding: 15px 20px;
+  border-radius: 16px;
+  /* Using the same shadow pattern as the upper console cards for visual consistency */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(135deg, #fefefe 0%, #e8e8e8 100%);
+  /* Light gradient background */
+  color: rgb(1, 0, 0);
+  font-family: 'Poppins', sans-serif;
+}
+
+/* --- Mobile Responsive Adjustments for Budget Section --- */
+@media (max-width: 1024px) {
+  .budget-container {
+    /* On mobile, stack them vertically to fit the single column layout */
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .budget,
+  .budget-list-container {
+    /* Ensure both cards take full width of the screen on mobile */
+    width: 100% !important;
+    /* Resetting the fixed widths defined above for the mobile view */
+    flex: none;
+  }
+}
+
+.budget-list-container h3 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #1e3c72;
+  /* A nice dark blue for headings */
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.budget-card {
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.budget-card div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  flex: 1;
+  min-width: 0;
+}
+
+.budget-card div label {
+  color: #333;
+  font-size: 0.9rem;
+}
+
+.budget-card div h2 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin: 0;
+  color: #1e3c72;
+}
+
+/* --- Mobile Responsive Adjustments for Budget List --- */
+@media (max-width: 1024px) {
+  .budget-card {
+    flex-direction: column;
+    width: 100%;
+  }
+}
