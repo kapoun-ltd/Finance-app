@@ -22,7 +22,7 @@ function IncomeChart({ transactions = [] }) {
       monthlyIncome[month] += Number(tx.amount);
     }
     // Handles both spellings just in case
-    if (tx.type?.toLowerCase() === "expence" || tx.type?.toLowerCase() === "expense") {
+    if (tx.type?.toLowerCase() === "expense" || tx.type?.toLowerCase() === "expense") {
       monthlyExpense[month] += Number(tx.amount);
     }
   });
@@ -49,11 +49,11 @@ function IncomeChart({ transactions = [] }) {
 function TransactionPieChart({ transactions = [], settings = {} }) {
   // Compute totals on the fly from the transactions array
   const totalIncome = transactions
-    .filter((tx) => tx.type?.toLowerCase() === "income")
+    .filter((tx) => tx.type?.toLowerCase() === "Income")
     .reduce((sum, tx) => sum + Number(tx.amount), 0);
 
   const totalExpense = transactions
-    .filter((tx) => tx.type?.toLowerCase() === "expence" || tx.type?.toLowerCase() === "expense")
+    .filter((tx) => tx.type?.toLowerCase() === "Expense")
     .reduce((sum, tx) => sum + Number(tx.amount), 0);
 
   // Format data strictly matching MUI X PieChart requirements

@@ -1,37 +1,25 @@
-import React, { useState, useEffect } from 'react';
-
+import React, { useState, useEffect, useMemo } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
-import {
-  faWallet,
-  faChartLine
-} from '@fortawesome/free-solid-svg-icons';
+import { faWallet, faChartLine } from '@fortawesome/free-solid-svg-icons';
 
 import Sidebar from './Sidebar';
 import './Dasboard.css';
-
 import { fetchTransactions } from "../Api/transaction";
 import { IncomeChart, PieChart } from '../charts/charts';
-
 import BudgetModel from '../pages/module';
-
-import { getActiveBudgets } from '../Api/budget';
+import { getActiveBudget } from '../Api/budget';
+import { calculateBudgetRemaining } from '../utils/budgetfunction';
+import { checkBudgetStatus } from '../utils/budgetchecker';
 
 const userName = "Kapoun";
 
 function Dashboard() {
-
   const [transactions, setTransactions] = useState([]);
-
   const [balance, setBalance] = useState(0);
-
   const [loading, setLoading] = useState(false);
-
   const [incomeTotal, setIncomeTotal] = useState(0);
-
   const [expenseTotal, setExpenseTotal] = useState(0);
-
-  const [budgets, setBudgets] = useState([]);
+  const [budget, setBudget] = useState([]);
 
   const settings = {
     margin: { top: 50, bottom: 50 },
@@ -40,445 +28,221 @@ function Dashboard() {
   };
 
   /* =========================================
-     FETCH TRANSACTIONS
+      FETCH TRANSACTIONS
   ========================================= */
-
   useEffect(() => {
-
     const loadTransactions = async () => {
-
       setLoading(true);
-
-      const resData =
-        await fetchTransactions();
-
+      const resData = await fetchTransactions();
       if (resData) {
-
         setTransactions(resData);
 
         const income = resData
-          .filter(
-            (tx) => tx.type === "Income"
-          )
-          .reduce(
-            (sum, tx) =>
-              sum + Number(tx.amount),
-            0
-          );
+          .filter(tx => tx.type === "Income")
+          .reduce((sum, tx) => sum + Number(tx.amount), 0);
 
         const expense = resData
-          .filter(
-            (tx) => tx.type === "Expense"
-          )
-          .reduce(
-            (sum, tx) =>
-              sum + Number(tx.amount),
-            0
-          );
+          .filter(tx => tx.type === "Expense")
+          .reduce((sum, tx) => sum + Number(tx.amount), 0);
 
         setIncomeTotal(income);
-
         setExpenseTotal(expense);
-
         setBalance(income - expense);
-
       }
-
       setLoading(false);
-
     };
-
     loadTransactions();
-
   }, []);
 
   /* =========================================
-     FETCH BUDGETS
+      FETCH BUDGETS
   ========================================= */
-
   useEffect(() => {
-
-    const fetchBudgets = async () => {
-
-      const today = new Date()
-        .toISOString()
-        .split("T")[0];
-
-      const data =
-        await getActiveBudgets(today);
-
+    const fetchBudgetData = async () => {
+      const today = new Date().toISOString().split("T")[0];
+      const data = await getActiveBudget(today);
       if (data) {
-        setBudgets(data);
+        setBudget(data);
       }
-
     };
-
-    fetchBudgets();
-
+    fetchBudgetData();
   }, []);
 
   /* =========================================
-     GROUP EXPENSES BY CATEGORY
+      DERIVED DATA (Logic inside function)
   ========================================= */
 
-  const expenseByCategory = {};
+  // Calculate expenses per category memoized for performance
+  const expenseByCategory = useMemo(() => {
+    const mapping = {};
+    transactions.forEach((item) => {
+      if (item.type === "Expense") {
+        const category = item.category?.trim();
+        mapping[category] = (mapping[category] || 0) + Number(item.amount);
+      }
+    });
+    return mapping;
+  }, [transactions]);
 
-  transactions.forEach((item) => {
+  // Calculate the consumed per category
+  const consumedByCategory = useMemo(() => {
+    const mapping = {};
 
-    if (item.type === "Expense") {
+    transactions.forEach((item) => {
+      const category = item.category;
+      const amount = Number(item.amount);
 
-      const category =
-        item.category?.trim();
+      // Ensure we are adding/subtracting correctly
+      // If 'amount' is negative in your data, use +=. 
+      // If 'amount' is positive but represents an expense, use -=.
+      mapping[category] = (mapping[category] || 0) + amount;
+    });
 
-      expenseByCategory[category] =
-        (expenseByCategory[category] || 0)
-        + Number(item.amount);
+    return mapping;
+  }, [transactions]);
 
-    }
 
-  });
-
-  /* =========================================
-     PIE CHART DATA
-  ========================================= */
-
-  const budgetChartData = budgets.map(
-    (budget, index) => {
-
-      const consumed =
-        expenseByCategory[
-        budget.category
-        ] || 0;
-
-      const colors = [
-        '#2e7d32',
-        '#d32f2f',
-        '#1976d2',
-        '#ed6c02',
-        '#9c27b0'
-      ];
-
-      return {
-        id: index,
-        value: consumed,
-        label: budget.category,
-        color: colors[index % colors.length]
-      };
-
-    }
-  );
+  // Format data for the Pie Chart
+  const pieChartData = useMemo(() => [
+    { id: 0, value: incomeTotal, label: 'Income', color: '#2e7d32' },
+    { id: 1, value: expenseTotal, label: 'Expenses', color: '#d32f2f' }
+  ], [incomeTotal, expenseTotal]);
 
   return (
-
     <div>
-
       <Sidebar />
-
       <div className='dashboard-container'>
+        <label>Welcome, {userName}!</label>
 
-        <label>
-          Welcome, {userName}!
-        </label>
-
-        {/* =========================================
-            TOP DASHBOARD CARDS
-        ========================================= */}
-
+        {/* TOP CARDS */}
         <div className='main-dashboard'>
-
           <div className='console'>
-
             <div className="card-console-accounts">
-              <label>Dashboard</label>
+              <label>Dashboard Overview</label>
             </div>
 
             <div className="card-console">
-
-              {/* INCOME */}
-
               <div className="card-console-balance">
-
-                <FontAwesomeIcon
-                  icon={faWallet}
-                />
-
+                <FontAwesomeIcon icon={faWallet} />
                 <div>
-
-                  <label>
-                    Total Income
+                  <label>Total Income</label>
+                  <label className='income-balance'>
+                    Ksh {incomeTotal.toLocaleString()}
                   </label>
-
-                  <div>
-
-                    <label className='income-balance'>
-                      Ksh {(incomeTotal || 0)
-                        .toLocaleString()}
-                    </label>
-
-                  </div>
-
                 </div>
-
               </div>
-
-              {/* EXPENSE */}
 
               <div className="card-console-balance-expense">
-
-                <FontAwesomeIcon
-                  icon={faWallet}
-                />
-
+                <FontAwesomeIcon icon={faWallet} />
                 <div>
-
-                  <label>
-                    Total Expenses
+                  <label>Total Expenses</label>
+                  <label className='expense-balance'>
+                    Ksh {expenseTotal.toLocaleString()}
                   </label>
-
-                  <div>
-
-                    <label className='expense-balance'>
-                      Ksh {(expenseTotal || 0)
-                        .toLocaleString()}
-                    </label>
-
-                  </div>
-
                 </div>
-
               </div>
-
-              {/* BALANCE */}
 
               <div className="card-console-balance-balance">
-
-                <FontAwesomeIcon
-                  icon={faWallet}
-                />
-
+                <FontAwesomeIcon icon={faWallet} />
                 <div>
-
-                  <label>
-                    Net Balance
-                  </label>
-
+                  <label>Net Balance</label>
                   <div className="card-console-balance-investment">
-
-                    <FontAwesomeIcon
-                      icon={faChartLine}
-                    />
-
+                    <FontAwesomeIcon icon={faChartLine} />
                     <label className='net-balance'>
-                      Ksh {(balance || 0)
-                        .toLocaleString()}
+                      Ksh {balance.toLocaleString()}
                     </label>
-
                   </div>
-
                 </div>
-
               </div>
-
             </div>
-
           </div>
-
         </div>
 
-        {/* =========================================
-            BUDGET SECTION
-        ========================================= */}
-
+        {/* BUDGET SECTION */}
         <div className='main-budget-container'>
-
           <div className='budget-container'>
-
-            {/* BUDGET FORM */}
-
             <div className='budget'>
               <BudgetModel />
             </div>
 
-            {/* BUDGET LIST */}
-
             <div className="budget-list-container">
-
               <div className="budget-header">
                 <h3>Budget Overview</h3>
+
               </div>
 
               <div className="budget-grid">
+                {budget.map((b) => {
+                  // Uses the first memoized function which filters by "Expense" type
+                  const consumed = expenseByCategory[b.category] || 0;
+                  const remaining = b.budget_limit - consumed;
 
-                {budgets.map((budget) => {
+                  const percentage = b.budget_limit > 0
+                    ? (consumed / b.budget_limit) * 100
+                    : 0;
 
-                  const consumed =
-                    expenseByCategory[
-                    budget.category
-                    ] || 0;
-
-                  const remaining =
-                    budget.budget_limit -
-                    consumed;
-
-                  const percentage =
-                    budget.budget_limit > 0
-                      ? (
-                        consumed /
-                        budget.budget_limit
-                      ) * 100
-                      : 0;
+                  // Determine color based on status
+                  const isOverBudget = remaining < 0;
 
                   return (
+                    <div key={b.id || b.category} className="budget-card">
+                      <h3>{b.category}</h3>
 
-                    <div
-                      className="budget-card"
-                      key={budget.id}
-                    >
-
-                      {/* TOP */}
-
-                      <div className="budget-card-top">
-
-                        <h2>
-                          {budget.category}
-                        </h2>
-
-                        <span>
-                          {percentage.toFixed(0)}%
-                        </span>
-
+                      <div className="budget-stats">
+                        <p>Limit: <strong>Ksh {Number(b.budget_limit).toLocaleString()}</strong></p>
+                        <p>Spent: <span className="spent-amt">Ksh {consumed.toLocaleString()}</span></p>
+                        <p>
+                          Remaining:
+                          <strong style={{ color: isOverBudget ? '#d32f2f' : '#2e7d32' }}>
+                            Ksh {remaining.toLocaleString()}
+                          </strong>
+                        </p>
                       </div>
 
-                      {/* MONEY */}
-
-                      <div className="budget-money">
-
-                        <div>
-
-                          <label>
-                            Total
-                          </label>
-
-                          <h3>
-                            Ksh {budget.budget_limit
-                              .toLocaleString()}
-                          </h3>
-
-                        </div>
-
-                        <div>
-
-                          <label>
-                            Used
-                          </label>
-
-                          <h3>
-                            Ksh {consumed
-                              .toLocaleString()}
-                          </h3>
-
-                        </div>
-
-                        <div>
-
-                          <label>
-                            Left
-                          </label>
-
-                          <h3>
-                            Ksh {remaining
-                              .toLocaleString()}
-                          </h3>
-
-                        </div>
-
-                      </div>
-
-                      {/* PROGRESS BAR */}
-
-                      <div className="progress-bar">
-
+                      {/* Progress Bar */}
+                      <div className="progress-container" style={{ background: '#eee', height: '10px', borderRadius: '5px', marginTop: '10px' }}>
                         <div
-                          className="progress"
+                          className="progress-bar"
                           style={{
-
-                            width:
-                              `${Math.min(
-                                percentage,
-                                100
-                              )}%`,
-
-                            background:
-                              percentage > 80
-                                ? "#dc2626"
-                                : "#2563eb"
-
+                            width: `${Math.min(percentage, 100)}%`,
+                            backgroundColor: percentage > 90 ? '#d32f2f' : '#2e7d32',
+                            height: '100%',
+                            borderRadius: '5px',
+                            transition: 'width 0.3s ease'
                           }}
                         />
-
                       </div>
-
+                      <small>{percentage.toFixed(0)}% of budget used</small>
                     </div>
-
                   );
-
                 })}
-
               </div>
 
+
             </div>
-
           </div>
-
         </div>
 
-        {/* =========================================
-            CHARTS
-        ========================================= */}
-
+        {/* CHARTS */}
         <div className="card-console-other-container">
-
           <div className="card-console-other">
-
-            <IncomeChart
-              transactions={transactions}
-            />
-
+            <IncomeChart transactions={transactions} />
           </div>
-
           <div className="card-console-other-pending">
-
-            <label>
-              Budget Breakdown
-            </label>
-
+            <label>Budget Breakdown</label>
             <PieChart
-              data={budgetChartData}
-              settings={settings}
+              series={[{ innerRadius: 50, outerRadius: 100, data: pieChartData, arcLabel: 'label' }]}
+              {...settings}
             />
-
           </div>
-
         </div>
-
-        {/* =========================================
-            TRANSACTIONS
-        ========================================= */}
 
         <div className="card-console-transaction-listing">
-
-          <h1 className='transaction-listing-title'>
-            Transaction Listing
-          </h1>
-
+          <h1 className='transaction-listing-title'>Transaction Listing</h1>
         </div>
-
       </div>
-
     </div>
-
   );
-
 }
 
 export default Dashboard;

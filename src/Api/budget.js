@@ -1,6 +1,6 @@
 import supabase from "../services/supabase";
 
-export const getActiveBudgets = async (
+export const getActiveBudget = async (
     currentDate
 ) => {
 

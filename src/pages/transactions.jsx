@@ -80,7 +80,7 @@ function Transactions() {
                 setBalance(income - expense);
 
                 const investment = data
-                    .filter((tx) => tx.type === "investment")
+                    .filter((tx) => tx.type === "Investment")
                     .reduce((sum, tx) => sum + Number(tx.amount), 0);
                 setInvestmentTotal(investment);
             }
@@ -159,6 +159,17 @@ function Transactions() {
                                 <option value="Shopping" />
                                 <option value="Bills" />
                                 <option value="Salary" />
+                                <option value="Freelance" />
+                                <option value="Investments" />
+                                <option value="Loans" />
+                                <option value="Rent" />
+                                <option value="Groceries" />
+                                <option value="Bills" />
+                                <option value="Education" />
+                                <option value="Health" />
+                                <option value="Transport" />
+                                <option value="Entertainment" />
+                                <option value="Shopping" />
                                 <option value="Other income" />
                                 <option value="Other expense" />
                                 <option value="Subscription" />
