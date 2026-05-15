@@ -10,8 +10,8 @@ import BudgetModel from '../pages/module';
 import { getActiveBudget } from '../Api/budget';
 import { calculateBudgetRemaining } from '../utils/budgetfunction';
 import { checkBudgetStatus } from '../utils/budgetchecker';
+import useRegistration from '../Api/user';
 
-const userName = "Kapoun";
 
 function Dashboard() {
   const [transactions, setTransactions] = useState([]);
@@ -20,12 +20,10 @@ function Dashboard() {
   const [incomeTotal, setIncomeTotal] = useState(0);
   const [expenseTotal, setExpenseTotal] = useState(0);
   const [budget, setBudget] = useState([]);
+  const [settings, setSettings] = useState([]);
 
-  const settings = {
-    margin: { top: 50, bottom: 50 },
-    legend: { hidden: true },
-    height: 300,
-  };
+  const { userName, registrationData, loading: userLoading } = useRegistration();
+
 
   /* =========================================
       FETCH TRANSACTIONS
@@ -108,11 +106,13 @@ function Dashboard() {
     { id: 1, value: expenseTotal, label: 'Expenses', color: '#d32f2f' }
   ], [incomeTotal, expenseTotal]);
 
+
+
   return (
     <div>
       <Sidebar />
       <div className='dashboard-container'>
-        <label>Welcome, {userName}!</label>
+        <label>Welcome, {userName} 👋</label>
 
         {/* TOP CARDS */}
         <div className='main-dashboard'>
@@ -146,12 +146,10 @@ function Dashboard() {
                 <FontAwesomeIcon icon={faWallet} />
                 <div>
                   <label>Net Balance</label>
-                  <div className="card-console-balance-investment">
-                    <FontAwesomeIcon icon={faChartLine} />
-                    <label className='net-balance'>
-                      Ksh {balance.toLocaleString()}
-                    </label>
-                  </div>
+                  <FontAwesomeIcon icon={faChartLine} />
+                  <label className='net-balance'>
+                    Ksh {balance.toLocaleString()}
+                  </label>
                 </div>
               </div>
             </div>
@@ -241,7 +239,7 @@ function Dashboard() {
           <h1 className='transaction-listing-title'>Transaction Listing</h1>
         </div>
       </div>
-    </div>
+    </div >
   );
 }
 

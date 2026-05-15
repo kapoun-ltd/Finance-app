@@ -129,7 +129,8 @@ body {
 .income-balance,
 .expense-balance,
 .net-balance {
-  font-size: 30px;
+  display: flex;
+  font-size: 25px;
   font-weight: 700;
   margin-top: 10px;
 }
