@@ -13,8 +13,6 @@ function Sidebar({ currentPage, setCurrentPage }) {
     "Transactions",
     "Reports",
     "Profile",
-    "Deposit",
-    "Withdrawal",
     "payment",
 
   ];

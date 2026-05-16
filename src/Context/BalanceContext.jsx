@@ -6,8 +6,9 @@ export const BalanceContext = createContext();
 
 // 2. Provider component
 export const BalanceProvider = ({ children }) => {
-    const [deposits, setDeposits] = useState([]);
     const [balance, setBalance] = useState(0);
+    const [deposits, setDeposits] = useState([]);
+
 
     // Fetch deposits from Supabase
     const fetchDeposit = async () => {

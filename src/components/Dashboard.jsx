@@ -22,6 +22,7 @@ function Dashboard() {
   const [budget, setBudget] = useState([]);
   const [settings, setSettings] = useState([]);
 
+
   const { userName, registrationData, loading: userLoading } = useRegistration();
 
 
