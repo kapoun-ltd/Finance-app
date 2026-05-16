@@ -78,3 +78,30 @@
     color: #49f049;
   }
 }
+
+.logout-btn {
+  background: none;
+  border: none;
+  color: white;
+  font: inherit;
+  cursor: pointer;
+  padding: 12px;
+  text-align: left;
+  width: 100%;
+}
+
+.logout-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.logout-btn {
+  margin-top: auto;
+}

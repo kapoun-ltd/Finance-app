@@ -6,6 +6,7 @@ import Transactions from "./pages/transactions";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Payment from "./pages/Payment";
+import logout from "./components/logout";
 
 
 export default function App() {
@@ -17,6 +18,8 @@ export default function App() {
       <Route path="/" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/payment" element={<Payment />} />
+      <Route path="/logout" element={<logout />} />
+
     </Routes>
   );
 }

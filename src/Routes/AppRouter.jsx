@@ -12,6 +12,8 @@ import Register from "../pages/Register.jsx";
 import Transactions from "../pages/transactions";
 import Reports from "../pages/Reports.jsx";
 import Payment from "../pages/Payment.jsx";
+import logout from "../components/logout";
+
 
 
 function AppRouter() {
@@ -34,6 +36,7 @@ function AppRouter() {
             <Route path="/payment" element={<Payment />} />
             <Route path="/reports" element={<Reports />} />
             <Route path="/withdrawal" element={<Withdrawal />} />
+            <Route path="/logout" element={<logout />} />
 
           </Route>
 

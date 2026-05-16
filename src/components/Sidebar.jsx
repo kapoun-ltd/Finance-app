@@ -14,6 +14,7 @@ function Sidebar({ currentPage, setCurrentPage }) {
     "Reports",
     "Profile",
     "payment",
+    "Logout"
 
   ];
 
@@ -24,6 +25,7 @@ function Sidebar({ currentPage, setCurrentPage }) {
       <Link to="/transactions">Transactions</Link>
       <Link to="/payment">payment</Link>
       <Link to="/profile">profile</Link>
+      <Link to="/logout">logout</Link>
 
     </div>
   );

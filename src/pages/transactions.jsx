@@ -132,6 +132,7 @@ function Transactions() {
                                 <option value="">Select Type</option>
                                 <option value="Income">Income</option>
                                 <option value="Expense">Expense</option>
+                                <option value="Investment">Investment</option>
                             </select>
                             <input type="text" list="account" placeholder="Account" name="account" value={formData.account} onChange={handleChange} required />
                             <datalist id="account">
@@ -170,9 +171,10 @@ function Transactions() {
                                 <option value="Transport" />
                                 <option value="Entertainment" />
                                 <option value="Shopping" />
+                                <option value="Subscription" />
                                 <option value="Other income" />
                                 <option value="Other expense" />
-                                <option value="Subscription" />
+
                             </datalist>
                             <input type="text" placeholder="Description" name="description" value={formData.description} onChange={handleChange} required />
 
