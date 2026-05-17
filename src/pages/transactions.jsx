@@ -114,6 +114,11 @@ function Transactions() {
                             <label className='investment-value'>{investmentTotal.toLocaleString()}</label>
                         </div>
 
+                        <div className="transaction-income-container">
+                            <label className='investment-label'>Saving </label>
+                            <label className='investment-value'>{investmentTotal.toLocaleString()}</label>
+                        </div>
+
                     </div>
                     <div className="transaction-btn-container">
                         <button className="trans-btn">Import</button>
@@ -132,6 +137,7 @@ function Transactions() {
                                 <option value="">Select Type</option>
                                 <option value="Income">Income</option>
                                 <option value="Expense">Expense</option>
+                                <option value="Saving">Saving</option>
                                 <option value="Investment">Investment</option>
                             </select>
                             <input type="text" list="account" placeholder="Account" name="account" value={formData.account} onChange={handleChange} required />

@@ -26,9 +26,10 @@
 ================================ */
 
 .transaction-title-container {
-    display: flex;
+    display: grid;
     justify-content: space-between;
     align-items: center;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 
     margin-bottom: 10px;
 }
