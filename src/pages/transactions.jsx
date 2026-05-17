@@ -7,6 +7,7 @@ function Transactions() {
     const [incomeTotal, setIncomeTotal] = useState(0);
     const [investmentTotal, setInvestmentTotal] = useState(0);
     const [expenceTotal, setExpenceTotal] = useState(0);
+    const [savingTotal, setSavingTotal] = useState(0);
     const [type, setType] = useState("")
     const [transactions, setTransactions] = useState([]);
     const [balance, setBalance] = useState(0);
@@ -83,7 +84,13 @@ function Transactions() {
                     .filter((tx) => tx.type === "Investment")
                     .reduce((sum, tx) => sum + Number(tx.amount), 0);
                 setInvestmentTotal(investment);
+
+                const saving = data
+                    .filter((tx) => tx.type === "Saving")
+                    .reduce((sum, tx) => sum + Number(tx.amount), 0);
+                setSavingTotal(saving);
             }
+
 
             setLoading(false);
         };
@@ -116,7 +123,7 @@ function Transactions() {
 
                         <div className="transaction-income-container">
                             <label className='investment-label'>Saving </label>
-                            <label className='investment-value'>{investmentTotal.toLocaleString()}</label>
+                            <label className='investment-value'>{savingTotal.toLocaleString()}</label>
                         </div>
 
                     </div>
