@@ -37,6 +37,7 @@ function AppRouter() {
             <Route path="/reports" element={<Reports />} />
             <Route path="/withdrawal" element={<Withdrawal />} />
             <Route path="/logout" element={<logout />} />
+            <Route path="/" element={<Login />} />
 
           </Route>
 

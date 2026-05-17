@@ -36,48 +36,8 @@
 }
 
 
-/* --- 📱 Mobile Responsiveness (Screens under 1024px wide) --- */
-@media (max-width: 1024px) {
-  .sidebar {
-    /* 1. Transform the sidebar into a bottom navigation bar */
-    height: 60px;
-    /* Fixed height at the bottom */
-    width: 100%;
-    /* Stretch fully across the screen */
-    position: fixed;
-    top: auto;
-    /* Release the top constraint */
-    bottom: 0;
-    /* Stick it to the very bottom */
-    left: 0;
 
-    /* 2. Change layout direction from vertical to horizontal */
-    flex-direction: row;
-    justify-content: space-around;
-    /* Space links evenly across the screen */
-    align-items: center;
 
-    padding: 0 10px;
-    gap: 0;
-    box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.1);
-    /* Shadow shifts upwards */
-    border-top: 1px solid #eee;
-  }
-
-  .sidebar a {
-    padding: 10px;
-    font-size: 0.9rem;
-    /* Slightly smaller text for phone layouts */
-    text-align: center;
-    flex: 1;
-  }
-
-  /* Adjust hover animation for horizontal alignment instead of vertical */
-  .sidebar a:hover {
-    transform: translateY(-2px);
-    color: #49f049;
-  }
-}
 
 .logout-btn {
   background: none;
@@ -104,4 +64,19 @@
 
 .logout-btn {
   margin-top: auto;
+}
+
+.logout-btn {
+  background: none;
+  border: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  padding: 12px;
+  text-align: left;
+  width: 100%;
+}
+
+.logout-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
 }
