@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faWallet, faChartLine } from '@fortawesome/free-solid-svg-icons';
-
 import Sidebar from './Sidebar';
 import './Dasboard.css';
 import { fetchTransactions } from "../Api/transaction";

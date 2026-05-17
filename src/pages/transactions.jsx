@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 import './transactions.css';
+import { toast } from "react-toastify";
 import Sidebar from '../components/Sidebar.jsx';
 import { addTransaction, fetchTransactions } from "../Api/transaction";
 function Transactions() {
@@ -42,28 +43,51 @@ function Transactions() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const newTransaction = await addTransaction(formData);
+        try {
+            const newTransaction = await addTransaction(formData);
 
-        if (newTransaction) {
-            setTransactions(prev => [newTransaction, ...prev]);
-            setFormData({
-                description: "",
-                amount: "",
-                type: "",
-                category: "",
-                account: "",
-                method: "",
-                date: "",
-                user_id: ""
-            });
+            if (newTransaction) {
+
+                setTransactions(prev => [newTransaction, ...prev]);
+
+                toast.success("Transaction Added Successfully 💰");
+
+                if (formData.type === "Expense" && Number(formData.amount) > 10000) {
+                    toast.warning("Large expense detected ⚠️");
+                }
+
+                if (formData.type === "Investment") {
+                    toast.info("Investment added 📈");
+                }
+
+                if (formData.type === "Saving") {
+                    toast.success("Savings growing nicely 🚀");
+                }
+
+                setFormData({
+                    description: "",
+                    amount: "",
+                    type: "",
+                    category: "",
+                    account: "",
+                    method: "",
+                    date: "",
+                    user_id: ""
+                });
+            } else {
+                toast.error("Failed to add transaction");
+            }
+
+        } catch (error) {
+            console.error(error);
+            toast.error("Something went wrong 🚨");
         }
-    }
-
+    };
     useEffect(() => {
         const loadTransactions = async () => {
             setLoading(true);
 
-            const data = await fetchTransactions(); // 👈 always all
+            const data = await fetchTransactions();
 
             if (data) {
                 setTransactions(data);
