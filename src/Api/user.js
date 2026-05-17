@@ -9,6 +9,7 @@ export default function useRegistration() {
     const [userName, setUserName] = useState("");
     const [loading, setLoading] = useState(true);
     const [email, setEmail] = useState("");
+    const [fullName, setFullName] = useState("");
 
     useEffect(() => {
         let isMounted = true;
@@ -49,5 +50,7 @@ export default function useRegistration() {
         userName,
         loading,
         email,
+        fullName,
+
     };
 }

@@ -1,39 +1,28 @@
 import React from 'react';
 import "./Profile.css";
 import Sidebar from '../components/Sidebar';
+import useRegistration from "../Api/user";
 
 
 
 
 function Profile() {
-    return (
-        <div className="setting">
+    const { userName, fullName, email, registrationData, loading: userLoading } = useRegistration();
 
+    return (
+        <div className="profile">
             <Sidebar />
-            <h2>Settings</h2>
-            <div className="setting-option">
-                <label>Notification Preferences</label>
-                <select>
-                    <option>Email</option>
-                    <option>SMS</option>
-                    <option>Push Notifications</option>
-                </select>
+            <div className='profile-container'>
+                <div className='console-profile'>
+                    <div className='profile-picture'>
+                        <img src="" alt="" />
+                    </div>
+                    <label>Username:{userName} 👋</label>
+                    <label>Email :{email} </label>
+                    <label>FullName :{fullName} </label>
+                </div>
             </div>
-            <div className="setting-option">
-                <label>Theme</label>
-                <select>
-                    <option>Light</option>
-                    <option>Dark</option>
-                </select>
-            </div>
-            <div className="setting-option">
-                <label>Language</label>
-                <select>
-                    <option>English</option>
-                    <option>Spanish</option>
-                    <option>French</option>
-                </select>
-            </div>
+
         </div>
 
     );

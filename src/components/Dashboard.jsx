@@ -91,9 +91,6 @@ function Dashboard() {
       const category = item.category;
       const amount = Number(item.amount);
 
-      // Ensure we are adding/subtracting correctly
-      // If 'amount' is negative in your data, use +=. 
-      // If 'amount' is positive but represents an expense, use -=.
       mapping[category] = (mapping[category] || 0) + amount;
     });
 
