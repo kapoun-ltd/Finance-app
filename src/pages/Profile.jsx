@@ -7,19 +7,33 @@ import useRegistration from "../Api/user";
 
 
 function Profile() {
-    const { userName, fullName, email, registrationData, loading: userLoading } = useRegistration();
+    const { userName, fullName, phone, email, registrationData, loading: userLoading } = useRegistration();
 
     return (
         <div className="profile">
             <Sidebar />
             <div className='profile-container'>
+                <hi className="profile-header">My Profile</hi>
                 <div className='console-profile'>
-                    <div className='profile-picture'>
-                        <img src="" alt="" />
+                    <label className='info-header'>Personal Information</label>
+                    <div className='profile-info-console'>
+                        <div className='profile-info-one'>
+                            <label>Username:{userName} 👋</label>
+                        </div>
+                        <div className='profile-info-one'>
+                            <label>Email :{email} </label>
+                        </div>
+                        <div className='profile-info-one'>
+                            <label>FullName :{fullName} </label>
+                        </div>
+                        <div className='profile-info-one'>
+                            <label>Phone :{phone} </label>
+                        </div>
                     </div>
-                    <label>Username:{userName} 👋</label>
-                    <label>Email :{email} </label>
-                    <label>FullName :{fullName} </label>
+
+                </div>
+                <div className='console-one'>
+                    <label>Account setting</label>
                 </div>
             </div>
 

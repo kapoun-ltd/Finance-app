@@ -10,6 +10,7 @@ export default function useRegistration() {
     const [loading, setLoading] = useState(true);
     const [email, setEmail] = useState("");
     const [fullName, setFullName] = useState("");
+    const [phone, setPhone] = useState("");
 
     useEffect(() => {
         let isMounted = true;
@@ -30,6 +31,7 @@ export default function useRegistration() {
                     setRegistrationData(data);
                     setUserName(data.full_name);
                     setEmail(data.email);
+                    setPhone(data.phone_number);
                 }
             } catch (err) {
                 console.error(err);
@@ -43,7 +45,7 @@ export default function useRegistration() {
         return () => {
             isMounted = false;
         };
-    }, [user?.id]); // 🔥 dependency added
+    }, [user?.id]);
 
     return {
         registrationData,
@@ -51,6 +53,7 @@ export default function useRegistration() {
         loading,
         email,
         fullName,
+        phone
 
     };
 }
