@@ -110,7 +110,10 @@ function Profile() {
                     </div>
 
                 </div>
+                <div className='goal-container'>
+                    <label>Financial Goals</label>
 
+                </div>
             </div>
         </div>
     );
