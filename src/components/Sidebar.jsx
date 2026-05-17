@@ -2,6 +2,7 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import supabase from "../services/supabase";
 import "./Sidebar.css";
+import { toast } from "react-toastify";
 
 function Sidebar() {
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ function Sidebar() {
     }
 
     navigate("/");
-    alert("user logged out");
+    toast.success("Logged out successfully 👋");
   };
 
   return (

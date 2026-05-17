@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import supabase from "../services/supabase";
 import './Register.css';
 import logo from '../assets/logo.png';
+import { toast } from "react-toastify";
 
 function Register() {
   const navigate = useNavigate();
@@ -77,6 +78,7 @@ function Register() {
       setErrorMessage(err.message);
       setSuccessMessage('');
     }
+    toast.success("Registration successful! Redirecting...");
   };
 
   return (

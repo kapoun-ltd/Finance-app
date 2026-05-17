@@ -11,7 +11,6 @@ export default function Logout() {
             console.error(error);
             return;
         }
-
         navigate("/login");
     };
 
