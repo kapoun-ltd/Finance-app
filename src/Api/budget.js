@@ -1,4 +1,5 @@
 import supabase from "../services/supabase";
+import { toast } from "react-toastify";
 
 export const getActiveBudget = async (
     currentDate
@@ -16,6 +17,7 @@ export const getActiveBudget = async (
     }
 
     return data;
+
 }
 
 
@@ -45,5 +47,6 @@ export const addBudget = async (budgetData) => {
         throw new Error(error.message);
     }
 
+    toast.success("Budget added successfully");
     return data;
 };
