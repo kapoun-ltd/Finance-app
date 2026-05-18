@@ -3,6 +3,9 @@ import "./Profile.css";
 import Sidebar from '../components/Sidebar';
 import useRegistration from "../Api/user";
 import { fetchTransactions } from "../Api/transaction";
+import { getActiveGoals, addGoal } from "../Api/goals";
+import { getActiveBudget } from "../Api/budget";
+
 
 
 
@@ -15,6 +18,50 @@ function Profile() {
     const [savingTotal, setSavingTotal] = useState(0);
     const [balance, setBalance] = useState(0);
     const [loading, setLoading] = useState(false);
+    const [goalName, setGoalName] = useState("");
+    const [goalAmount, setGoalAmount] = useState("");
+    const [startDate, setStartDate] = useState("");
+    const [endDate, setEndDate] = useState("");
+    const [goals, setGoals] = useState([]);
+    const [budget, setBudget] = useState([]);
+    const handleAddGoal = () => {
+        const newGoal = {
+            goal_name: goalName,
+            goal_amount: goalAmount,
+            start_date: startDate,
+            end_date: endDate,
+        };
+        addGoal(newGoal);
+        setGoalName("");
+        setGoalAmount("");
+        setStartDate("");
+        setEndDate("");
+    };
+
+    /* =========================================
+         FETCH BUDGETS
+     ========================================= */
+    useEffect(() => {
+        const fetchBudgetData = async () => {
+            const today = new Date().toISOString().split("T")[0];
+            const data = await getActiveBudget(today);
+            if (data) {
+                setBudget(data);
+            }
+        };
+        fetchBudgetData();
+
+        const loadGoals = async () => {
+            setLoading(true);
+            const data = await getActiveGoals();
+            if (data) {
+                setGoals(data);
+            }
+            setLoading(false);
+        };
+        loadGoals();
+    }, []);
+
 
     const { userName, fullName, phone, email, registrationData, loading: userLoading } = useRegistration();
     /* =========================================
@@ -112,6 +159,42 @@ function Profile() {
                 </div>
                 <div className='goal-container'>
                     <label>Financial Goals</label>
+                    <div className="add-goal-container">
+                        <input
+                            type="text"
+                            placeholder="Goal Name"
+                            value={goalName}
+                            onChange={(e) => setGoalName(e.target.value)}
+                        />
+                        <input
+                            type="number"
+                            placeholder="Goal Amount"
+                            value={goalAmount}
+                            onChange={(e) => setGoalAmount(e.target.value)}
+                        />
+                        <input
+                            type="date"
+                            placeholder="Start Date"
+                            value={startDate}
+                            onChange={(e) => setStartDate(e.target.value)}
+                        />
+                        <input
+                            type="date"
+                            placeholder="End Date"
+                            value={endDate}
+                            onChange={(e) => setEndDate(e.target.value)}
+                        />
+                        <button onClick={handleAddGoal}>Add Goal</button>
+                    </div>
+                    <div className="goals-list-container">
+                        {goals.map((goal) => (
+                            <div className="goal-item" key={goal.id}>
+                                <h3>{goal.goal_name}</h3>
+                                <p>Target: {goal.goal_amount}</p>
+                                <p>Deadline: {goal.end_date}</p>
+                            </div>
+                        ))}
+                    </div>
 
                 </div>
             </div>

@@ -13,6 +13,7 @@ export const getActiveBudget = async (
 
     if (error) {
         console.error(error);
+
         return [];
     }
 
