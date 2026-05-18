@@ -16,7 +16,7 @@ function Sidebar() {
     }
 
     navigate("/");
-    toast.success("Logged out successfully 👋");
+    toast.success("Logged out successfully ✌️");
   };
 
   return (

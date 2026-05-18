@@ -109,7 +109,7 @@ function Dashboard() {
     <div>
       <Sidebar />
       <div className='dashboard-container'>
-        <label>Welcome, {userName} 👋</label>
+        <label>Welcome, {userName} 😊</label>
 
         {/* TOP CARDS */}
         <div className='main-dashboard'>
