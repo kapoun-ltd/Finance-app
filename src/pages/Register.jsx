@@ -10,6 +10,7 @@ function Register() {
   const [user, setUser] = useState({
     username: "",
     full_name: "",
+    phone_number: "",
     email: "",
     password: "",
   });
@@ -40,6 +41,7 @@ function Register() {
         id: data.user.id,
         username: user.username,
         full_name: user.full_name,
+        phone_number: user.phone_number,
         email: user.email,
       });
 
@@ -55,7 +57,7 @@ function Register() {
   return (
     <div className="register-container">
       <form className="register-form" onSubmit={handleSubmit}>
-        <h1>Register</h1>
+        <h1>Create Account</h1>
 
         <input
           type="text"
@@ -71,6 +73,15 @@ function Register() {
           name="full_name"
           placeholder="Full Name"
           value={user.full_name}
+          onChange={handleChange}
+          required
+        />
+
+        <input
+          type="text"
+          name="phone_number"
+          placeholder="Phone Number"
+          value={user.phone_number}
           onChange={handleChange}
           required
         />
