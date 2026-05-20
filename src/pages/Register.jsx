@@ -1,124 +1,107 @@
-import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import supabase from "../services/supabase";
-import './Register.css';
-import logo from '../assets/logo.png';
 import { toast } from "react-toastify";
+import "./Register.css";
 
 function Register() {
   const navigate = useNavigate();
 
   const [user, setUser] = useState({
-    username: '',
-    full_name: '',
-    email: '',
-    phone_number: '',
-    password: '',
-    confirm_password: ''
+    username: "",
+    full_name: "",
+    email: "",
+    password: "",
   });
 
-  const [errorMessage, setErrorMessage] = useState('');
-  const [successMessage, setSuccessMessage] = useState('');
-
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setUser(prev => ({ ...prev, [name]: value }));
+    setUser({
+      ...user,
+      [e.target.name]: e.target.value,
+    });
   };
 
-  const registerUser = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (user.password !== user.confirm_password) {
-      setErrorMessage("Passwords do not match!");
+    const { data, error } = await supabase.auth.signUp({
+      email: user.email,
+      password: user.password,
+    });
+
+    if (error) {
+      toast.error(error.message);
       return;
     }
 
-    try {
-      // --- Step 1: Sign up with Supabase auth ---
-      const { data, error } = await supabase.auth.signUp({
+    const { error: dbError } = await supabase
+      .from("registration")
+      .insert({
+        id: data.user.id,
+        username: user.username,
+        full_name: user.full_name,
         email: user.email,
-        password: user.password
       });
 
-      if (error) throw error;
-
-      // ⚠️ Check if user was actually returned
-      if (!data?.user) {
-        throw new Error("Signup succeeded, but no user data was returned. Check if email confirmation is required.");
-      }
-
-      const userId = data.user.id;
-
-      // --- Step 2: Insert profile info into your table ---
-      const { error: profileError } = await supabase
-        .from('registration')
-        .insert({
-          id: userId,
-          username: user.username,
-          full_name: user.full_name,
-          phone_number: user.phone_number,
-          email: user.email
-        });
-
-      // If it fails here, it's either an RLS policy issue or a table schema mismatch
-      if (profileError) {
-        console.error("Profile Insert Error:", profileError);
-        throw new Error(`Auth succeeded, but profile creation failed: ${profileError.message}`);
-      }
-
-      console.log("Registration successful!", data);
-      setSuccessMessage("Registration successful! Redirecting...");
-      setErrorMessage('');
-
-      // Give the user a brief moment to see the success message
-      setTimeout(() => {
-        navigate('/');
-      }, 1500);
-
-    } catch (err) {
-      console.error("Catch block triggered:", err);
-      setErrorMessage(err.message);
-      setSuccessMessage('');
+    if (dbError) {
+      toast.error(dbError.message);
+      return;
     }
-    toast.success("Registration successful! Redirecting...");
+
+    toast.success("Registration successful!");
+    navigate("/login");
   };
 
   return (
-    <div className="auth-container">
-      <div className='register-container'>
-        <h2>Register Page</h2>
-        <form onSubmit={registerUser}>
-          <label>Username</label>
-          <input type="text" name="username" value={user.username} onChange={handleChange} placeholder='Enter your username' required />
+    <div className="register-container">
+      <form className="register-form" onSubmit={handleSubmit}>
+        <h1>Register</h1>
 
-          <label>Full Name</label>
-          <input type="text" name="full_name" value={user.full_name} onChange={handleChange} placeholder='Enter your full name' required />
+        <input
+          type="text"
+          name="username"
+          placeholder="Username"
+          value={user.username}
+          onChange={handleChange}
+          required
+        />
 
-          <label>Email</label>
-          <input type="email" name="email" value={user.email} onChange={handleChange} placeholder='Enter your email' required />
+        <input
+          type="text"
+          name="full_name"
+          placeholder="Full Name"
+          value={user.full_name}
+          onChange={handleChange}
+          required
+        />
 
-          <label>Phone Number</label>
-          <input type="text" name="phone_number" value={user.phone_number} onChange={handleChange} placeholder='Enter your phone number' required />
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          value={user.email}
+          onChange={handleChange}
+          required
+        />
 
-          <label>Password</label>
-          <input type="password" name="password" value={user.password} onChange={handleChange} placeholder='Enter your password' required />
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          value={user.password}
+          onChange={handleChange}
+          required
+        />
 
-          <label>Confirm Password</label>
-          <input type="password" name="confirm_password" value={user.confirm_password} onChange={handleChange} placeholder='Confirm your password' required />
+        <button type="submit">Register</button>
 
-          <button type="submit">Register</button>
+        <p>
+          Already have an account?{" "}
+          <Link to="/login">Login</Link>
+        </p>
 
-          {errorMessage && <p className="error">{errorMessage}</p>}
-          {successMessage && <p className="success">{successMessage}</p>}
-        </form>
-
-        <label>If you already have an account</label>
-        <Link to="/login">Login Here</Link>
-       <div>
-          <Link to="/">Home</Link>
-       </div>
-      </div>
-      
+        <Link to="/">Home</Link>
+      </form>
     </div>
   );
 }

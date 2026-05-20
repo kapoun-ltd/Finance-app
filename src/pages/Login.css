@@ -1,101 +1,61 @@
 .login-container {
-    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    min-height: 100vh;
+
+      background: linear-gradient(
+        135deg,
+        #2673de,
+        #dac8bf,
+        #60a5fa
+    );
 }
 
-.auth-box h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    background: linear-gradient(to right, #00c6ff, #0072ff);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.auth-box {
-    width: 350px;
-    padding: 30px;
-    border-radius: 15px;
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(12px);
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
-    color: white;
-}
-
-
-.auth-box input {
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 15px;
-    border: none;
-    border-radius: 8px;
-    background: rgba(255, 255, 255, 0.1);
-    color: white;
-    outline: none;
-}
-
-.auth-box input:focus {
-    border: 1px solid #00c6ff;
-}
-
-.auth-box input:focus {
-    border: 1px solid #00c6ff;
-}
-
-
-.auth-box p {
-    text-align: center;
-    margin-top: 15px;
-}
-
-.auth-box a {
-    color: #00c6ff;
-    text-decoration: none;
-}
-
-.login-container label:last-of-type {
-    margin-top: 15px;
-    font-weight: normal;
-}
-
-.login-container input:focus {
-    outline: none;
-    border-color: #007bff;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-}
-
-
-.login-container p {
-    justify-items: center;
-    align-items: center;
-    text-align: center;
-}
-
-
-.login-container img.logo {
-    width: 80px;
-    height: 80px;
-    margin: 0 auto 20px;
-    display: block;
-    border-radius: 50%;
-}
-
-form {
+.login-form {
     display: flex;
     flex-direction: column;
+    gap: 15px;
 
+    width: 300px;
+    padding: 30px;
+
+    background: white;
+    border-radius: 15px;
+
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    color: yellowgreen;
 }
 
-.auth-box button {
-    margin-top: 20px;
+.login-form h1 {
+    text-align: center;
+}
+
+.login-form input {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+}
+
+.login-form button {
     padding: 12px;
     border: none;
     border-radius: 8px;
-    background: linear-gradient(135deg, #00c6ff, #0072ff);
+
+    background: #2673de;
     color: white;
+    font-weight: bold;
+
     cursor: pointer;
-    transition: 0.3s;
+}
+
+.login-form button:hover {
+    opacity: 0.9;
+}
+
+.login-form a {
+    text-decoration: none;
+    color: #2673de;
+    text-align: center;
 }
