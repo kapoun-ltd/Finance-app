@@ -4,9 +4,20 @@ import myLogo from "../assets/logo.png";
 
 function Frontpage() {
     return (
-        <div className="front-container">
-            <div className="front-text">
+    
+         
 
+        <div className="front-container">
+    <div className="log-options">
+            <lable>Get Started</lable>
+            <a href="/register">
+                <button>Register</button>
+            </a>
+           <a href="/login">
+                <button>Log In</button>
+            </a>
+        </div>
+            <div className="front-text">
                 <img className="company-logo" src={myLogo} alt="comapany logo" />
 
                 <h1>Next-Gen</h1>
@@ -18,6 +29,8 @@ function Frontpage() {
 
             </div>
         </div>
+      
+
     );
 }
 

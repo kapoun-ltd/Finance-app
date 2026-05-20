@@ -96,7 +96,9 @@ function Login() {
 
           <label style={{ display: 'block', marginTop: '15px' }}>
             If you don't have an account <Link to="/register">Register Here</Link>
+            
           </label>
+          <Link to="/">Home</Link>
         </form>
       </div>
     </div>

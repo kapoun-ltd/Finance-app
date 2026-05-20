@@ -113,8 +113,12 @@ function Register() {
         </form>
 
         <label>If you already have an account</label>
-        <Link to="/">Login Here</Link>
+        <Link to="/login">Login Here</Link>
+       <div>
+          <Link to="/">Home</Link>
+       </div>
       </div>
+      
     </div>
   );
 }
