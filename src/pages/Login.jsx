@@ -5,9 +5,8 @@ import logo from '../assets/logo.png';
 import supabase from "../services/supabase";
 import { toast } from "react-toastify";
 
-
 function Login() {
-  const [email, setEmail] = useState("");
+  const [identifier, setIdentifier] = useState(""); // Renamed from email to fit both formats
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -20,24 +19,47 @@ function Login() {
     setError("");
 
     try {
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email,
-        password
+      let emailToAuth = identifier.trim();
+
+      // 1. Check if the input is a username (doesn't contain '@')
+      if (!emailToAuth.includes("@")) {
+        console.log("Username detected, fetching associated email...");
+
+        const { data: profile, error: profileError } = await supabase
+          .from("profiles")
+          .select("email")
+          .eq("username", emailToAuth)
+          .single();
+
+        if (profileError || !profile) {
+          throw new Error("No account found with that username.");
+        }
+
+        // Overwrite identifier with the real email found in the profiles table
+        emailToAuth = profile.email;
+      }
+
+      // 2. Proceed with standard Supabase email/password authentication
+      const { data, error: authError } = await supabase.auth.signInWithPassword({
+        email: emailToAuth,
+        password: password,
       });
 
-      if (error) throw error;
+      if (authError) throw authError;
 
       console.log("Logged in user:", data.user);
-      // redirect to dashboard or home page
+      toast.success("Logged in successfully!");
+
+      // Redirect to dashboard or home page
       navigate('/dashboard');
 
     } catch (err) {
       console.error("Login error:", err.message);
       setError(err.message);
+      toast.error(err.message);
     } finally {
       setLoading(false);
     }
-    toast.success("Login successful");
   };
 
   return (
@@ -48,12 +70,12 @@ function Login() {
         <p>Welcome back! Log in to continue where you left off.</p>
 
         <form className="login-form" onSubmit={handleSubmit}>
-          <label>Email</label>
+          <label>Username or Email</label>
           <input
-            type="email"
-            placeholder='Enter email'
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            type="text"
+            placeholder='Enter username or email'
+            value={identifier}
+            onChange={(e) => setIdentifier(e.target.value)}
             required
           />
 
@@ -70,9 +92,11 @@ function Login() {
             {loading ? "Logging in..." : "Login"}
           </button>
 
-          {error && <p style={{ color: 'red' }}>{error}</p>}
+          {error && <p style={{ color: 'red', marginTop: '10px' }}>{error}</p>}
 
-          <label>If you don't have an account  <Link to="/register">Register Here</Link></label>
+          <label style={{ display: 'block', marginTop: '15px' }}>
+            If you don't have an account <Link to="/register">Register Here</Link>
+          </label>
         </form>
       </div>
     </div>

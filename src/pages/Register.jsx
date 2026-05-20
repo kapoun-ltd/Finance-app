@@ -9,6 +9,7 @@ function Register() {
   const navigate = useNavigate();
 
   const [user, setUser] = useState({
+    username: '',
     full_name: '',
     email: '',
     phone_number: '',
@@ -53,6 +54,7 @@ function Register() {
         .from('registration')
         .insert({
           id: userId,
+          username: user.username,
           full_name: user.full_name,
           phone_number: user.phone_number,
           email: user.email
@@ -86,6 +88,9 @@ function Register() {
       <div className='register-container'>
         <h2>Register Page</h2>
         <form onSubmit={registerUser}>
+          <label>Username</label>
+          <input type="text" name="username" value={user.username} onChange={handleChange} placeholder='Enter your username' required />
+
           <label>Full Name</label>
           <input type="text" name="full_name" value={user.full_name} onChange={handleChange} placeholder='Enter your full name' required />
 

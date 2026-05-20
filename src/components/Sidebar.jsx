@@ -27,6 +27,7 @@ function Sidebar() {
       <Link to="/transactions">Transactions</Link>
       <Link to="/payment">Payment</Link>
       <Link to="/profile">Profile</Link>
+      {/* <Link to="/login">Login</Link> */}
 
       {/* REAL logout */}
       <button className="logout-btn" onClick={handleLogout}>

@@ -11,6 +11,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Payment from "./pages/Payment";
 import Logout from "./components/logout";
+import Frontpage from "./pages/frontpage";
 
 export default function App() {
   return (
@@ -25,10 +26,11 @@ export default function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/transactions" element={<Transactions />} />
-        <Route path="/" element={<Login />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/payment" element={<Payment />} />
         <Route path="/logout" element={<Logout />} />
+        <Route path="/" element ={<Frontpage />} />
       </Routes>
     </>
   );

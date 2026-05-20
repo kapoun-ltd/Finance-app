@@ -41,7 +41,6 @@ app.post("/api/pay", async (req, res) => {
     }
 });
 
-// ✅ Health check (VERY useful for Render)
 app.get("/", (req, res) => {
     res.send("API is running 🚀");
 });
