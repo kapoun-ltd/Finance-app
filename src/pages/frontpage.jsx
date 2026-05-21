@@ -28,6 +28,25 @@ function Frontpage() {
                 </p>
 
             </div>
+            <div className="landing-wrapper">
+    <div className="front-intro">
+        <h1>Welcome to</h1>
+        <h1 className="brand-name">Finovate</h1>
+        <p>Experience seamless financial management with our intuitive platform designed to simplify your budgeting and transactions.</p>
+    </div>
+
+    <div className="features-container">
+        <div className="feature-card">
+            <h1>Secure Transactions</h1>
+            <p>Experience our state-of-the-art security features designed to protect your financial data and ensure safe transactions every time.</p>
+        </div>
+        
+        <div className="feature-card">
+            <h1>Smart Budgeting</h1>
+            <p>Discover how intelligent budgeting can help you manage your finances effortlessly and achieve your savings goals seamlessly.</p>
+        </div>
+    </div>
+</div>
         </div>
       
 

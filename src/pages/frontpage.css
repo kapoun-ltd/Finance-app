@@ -75,3 +75,81 @@
     background: rgba(255, 255, 255, 0.4);
     transform: translateY(-2px);
 }
+
+/* Base Layout Setup */
+.landing-wrapper {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    max-width: 1200px;
+    margin: 120px auto;
+    padding: 4rem 2rem;
+    color: #1a202c; /* Dark slate text */
+    background-color: #f7fafc; /* Soft off-white background */
+}
+
+/* Intro Section Styling */
+.front-intro {
+    text-align: center;
+    margin-bottom: 5rem;
+}
+
+.front-intro h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.2;
+    color: #2d3748;
+}
+
+/* Pops the brand name out with a modern blue accent */
+.front-intro .brand-name {
+    font-size: 4rem;
+    color: #3182ce; 
+    margin-top: 0.5rem;
+}
+
+.front-intro p {
+    font-size: 1.2rem;
+    color: #4a5568;
+    max-width: 600px;
+    margin: 1.5rem auto 0 auto;
+    line-height: 1.6;
+}
+
+/* Features Grid Layout */
+.features-container {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    flex-wrap: wrap; /* Ensures responsiveness on smaller screens */
+}
+
+/* Individual Feature Cards */
+.feature-card {
+    background: #ffffff;
+    padding: 2.5rem;
+    border-radius: 12px;
+    flex: 1;
+    min-width: 300px; /* Keeps cards from getting too squished */
+    max-width: 500px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Subtle hover effect for interactivity */
+.feature-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.feature-card h1 {
+    font-size: 1.5rem;
+    color: #2d3748;
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+.feature-card p {
+    color: #718096;
+    line-height: 1.5;
+    margin: 0;
+}
