@@ -1,119 +1,301 @@
-/* ==========================================
-   1. Cleaned Up Desktop Sidebar
-============================================= */
+/* =========================================
+   FUTURISTIC SIDEBAR
+========================================= */
+
 .sidebar {
-  height: 100vh;
-  width: 140px;
-  /* Added explicit width so content doesn't squeeze */
-  padding: 20px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  display: flex;
-  flex-direction: column;
-  background-color: white;
-  gap: 20px;
-  color: rgb(5, 5, 5);
-  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
-  z-index: 1000;
+
+    height: 100vh;
+    width: 200px;
+
+    padding: 24px 18px;
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 12px;
+
+    background:
+        rgba(15, 23, 42, 0.85);
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    border-right:
+        1px solid rgba(255,255,255,0.08);
+
+    box-shadow:
+        0 0 30px rgba(0,0,0,0.35);
+
+    z-index: 1000;
+
+    overflow-y: auto;
 }
+
+/* =========================================
+   GLOW EFFECT
+========================================= */
+
+.sidebar::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: -120px;
+    left: -120px;
+
+    width: 260px;
+    height: 260px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(0, 200, 255, 0.18);
+
+    filter: blur(100px);
+
+    z-index: 0;
+}
+
+/* =========================================
+   LINKS
+========================================= */
 
 .sidebar a {
-  text-decoration: none;
-  padding: 10px 12px;
-  transition: 0.3s ease;
-  font-size: 1rem;
-  display: block;
-  color: inherit;
-  border-radius: 6px;
-  /* Smooths out any hover/active background looks */
+
+    text-decoration: none;
+
+    padding: 15px 18px;
+
+    border-radius: 18px;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    color:
+        rgba(255,255,255,0.78);
+
+    transition: 0.3s ease;
+
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    position: relative;
+    z-index: 1;
+
+    overflow: hidden;
 }
+
+/* =========================================
+   HOVER
+========================================= */
 
 .sidebar a:hover {
-  color: #49f049;
-  transform: translateX(5px);
+
+    color: white;
+
+    transform:
+        translateX(6px);
+
+    background:
+        rgba(255,255,255,0.08);
+
+    border:
+        1px solid rgba(0,200,255,0.20);
+
+    box-shadow:
+        0 0 18px rgba(0,200,255,0.15);
 }
+
+/* =========================================
+   ACTIVE LINK
+========================================= */
 
 .sidebar a.active {
-  color: #fbbf24;
-  font-weight: bold;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(0,200,255,0.22),
+            rgba(140,82,255,0.22)
+        );
+
+    color: white;
+
+    border:
+        1px solid rgba(0,200,255,0.35);
+
+    box-shadow:
+        0 0 20px rgba(0,200,255,0.15);
 }
 
+/* glowing active indicator */
+
+.sidebar a.active::before {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 15%;
+
+    width: 4px;
+    height: 70%;
+
+    border-radius: 20px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #00c8ff,
+            #8c52ff
+        );
+}
+
+/* =========================================
+   LOGOUT BUTTON
+========================================= */
+
 .logout-btn {
-  margin-top: auto;
-  /* Pushes button to the bottom */
-  background: none;
-  border: none;
-  color: inherit;
-  font: inherit;
-  cursor: pointer;
-  padding: 12px;
-  text-align: left;
-  width: 100%;
-  border-radius: 6px;
-  transition: background-color 0.2s ease, color 0.2s ease;
+
+    margin-top: auto;
+
+    border: none;
+
+    padding: 15px 18px;
+
+    border-radius: 18px;
+
+    background:
+        rgba(255,255,255,0.05);
+
+    color:
+        rgba(255,255,255,0.78);
+
+    font-size: 15px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.3s ease;
+
+    text-align: left;
+
+    position: relative;
+    z-index: 1;
 }
 
 .logout-btn:hover {
-  background-color: rgba(0, 0, 0, 0.05);
-  /* Changed from white to dark tint for visibility */
-  color: #ef4444;
-  /* Optional: Soft red highlight for logging out */
+
+    background:
+        rgba(255, 77, 109, 0.12);
+
+    color: #ff4d6d;
+
+    border:
+        1px solid rgba(255,77,109,0.25);
+
+    box-shadow:
+        0 0 20px rgba(255,77,109,0.12);
 }
 
+/* =========================================
+   SCROLLBAR
+========================================= */
 
-/* ==========================================
-   2. Responsive Mode for Smaller Screens (< 768px)
-   Transforms sidebar into a bottom navigation bar
-============================================= */
+.sidebar::-webkit-scrollbar {
+    width: 5px;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+
+    background:
+        rgba(255,255,255,0.12);
+
+    border-radius: 20px;
+}
+
+/* =========================================
+   MOBILE NAVIGATION
+========================================= */
+
 @media (max-width: 768px) {
-  .sidebar {
-    height: 60px;
-    /* Fixed short height at bottom */
-    width: 100%;
-    /* Stretch across the screen width */
-    position: fixed;
-    top: auto;
-    /* Remove top anchoring */
-    bottom: 0;
-    /* Snap to the absolute bottom */
-    left: 0;
-    flex-direction: row;
-    /* Align items horizontally */
-    justify-content: space-around;
-    /* Distribute items evenly */
-    align-items: center;
-    padding: 0 10px;
-    gap: 0;
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
-    /* Shadow moves to the top edge */
-    border-top: 1px solid rgba(0, 0, 0, 0.05);
-  }
 
-  .sidebar a {
-    padding: 8px 12px;
-    font-size: 0.9rem;
-    /* Slightly smaller text for compact screens */
-    text-align: center;
-    flex: 1;
-    /* Forces equal distribution */
-  }
+    .sidebar {
 
-  .sidebar a:hover {
-    transform: none;
-    /* Disable horizontal shifting on mobile touch */
-    color: #49f049;
-  }
+        height: 75px;
+        width: 100%;
 
-  .logout-btn {
-    margin-top: 0;
-    /* Undo the desktop bottom push */
-    width: auto;
-    /* Let it size to its content */
-    text-align: center;
-    padding: 8px 12px;
-    font-size: 0.9rem;
-    flex: 1;
-    /* Mixes right into the bottom row layout */
-  }
+        position: fixed;
+
+        top: auto;
+        bottom: 0;
+        left: 0;
+
+        flex-direction: row;
+
+        justify-content: space-around;
+        align-items: center;
+
+        padding: 10px;
+
+        gap: 8px;
+
+        border-right: none;
+
+        border-top:
+            1px solid rgba(255,255,255,0.08);
+
+        background:
+            rgba(15, 23, 42, 0.92);
+
+        overflow-x: auto;
+        overflow-y: hidden;
+    }
+
+    .sidebar::before {
+        display: none;
+    }
+
+    .sidebar a {
+
+        flex: 1;
+
+        min-width: 70px;
+
+        justify-content: center;
+
+        padding: 10px;
+
+        font-size: 13px;
+
+        border-radius: 14px;
+
+        transform: none !important;
+    }
+
+    .sidebar a.active::before {
+        display: none;
+    }
+
+    .logout-btn {
+
+        margin-top: 0;
+
+        padding: 10px;
+
+        text-align: center;
+
+        font-size: 13px;
+
+        border-radius: 14px;
+    }
 }
