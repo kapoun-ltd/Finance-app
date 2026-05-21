@@ -11,7 +11,12 @@
 
     padding: 30px;
 
-    background: #f5f7fb;
+  background: linear-gradient(
+        135deg,
+        #2673de,
+        #dac8bf,
+        #60a5fa
+    );
 
     display: flex;
     flex-direction: column;
