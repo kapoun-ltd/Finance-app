@@ -46,6 +46,15 @@ function Frontpage() {
             <p>Discover how intelligent budgeting can help you manage your finances effortlessly and achieve your savings goals seamlessly.</p>
         </div>
     </div>
+    <div className="feature-card">
+        <h1>Transaction History</h1>
+        <p> Explore your recent transactions with detailed summaries, allowing for easy tracking of spending and income patterns. </p>
+    </div>
+
+    <div className="feature-card">
+        <h1>Confirm Transaction</h1>
+        <p>Review all details before proceeding. Ensure the recipient's information and amount are accurate for a smooth transaction.</p>
+    </div>
 </div>
         </div>
       
