@@ -1,6 +1,7 @@
 import React from "react";
 import "./frontpage.css";
 import myLogo from "../assets/logo.png";
+import { Link } from "react-router-dom";
 
 function Frontpage() {
     return (
@@ -9,13 +10,11 @@ function Frontpage() {
 
         <div className="front-container">
     <div className="log-options">
-            <lable>Get Started</lable>
-            <a href="/register">
-                <button>Register</button>
-            </a>
-           <a href="/login">
-                <button>Log In</button>
-            </a>
+           <label>Get Started</label>
+
+        <Link to="/register"> <button>Register</button> </Link>
+
+        <Link to="/login"><button>Log In</button> </Link>
         </div>
             <div className="front-text">
                 <img className="company-logo" src={myLogo} alt="comapany logo" />

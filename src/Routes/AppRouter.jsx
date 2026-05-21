@@ -39,7 +39,7 @@ function AppRouter() {
             <Route path="/withdrawal" element={<Withdrawal />} />
             <Route path="/logout" element={<logout />} />
             {/* <Route path="/loin" element={<Login />} /> */}
-            <route path="/" element={Fontpage} />
+            <Route path="/" element={Fontpage} />
 
           </Route>
 
