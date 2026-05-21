@@ -28,7 +28,7 @@ function BudgetCard() {
     }
 
     return (
-        <Box sx={{ mb: 3, p: 2, borderRadius: 2, bgcolor: '#f9f9f9' }}>
+        <Box sx={{ mb: 3, p: 2, borderRadius: 2, bgcolor: '#c81c1c' }}>
             <Typography variant="h6">{category}</Typography>
             <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
                 <Typography variant="body2">

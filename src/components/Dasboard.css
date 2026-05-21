@@ -88,8 +88,6 @@ body {
 
   padding: 24px;
 
-  color: white;
-
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -108,23 +106,17 @@ body {
 
 .card-console-balance {
   background:
-    linear-gradient(135deg,
-      #2563eb,
-      #60a5fa);
+   transparent
 }
 
 .card-console-balance-expense {
   background:
-    linear-gradient(135deg,
-      #dc2626,
-      #f87171);
+  transparent
 }
 
 .card-console-balance-balance {
   background:
-    linear-gradient(135deg,
-      #16a34a,
-      #4ade80);
+    transparent
 }
 
 .card-console-balance svg,
@@ -142,17 +134,7 @@ body {
   margin-top: 10px;
 }
 
-.income-balance {
-  color: #bbf7d0;
-}
 
-.expense-balance {
-  color: #fee2e2;
-}
-
-.net-balance {
-  color: #dcfce7;
-}
 
 /* ================================
    BUDGET SECTION
@@ -217,7 +199,6 @@ body {
 ================================ */
 
 .budget-card {
-  background: white;
 
   border-radius: 20px;
 
@@ -258,8 +239,6 @@ body {
 }
 
 .budget-card-top span {
-  background: #eff6ff;
-
   color: var(--primary);
 
   padding: 6px 12px;

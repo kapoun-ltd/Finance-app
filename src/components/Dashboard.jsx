@@ -109,7 +109,7 @@ function Dashboard() {
     <div>
       <Sidebar />
       <div className='dashboard-container'>
-        <label>Welcome, {userName} 😊</label>
+        <label>Welcome, {userName} </label>
 
         {/* TOP CARDS */}
         <div className='main-dashboard'>
@@ -143,7 +143,6 @@ function Dashboard() {
                 <FontAwesomeIcon icon={faWallet} />
                 <div>
                   <label>Net Balance</label>
-                  <FontAwesomeIcon icon={faChartLine} />
                   <label className='net-balance'>
                     Ksh {balance.toLocaleString()}
                   </label>
