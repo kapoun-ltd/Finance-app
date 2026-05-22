@@ -1,57 +1,128 @@
-/* Base Layout: Sidebar on left, Content on right */
+/* Layout containers */
 .main-container {
   display: flex;
   min-height: 100vh;
-  background-color: #f8f9fa;
-  font-family: system-ui, -apple-system, sans-serif;
+   background: linear-gradient(
+        135deg,
+        #2673de,
+        #dac8bf,
+        #60a5fa
+    );
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
 .accounts-container {
   flex: 1;
-  padding: 2rem;
-  color: #212529;
-  margin-left: 180px;
+  padding: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+  margin-left: 180px; /* Space for sidebar */
+
 }
 
 .accounts-container h1 {
-  font-size: 1.75rem;
+  font-size: 2rem;
+  color: #1a1f36;
+  margin-bottom: 30px;
+  font-weight: 700;
+}
+
+/* Global Overview Card */
+.global-overview-card {
+  background: linear-gradient(135deg, #4f46e5 0%, #3730a3 100%);
+  color: #ffffff;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  margin-bottom: 35px !important; /* Forces separation */
+}
+
+.global-overview-card label {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.85;
+}
+
+.global-overview-card div {
+  font-size: 1.4rem;
   font-weight: 600;
-  margin-bottom: 2rem;
+  margin-top: 10px;
 }
 
-/* Account Cards Layout */
+/* Grid Layout for Account Cards */
+.accounts-container > div:not(.global-overview-card) {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+/* Individual Account Cards */
 .account-card {
-  display: flex;
-  justify-content: space-between; /* Pushes label to left, balance to right */
-  align-items: center;            /* Perfectly centers them vertically */
   background: #ffffff;
-  padding: 1.25rem 1.5rem;
-  margin-bottom: 1rem;
-  border-radius: 8px;
-  border: 1px solid #e9ecef;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 24px;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-/* Hover interaction */
 .account-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  border-color: #dee2e6;
+  transform: translateY(-4px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  border-color: #cbd5e1;
 }
 
-/* Label Styling (Left side) */
-.account-card label {
-  font-size: 1rem;
-  font-weight: 500;
-  color: #495057;
-  cursor: pointer;
-}
-
-/* Balance Styling (Right side) */
-.account-balance {
+/* Account Title Label */
+.account-card > label:first-child {
   font-size: 1.15rem;
   font-weight: 600;
-  color: #2b2d42; /* Slightly darker font to emphasize the money */
+  color: #334155;
+  margin-bottom: 16px;
+  display: block;
+}
+
+/* Metrics Section Layout */
+.account-metrics {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Value specific statuses */
+.used-balance, .net-balance {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.95rem;
+  font-weight: 500;
+  padding: 8px 12px;
+  border-radius: 6px;
+}
+
+/* Used styling (Negative flow/Expense) */
+.used-balance {
+  color: #b91c1c;
+  background-color: #fef2f2; /* Light pastel red */
+}
+
+/* Remaining styling (Positive flow/Balance) */
+.net-balance {
+  color: #15803d;
+  background-color: #f0fdf4; /* Light pastel green */
+  font-weight: 600;
+}
+
+/* Responsive Scaling fixes */
+@media (max-width: 768px) {
+  .accounts-container {
+    padding: 20px;
+  }
+  
+  .global-overview-card div {
+    flex-direction: column;
+    gap: 8px;
+  }
 }

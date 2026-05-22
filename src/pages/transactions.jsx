@@ -176,7 +176,7 @@ function Transactions() {
                                 <option value="Main Wallet" />
                                 <option value="Saving Wallet" />
                                 <option value="Mpesa" />
-                                <option value="Bank" />
+                                <option value="Bank Account" />
                                 <option value="Cash" />
                                 <option value="Card" />
                             </datalist>
