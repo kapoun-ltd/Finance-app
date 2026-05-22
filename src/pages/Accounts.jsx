@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import './Accounts.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -8,13 +8,16 @@ import {
   faBuildingColumns
 } from '@fortawesome/free-solid-svg-icons';
 
-import { useState } from 'react';
 import { Label } from 'recharts';
 import Sidebar from "../components/Sidebar";
+import transactions from "./transactions"
 
-
+  /* =========================================
+      FETCH TRANSACTIONS
+  ========================================= */
 
 function AccountsPage({ }) {
+  const [mainaccount , setMainaccount] = useState;
 
 
   return (
@@ -35,7 +38,7 @@ function AccountsPage({ }) {
 
     <div className='account-card'>
       <label>Saving Account</label>
-      <span className='account-balance'>$24,500.25</span>
+      <span className='account-balance'>{incomeTotal.toLocaleString()}</span>
     </div>
   </div>
 </div>
