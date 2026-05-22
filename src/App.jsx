@@ -12,6 +12,7 @@ import Register from "./pages/Register";
 import Payment from "./pages/Payment";
 import Logout from "./components/logout";
 import Frontpage from "./pages/frontpage";
+import AccountsPage from "./pages/Accounts";
 
 export default function App() {
   return (
@@ -31,6 +32,8 @@ export default function App() {
         <Route path="/payment" element={<Payment />} />
         <Route path="/logout" element={<Logout />} />
         <Route path="/" element ={<Frontpage />} />
+        <Route path="/Accounts" element ={<AccountsPage />} />
+        
       </Routes>
     </>
   );
