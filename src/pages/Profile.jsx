@@ -128,6 +128,14 @@ function Profile() {
                         <div className='profile-info-one'>
                             <label>Phone :{phone} </label>
                         </div>
+                        <div className='profile-info-update'>
+                            <label className='info-update-header'>Update Information</label>
+                            <label>Password</label>
+                            <input type="password" placeholder='Current Password' />
+                            <input type="password" placeholder='Confirm Password' />
+                            <input type="password" placeholder='New Password' />
+                            <button>Update</button>
+                        </div>
                     </div>
 
                 </div>
