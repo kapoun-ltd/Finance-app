@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import supabase from "./src/services/supabase.js";
+// import supabase from "./src/services/supabase.js";
 import mpesaRoutes from "./src/Routes/mpesaRoutes.js";
 import stkPush from "./src/services/mpesaService.js";
 
