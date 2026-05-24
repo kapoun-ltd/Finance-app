@@ -41,6 +41,30 @@ function Login() {
     }
   };
 
+ const handleGoogleLogin = async () => {
+  try {
+
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: {
+        redirectTo: `${window.location.origin}/dashboard`
+      }
+    });
+
+    if (error) {
+      toast.error(error.message);
+    }
+
+  } catch (err) {
+    console.log(err);
+    toast.error("Google login failed");
+  }
+};
+
+<button type="submit" disabled={loading}>
+  {loading ? "Logging in..." : "Login"}
+</button>
+
   return (
     <div className="login-container">
       <form className="login-form" onSubmit={handleSubmit}>
@@ -65,7 +89,13 @@ function Login() {
         <button type="submit" disabled={loading}>
           {loading ? "Logging in..." : "Login"}
         </button>
-
+<button
+  type="button"
+  onClick={handleGoogleLogin}
+  className="google-btn"
+>
+  Continue with Google
+</button>
         <p>
           Don’t have an account?{" "}
           <Link to="/register">Register</Link>

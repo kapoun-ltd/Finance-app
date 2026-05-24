@@ -59,3 +59,20 @@
     color: #2673de;
     text-align: center;
 }
+
+.google-btn {
+  width: 100%;
+  padding: 12px;
+  margin-top: 12px;
+  border: none;
+  border-radius: 8px;
+  background-color: white;
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.google-btn:hover {
+  opacity: 0.9;
+}
