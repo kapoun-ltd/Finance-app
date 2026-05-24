@@ -6,10 +6,11 @@ export const getActiveBudget = async (
 ) => {
 
     const { data, error } = await supabase
-        .from("budget")
-        .select("*")
-        .lte("start_date", currentDate)
-        .gte("end_date", currentDate);
+    .from("budget")
+    .select("*")
+    .eq("user_id", (await supabase.auth.getUser()).data.user.id)
+    .lte("start_date", currentDate)
+    .gte("end_date", currentDate);
 
     if (error) {
         console.error(error);
@@ -24,10 +25,16 @@ export const getActiveBudget = async (
 
 
 export const addBudget = async (budgetData) => {
-    // 1. Destructure with default values to prevent undefined errors
+
+    const { data: { user }, error: userError } = await supabase.auth.getUser();
+
+    if (userError || !user) {
+        console.error("User not found:", userError);
+        return null;
+    }
+
     const { budget_limit = 0, category, start_date, end_date } = budgetData;
 
-    // 2. Perform the insert
     const { data, error } = await supabase
         .from("budget")
         .insert([
@@ -36,18 +43,16 @@ export const addBudget = async (budgetData) => {
                 budget_limit,
                 start_date,
                 end_date,
-
-            }
+                user_id: user.id}
         ])
         .select()
         .single();
 
     if (error) {
-        // Log more context for debugging
-        console.error(`Error adding budget for ${category}:`, error.message);
-        throw new Error(error.message);
+        console.error("Insert budget error:", error);
+        return null;
     }
 
-    toast.success("Budget added successfully");
     return data;
 };
+

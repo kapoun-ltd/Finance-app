@@ -18,7 +18,7 @@ export const subscribeToTransactions = (onUpdate) => {
 
 // ➕ ADD transaction
 export const addTransaction = async (formData) => {
-
+    const { data: { user }, error: userError } = await supabase.auth.getUser();
     const { amount, type, account, method, description, category, date } = formData;
 
     const { data, error } = await supabase
@@ -30,7 +30,8 @@ export const addTransaction = async (formData) => {
             method,
             description,
             category,
-            date
+            date,
+            user_id: user.id
         }])
         .select();
 
