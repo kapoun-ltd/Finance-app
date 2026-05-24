@@ -61,9 +61,7 @@ function Login() {
   }
 };
 
-<button type="submit" disabled={loading}>
-  {loading ? "Logging in..." : "Login"}
-</button>
+
 
   return (
     <div className="login-container">
