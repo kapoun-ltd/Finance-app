@@ -8,33 +8,26 @@ export function AuthProvider({ children }) {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-
         const fetchSession = async () => {
-            const {
-                data: { session },
-                error,
-            } = await supabase.auth.getSession();
+            const { data, error } = await supabase.auth.getSession();
 
             if (error) {
                 console.error(error.message);
             }
 
-            setUser(session?.user ?? null);
+            setUser(data.session?.user ?? null);
             setLoading(false);
         };
 
         fetchSession();
 
-        const {
-            data: { subscription },
-        } = supabase.auth.onAuthStateChange((_event, session) => {
-            setUser(session?.user ?? null);
-        });
+        const { data: { subscription } } =
+            supabase.auth.onAuthStateChange((_event, session) => {
+                setUser(session?.user ?? null);
+                setLoading(false);
+            });
 
-        return () => {
-            subscription.unsubscribe();
-        };
-
+        return () => subscription.unsubscribe();
     }, []);
 
     return (

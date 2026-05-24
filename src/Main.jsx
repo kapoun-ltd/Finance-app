@@ -1,9 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
-import { BalanceProvider } from "./Context/BalanceContext";
-import ErrorBoundary from "./components/ErrorBoundary";
 import { BrowserRouter } from "react-router-dom";
+import ErrorBoundary from "./components/ErrorBoundary.jsx";
 import { AuthProvider } from "./Context/AuthContext";
 import "./styles/global.css";
 
@@ -13,11 +12,11 @@ root.render(
   <React.StrictMode>
     <ErrorBoundary>
       <AuthProvider>
-        <BalanceProvider>
+       
           <BrowserRouter>
             <App />
           </BrowserRouter>
-        </BalanceProvider>
+        
       </AuthProvider>
     </ErrorBoundary>
   </React.StrictMode>

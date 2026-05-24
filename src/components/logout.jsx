@@ -11,7 +11,9 @@ export default function Logout() {
             console.error(error);
             return;
         }
-        navigate("/login");
+
+        // 🔥 clean SPA logout
+        navigate("/login", { replace: true });
     };
 
     return (
