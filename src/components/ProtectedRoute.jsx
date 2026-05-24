@@ -1,13 +1,15 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { useAuth } from "../Context/AuthContext";
-import ErrorBoundary from "./ErrorBoundary";
 
 function ProtectedRoute() {
+
     const { user, loading } = useAuth();
 
-    if (loading) return <p>Loading...</p>;
+    if (loading) {
+        return <p>Loading...</p>;
+    }
 
-    return user ? <Outlet /> : <Navigate to="/" />;
+    return user ? <Outlet /> : <Navigate to="/login" replace />;
 }
 
 export default ProtectedRoute;
