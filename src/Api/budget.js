@@ -22,6 +22,24 @@ export const getActiveBudget = async (
 
 }
 
+export const updateBudget = async (budgetId, updatedData) => {
+
+    const { data, error } = await supabase
+        .from("budget")
+        .update(updatedData)
+        .eq("id", budgetId)
+        .eq("user_id", (await supabase.auth.getUser()).data.user.id)
+        .select()
+        .single();
+
+        if (error) {
+            console.error("Update budget error:", error);
+            return null;
+        }
+        toast.info("Budget updated successfully!");
+
+        return data;
+}
 
 
 export const addBudget = async (budgetData) => {

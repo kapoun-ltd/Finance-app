@@ -156,13 +156,13 @@ function Dashboard() {
         <div className='main-budget-container'>
           <div className='budget-container'>
             <div className='budget'>
-              <BudgetModel />
+             
             </div>
 
             <div className="budget-list-container">
               <div className="budget-header">
                 <h3>Budget Overview</h3>
-
+ <BudgetModel />
               </div>
 
               <div className="budget-grid">

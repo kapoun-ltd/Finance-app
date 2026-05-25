@@ -1,22 +1,36 @@
 import React, { useState } from "react";
-import { Box, Typography, TextField, Button, Stack } from "@mui/material";
-import "./module.css"; // Ensure this file exists in the same folder!
-import { addBudget } from "../Api/budget";
+import {
+    Box,
+    Typography,
+    TextField,
+    Button,
+    Stack,
+    Modal
+} from "@mui/material";
 
-function BudgetModel({ onAddBudget }) {
+import "./module.css";
+import { addBudget, updateBudget } from "../Api/budget";
+
+function BudgetModel() {
+
+    // MODAL STATE
+    const [open, setOpen] = useState(false);
+
+    // FORM STATES
     const [category, setCategory] = useState("");
     const [budget_limit, setbudget_limit] = useState("");
     const [start_date, setstart_date] = useState("");
     const [end_date, setend_date] = useState("");
-    const [budgetdata, setbudgetdata] = useState({
-        category: "",
-        budget_limit: 0,
-        start_date: "",
-        end_month: ""
-    })
+
+    // OPEN MODAL
+    const handleOpen = () => setOpen(true);
+
+    // CLOSE MODAL
+    const handleClose = () => setOpen(false);
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
         if (!category || !budget_limit) return;
 
         const newBudget = {
@@ -27,14 +41,20 @@ function BudgetModel({ onAddBudget }) {
         };
 
         console.log("Submitting Budget:", newBudget);
-        addBudget(newBudget);
-        setbudgetdata(newBudget)
 
-        // Clear form
+        addBudget(newBudget);
+
+        // CLEAR FORM
         setCategory("");
         setbudget_limit("");
+        setstart_date("");
+        setend_date("");
+
+        // CLOSE MODAL AFTER SUBMIT
+        handleClose();
     };
 
+    // MODAL STYLE
     const modalStyle = {
         position: 'absolute',
         top: '50%',
@@ -42,7 +62,6 @@ function BudgetModel({ onAddBudget }) {
         transform: 'translate(-50%, -50%)',
         width: 400,
         bgcolor: 'background.paper',
-        border: 'none',
         boxShadow: 24,
         p: 4,
         borderRadius: '16px',
@@ -50,74 +69,95 @@ function BudgetModel({ onAddBudget }) {
     };
 
     return (
-        <Box className="budget-form-container">
-            <Typography variant="h6" gutterBottom>
-                Set Monthly Budget
-            </Typography>
+        <>
 
-            <form onSubmit={handleSubmit}>
-                <Stack spacing={2}>
-                    <TextField
-                        label="Budget Category"
-                        variant="outlined"
-                        fullWidth
-                        placeholder="e.g., Food, Rent"
-                        value={category}
-                        onChange={(e) => setCategory(e.target.value)}
-                    />
+            {/* BUTTON THAT OPENS MODAL */}
+            <Button
+                variant="contained"
+                color="primary"
+                onClick={handleOpen}
+            >
+                Add Budget
+            </Button>
 
-                    <TextField
-                        label="Budget Limit"
-                        variant="outlined"
-                        type="number"
-                        fullWidth
-                        placeholder="Max Amount"
-                        value={budget_limit}
-                        onChange={(e) => setbudget_limit(e.target.value)}
-                    />
+            {/* MODAL */}
+            <Modal
+                open={open}
+                onClose={handleClose}
+            >
 
+                <Box sx={modalStyle}>
 
+                    <Typography variant="h6" gutterBottom>
+                        Set Monthly Budget
+                    </Typography>
 
-                    <TextField
-                        label=""
-                        variant="outlined"
-                        type="date"
-                        fullWidth
-                        // We convert slashes back to dashes so the input can read it
-                        value={start_date.replace(/\//g, '-')}
-                        onChange={(e) => {
-                            const dateValue = e.target.value; // This comes as YYYY-MM-DD
-                            const formattedDate = dateValue.replace(/-/g, '/');
-                            setstart_date(formattedDate);
-                        }}
-                        InputLabelProps={{ shrink: true }}
-                    />
+                    <form onSubmit={handleSubmit}>
+                        <Stack spacing={2}>
 
-                    <TextField
-                        label=""
-                        variant="outlined"
-                        type="date"
-                        fullWidth
-                        value={end_date.replace(/\//g, '-')}
-                        onChange={(e) => {
-                            const dateValue = e.target.value; // This comes as YYYY-MM-DD
-                            const formattedDate = dateValue.replace(/-/g, '/');
-                            setend_date(formattedDate);
-                        }}
-                        InputLabelProps={{ shrink: true }}
-                    />
+                            <TextField
+                                label="Budget Category"
+                                variant="outlined"
+                                fullWidth
+                                placeholder="Food, Rent"
+                                value={category}
+                                onChange={(e) =>
+                                    setCategory(e.target.value)
+                                }
+                            />
 
-                    <Button
-                        type="submit"
-                        variant="contained"
-                        color="primary"
-                        sx={{ mt: 2 }}
-                    >
-                        Add Budget Goal
-                    </Button>
-                </Stack>
-            </form>
-        </Box>
+                            <TextField
+                                label="Budget Limit"
+                                variant="outlined"
+                                type="number"
+                                fullWidth
+                                placeholder="Max Amount"
+                                value={budget_limit}
+                                onChange={(e) =>
+                                    setbudget_limit(e.target.value)
+                                }
+                            />
+
+                            <TextField
+                                type="date"
+                                fullWidth
+                                value={start_date}
+                                onChange={(e) =>
+                                    setstart_date(e.target.value)
+                                }
+                            />
+
+                            <TextField
+                                type="date"
+                                fullWidth
+                                value={end_date}
+                                onChange={(e) =>
+                                    setend_date(e.target.value)
+                                }
+                            />
+
+                            <Button
+                                type="submit"
+                                variant="contained"
+                                color="primary"
+                            >
+                                Add Budget Goal
+                            </Button>
+
+                            <Button
+                                variant="outlined"
+                                color="secondary"
+                                onClick={handleClose}
+                            >
+                                Cancel
+                            </Button>
+
+                        </Stack>
+                    </form>
+
+                </Box>
+            </Modal>
+        </>
     );
 }
 
