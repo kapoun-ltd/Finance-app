@@ -222,17 +222,38 @@ function Dashboard() {
           <div className="card-console-other">
             <IncomeChart transactions={transactions} />
           </div>
-          <div className="card-console-other-pending">
-            <label>Budget Breakdown</label>
+          <div className="pie-console">
             <PieChart
-              series={[{ innerRadius: 50, outerRadius: 100, data: pieChartData, arcLabel: 'label' }]}
-              {...settings}
+            transactions={transactions}
+            settings={settings}
             />
           </div>
         </div>
 
         <div className="card-console-transaction-listing">
           <h1 className='transaction-listing-title'>Transaction Listing</h1>
+          <div className="transaction-listing-container">
+            {loading ? (
+              <p>Loading transactions...</p>  
+            ) : transactions.length === 0 ? (
+              <p>No transactions found.</p>
+            ) : (
+              transactions.map((tx) => (
+                <div key={tx.id} className="transaction-item">
+                  <div className="transaction-item-header">
+                    <h3>{tx.category}</h3>
+                    <span className={`transaction-type ${tx.type.toLowerCase()}`}>
+                      {tx.type}
+                    </span>
+                  </div>
+                  <p>{new Date(tx.date).toLocaleDateString()}</p>
+                  <p>Ksh {Number(tx.amount).toLocaleString()}</p>
+                </div>
+              ))
+            )}
+            </div>
+
+            
         </div>
       </div>
     </div >

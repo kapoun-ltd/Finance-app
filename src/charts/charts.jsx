@@ -1,10 +1,10 @@
 import React from 'react';
 import { BarChart } from '@mui/x-charts/BarChart';
-import { PieChart as MuiPieChart } from '@mui/x-charts/PieChart'; // Rename import slightly to avoid conflicts
+import { PieChart as MuiPieChart } from '@mui/x-charts/PieChart';
 import { Typography } from '@mui/material';
 
-// 1. Existing Bar Chart
 function IncomeChart({ transactions = [] }) {
+
   const xAxisData = [
     'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
     'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
@@ -14,17 +14,19 @@ function IncomeChart({ transactions = [] }) {
   const monthlyExpense = Array(12).fill(0);
 
   transactions.forEach((tx) => {
+
     if (!tx.created_at) return;
 
     const month = new Date(tx.created_at).getMonth();
 
-    if (tx.type?.toLowerCase() === "income") {
+    if (tx.type?.trim().toLowerCase() === "income") {
       monthlyIncome[month] += Number(tx.amount);
     }
-    // Handles both spellings just in case
-    if (tx.type?.toLowerCase() === "expense" || tx.type?.toLowerCase() === "expense") {
+
+    if (tx.type?.trim().toLowerCase() === "expense") {
       monthlyExpense[month] += Number(tx.amount);
     }
+
   });
 
   return (
@@ -45,32 +47,40 @@ function IncomeChart({ transactions = [] }) {
   );
 }
 
-// 2. New custom Wrapper for PieChart
 function TransactionPieChart({ transactions = [], settings = {} }) {
-  // Compute totals on the fly from the transactions array
+
+  console.log(transactions);
+
   const totalIncome = transactions
-    .filter((tx) => tx.type?.toLowerCase() === "Income")
+    .filter((tx) => tx.type?.trim().toLowerCase() === "income")
     .reduce((sum, tx) => sum + Number(tx.amount), 0);
 
   const totalExpense = transactions
-    .filter((tx) => tx.type?.toLowerCase() === "Expense")
+    .filter((tx) => tx.type?.trim().toLowerCase() === "expense")
     .reduce((sum, tx) => sum + Number(tx.amount), 0);
 
-  // Format data strictly matching MUI X PieChart requirements
   const chartData = [
     { id: 0, value: totalIncome, label: 'Income', color: '#2e7d32' },
     { id: 1, value: totalExpense, label: 'Expense', color: '#d32f2f' },
   ];
 
+  console.log(chartData);
+
   return (
     <MuiPieChart
-      series={[{ innerRadius: 40, outerRadius: 100, data: chartData, arcLabel: 'label' }]}
-      width={200}
-      height={200}
+      series={[
+        {
+          innerRadius: 40,
+          outerRadius: 100,
+          data: chartData,
+          arcLabel: 'label',
+        },
+      ]}
+      width={300}
+      height={300}
       {...settings}
     />
   );
 }
 
-// Export your custom components
 export { IncomeChart, TransactionPieChart as PieChart };

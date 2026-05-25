@@ -137,6 +137,14 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
+.pie-console {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: white;
+  border-radius: var(--radius);
+  padding: 24px;
+}
 
 
 /* ================================
@@ -356,26 +364,143 @@ body {
   max-width: 350px;
 }
 
-/* ================================
+/* =========================
    TRANSACTION SECTION
-================================ */
+========================= */
 
 .card-console-transaction-listing {
-  background: white;
-
-  border-radius: var(--radius);
-
-  padding: 24px;
-
-  box-shadow: var(--shadow);
+    width: 100%;
+    margin-top: 2rem;
+    padding: 2rem;
+    border-radius: 20px;
+    background: #ffffff;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
 }
 
+/* Title */
 .transaction-listing-title {
-  font-size: 22px;
-  font-weight: 700;
-
-  margin-bottom: 20px;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.5px;
 }
+
+/* Grid Layout */
+.transaction-listing-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.2rem;
+}
+
+/* Transaction Card */
+.transaction-item {
+    background: #f8fafc;
+    border-radius: 18px;
+    padding: 1.2rem;
+    border: 1px solid #e2e8f0;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Hover Glow */
+.transaction-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+    border-color: #cbd5e1;
+}
+
+/* Header */
+.transaction-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+/* Category */
+.transaction-item-header h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #0f172a;
+    margin: 0;
+}
+
+/* Transaction Type Badge */
+.transaction-type {
+    padding: 0.4rem 0.8rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Income Badge */
+.transaction-type.income {
+    background: rgba(34, 197, 94, 0.12);
+    color: #15803d;
+}
+
+/* Expense Badge */
+.transaction-type.expense {
+    background: rgba(239, 68, 68, 0.12);
+    color: #dc2626;
+}
+
+/* Date & Amount */
+.transaction-item p {
+    margin: 0.4rem 0;
+    color: #475569;
+    font-size: 0.95rem;
+}
+
+/* Amount Styling */
+.transaction-item p:last-child {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #111827;
+    margin-top: 0.8rem;
+}
+
+/* Empty / Loading State */
+.transaction-listing-container p {
+    font-size: 1rem;
+    color: #64748b;
+    text-align: center;
+    padding: 2rem;
+}
+
+/* =========================
+   MOBILE RESPONSIVE
+========================= */
+
+@media (max-width: 768px) {
+
+    .card-console-transaction-listing {
+        padding: 1rem;
+    }
+
+    .transaction-listing-title {
+        font-size: 1.4rem;
+    }
+
+    .transaction-listing-container {
+        grid-template-columns: 1fr;
+    }
+
+    .transaction-item {
+        padding: 1rem;
+    }
+
+    .transaction-item-header h3 {
+        font-size: 1rem;
+    }
+
+}
+
+
 
 /* ================================
    BUTTONS
