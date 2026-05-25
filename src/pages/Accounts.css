@@ -105,13 +105,11 @@
 /* Used styling (Negative flow/Expense) */
 .used-balance {
   color: #b91c1c;
-  background-color: #fef2f2; /* Light pastel red */
 }
 
 /* Remaining styling (Positive flow/Balance) */
 .net-balance {
   color: #15803d;
-  background-color: #f0fdf4; /* Light pastel green */
   font-weight: 600;
 }
 
