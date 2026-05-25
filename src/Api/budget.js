@@ -52,6 +52,8 @@ export const addBudget = async (budgetData) => {
         console.error("Insert budget error:", error);
         return null;
     }
+    toast.info("Budget addedS");
+    
 
     return data;
 };
