@@ -65,7 +65,31 @@ function Payment() {
 
                     <button type="submit">Pay</button>
                 </form>
+                 <form className="schedule-payment-form">
+                <h2>Schedule Payment</h2>
+                <input
+                    type="text"
+                    placeholder="Phone e.g 254712345678"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                />
+                <input
+                    type="number"
+                    placeholder="Amount"
+                    value={amount}
+                    onChange={(e) => setAmount(e.target.value)}
+                />
+                <input
+                    type="date"
+                    value={date}
+                    onChange={(e) => setDate(e.target.value)}
+                />
+
+                <button type="submit">Schedule Payment</button>
+            </form>
             </div>
+
+            
         </div>
     );
 }

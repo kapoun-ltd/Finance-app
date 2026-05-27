@@ -162,7 +162,7 @@ function Dashboard() {
             <div className="budget-list-container">
               <div className="budget-header">
                 <h3>Budget Overview</h3>
- <BudgetModel />
+                <BudgetModel />
               </div>
 
               <div className="budget-grid">

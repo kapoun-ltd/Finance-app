@@ -59,6 +59,21 @@
     /* Nice subtle hover effect */
 }
 
+.schedule-payment-form {
+    background-color: #e9ecef;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-left: 200px;
+    border-radius: 0.5rem;
+    color: #333;
+}
+
+.schedule-payment-form input {
+    padding: 0.4rem;
+  
+}
+
 /* --- Desktop Layout Adjustments --- */
 /* Adjusts automatically if the screen is wider than 768px (like tablets/desktops) */
 @media (min-width: 768px) {
