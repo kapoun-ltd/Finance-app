@@ -22,37 +22,40 @@ function Register() {
     });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    const { data, error } = await supabase.auth.signUp({
-      email: user.email,
-      password: user.password,
-    });
+  const { data, error } = await supabase.auth.signUp({
+    email: user.email,
+    password: user.password,
+  });
 
-    if (error) {
-      toast.error(error.message);
-      return;
-    }
+  if (error) {
+    toast.error(error.message);
+    return;
+  }
 
-    const { error: dbError } = await supabase
-      .from("registration")
-      .insert({
-        id: data.user.id,
-        username: user.username,
-        full_name: user.full_name,
-        phone_number: user.phone_number,
-        email: user.email,
-      });
+  if (!data.user) {
+    toast.info("Please check your email to confirm your account.");
+    return;
+  }
 
-    if (dbError) {
-      toast.error(dbError.message);
-      return;
-    }
+  const { error: dbError } = await supabase.from("registration").insert({
+    id: data.user.id,
+    username: user.username,
+    full_name: user.full_name,
+    phone_number: user.phone_number,
+    email: user.email,
+  });
 
-    toast.success("Registration successful!");
-    navigate("/login");
-  };
+  if (dbError) {
+    toast.error(dbError.message);
+    return;
+  }
+
+  toast.success("Registration successful!");
+  navigate("/login");
+};
 
   return (
     <div className="register-container">
