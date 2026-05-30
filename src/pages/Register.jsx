@@ -36,7 +36,12 @@ const handleSubmit = async (e) => {
   }
 
   if (!data.user) {
-    toast.info("Please check your email to confirm your account.");
+    toast.error("This email is already registered. Please log in instead.");
+    return;
+  }
+
+  if (!data.user.email_confirmed_at) {
+    toast.info("Account created! Please check your email to confirm your account.");
     return;
   }
 

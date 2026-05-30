@@ -15,8 +15,9 @@ function Transactions() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [date, setDate] = useState("");
-    const [insight, setInsight] = useState(""); // Already declared correctly here!
+    const [insight, setInsight] = useState(""); 
     const [category, setCategory] = useState("");
+    const [analyzeSpending, setAnalyzeSpending] = useState(false);
     const [formData, setFormData] = useState({
         description: "",
         amount: "",
