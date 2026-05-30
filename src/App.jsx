@@ -13,6 +13,8 @@ import Payment from "./pages/Payment";
 import Logout from "./components/logout";
 import Frontpage from "./pages/frontpage";
 import AccountsPage from "./pages/Accounts";
+import ForgotPassword from "./pages/ForgotPassword";
+import ResetPassword from "./pages/resetPassword";
 
 export default function App() {
   return (
@@ -33,6 +35,10 @@ export default function App() {
         <Route path="/logout" element={<Logout />} />
         <Route path="/" element ={<Frontpage />} />
         <Route path="/Accounts" element ={<AccountsPage />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+
+
         
       </Routes>
     </>

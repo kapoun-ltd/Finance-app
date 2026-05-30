@@ -15,6 +15,8 @@ import Payment from "../pages/Payment.jsx";
 import Logout from "../components/Logout.jsx";
 import Frontpage from "../pages/frontpage.jsx";
 import Accountspage from "../pages/Accounts.jsx";
+import ForgotPassword from "../pages/ForgotPassword.jsx";
+import resetPassword from "../pages/resetPassword.jsx";
 
 function AppRouter() {
   return (
@@ -37,6 +39,7 @@ function AppRouter() {
             <Route path="/payment" element={<Payment />} />
             <Route path="/reports" element={<Reports />} />
             <Route path="/logout" element={<Logout />} />
+            <Route path="/reset-password" element={<resetPassword />} />
 
           </Route>
 

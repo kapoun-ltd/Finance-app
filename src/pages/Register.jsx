@@ -118,7 +118,7 @@ const handleSubmit = async (e) => {
           Already have an account?{" "}
           <Link to="/login">Login</Link>
         </p>
-
+        
         <Link to="/">Home</Link>
       </form>
     </div>

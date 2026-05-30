@@ -98,7 +98,9 @@ function Login() {
           Don’t have an account?{" "}
           <Link to="/register">Register</Link>
         </p>
-
+        <p> For got password?{" "}
+          <Link to="/reset-password">Reset Password</Link>
+        </p>
         <Link to="/">Home</Link>
       </form>
     </div>
