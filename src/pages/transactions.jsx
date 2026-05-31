@@ -146,7 +146,12 @@ function Transactions() {
         <div className='transaction-main-container'>
             <Sidebar />
             <div className='container'>
+                <div className="transaction-btn-container">
+                        <button className="trans-btn">Import</button>
+                        <button className="trans-btn">Export</button>
+                    </div>
                 <div className="transaction-title-container">
+                    
                     <div className="transaction-balance-all-container">
                         <div className="transaction-balance-container">
                             <label className='balance-label'>Balance </label>
@@ -168,10 +173,7 @@ function Transactions() {
                             <label className='investment-value'>{savingTotal.toLocaleString()}</label>
                         </div>
                     </div>
-                    <div className="transaction-btn-container">
-                        <button className="trans-btn">Import</button>
-                        <button className="trans-btn">Export</button>
-                    </div>
+                    
                 </div>
                 
                 <div className='transaction-mini-container'>
