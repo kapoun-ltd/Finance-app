@@ -20,7 +20,7 @@
 
     display: flex;
     flex-direction: column;
-
+    
     gap: 24px;
 
     overflow-x: hidden;
@@ -350,6 +350,7 @@
 /* AI Container Card */
 .ai-card {
     margin-top: 20px;
+    margin-left: 200px;
     background: linear-gradient(145deg, #ffffff, #f1f5f9);
     border: 1px solid #e2e8f0;
     border-left: 5px solid #6366f1; /* Nice purple/indigo accent bar */

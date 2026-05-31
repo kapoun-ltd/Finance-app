@@ -389,7 +389,7 @@ const modalStyle = {
         {insight || "No feedback generated yet. Click above to analyze."}
     </p>
 </div>
-            </div>
+</div>
         
     );
 }
