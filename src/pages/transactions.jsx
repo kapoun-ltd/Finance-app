@@ -3,6 +3,14 @@ import './transactions.css';
 import { toast } from "react-toastify";
 import Sidebar from '../components/Sidebar.jsx';
 import { addTransaction, fetchTransactions } from "../Api/transaction";
+import {
+    Box,
+    Typography,
+    TextField,
+    Button,
+    Stack,
+    Modal
+} from "@mui/material";
 
 function Transactions() {
     const [incomeTotal, setIncomeTotal] = useState(0);
@@ -17,6 +25,9 @@ function Transactions() {
     const [date, setDate] = useState("");
     const [insight, setInsight] = useState(""); 
     const [category, setCategory] = useState("");
+    const [open, setOpen] = useState(false);
+    const[close, setClose] = useState(false);
+    const [transactionFormVisible, setTransactionFormVisible] = useState(false);
     const [analyzeSpending, setAnalyzeSpending] = useState(false);
     const [formData, setFormData] = useState({
         description: "",
@@ -142,6 +153,33 @@ function Transactions() {
         }
     };
 
+    
+// handle transaction form visibility
+
+
+
+const handleOpen = () => {
+    setTransactionFormVisible(true);
+};
+
+const handleClose = () => {
+    setTransactionFormVisible(false);
+};
+
+const modalStyle = {
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: 400,
+        bgcolor: 'background.paper',
+        boxShadow: 24,
+        p: 4,
+        borderRadius: '16px',
+        outline: 'none'
+    };
+
+
     return (
         <div className='transaction-main-container'>
             <Sidebar />
@@ -178,57 +216,138 @@ function Transactions() {
                 
                 <div className='transaction-mini-container'>
                     <div className='transaction-form'>
-                        <form onSubmit={handleSubmit}>
-                            <div className='transaction-form-title'>
-                                <label className='transaction-form-title-label'>Add Transaction</label>
-                            </div>
-                            <select name="type" value={formData.type} onChange={handleChange} required>
-                                <option value="">Select Type</option>
-                                <option value="Income">Income</option>
-                                <option value="Expense">Expense</option>
-                                <option value="Saving">Saving</option>
-                                <option value="Investment">Investment</option>
-                            </select>
-                            <input type="text" list="account" placeholder="Account" name="account" value={formData.account} onChange={handleChange} required />
-                            <datalist id="account">
-                                <option value="Main Wallet" />
-                                <option value="Saving Wallet" />
-                                <option value="Mpesa" />
-                                <option value="Bank Account" />
-                                <option value="Cash" />
-                                <option value="Card" />
-                            </datalist>
-                            <input type="number" placeholder="Amount" name="amount" value={formData.amount} onChange={handleChange} required />
-                            <input type="text" list="method" placeholder="Method" name="method" value={formData.method} onChange={handleChange} required />
-                            <datalist id="method">
-                                <option value="Cash" />
-                                <option value="Card" />
-                                <option value="Bank Transfer" />
-                                <option value="Mobile Money" />
-                            </datalist>
-                            <input type="text" list="category" placeholder="Category" name="category" value={formData.category} onChange={handleChange} required />
-                            <datalist id="category">
-                                <option value="Food" />
-                                <option value="Transportation" />
-                                <option value="Utilities" />
-                                <option value="Entertainment" />
-                                <option value="Shopping" />
-                                <option value="Salary" />
-                                <option value="Freelance" />
-                                <option value="Investments" />
-                                <option value="Loans" />
-                                <option value="Rent" />
-                                <option value="Groceries" />
-                                <option value="Education" />
-                                <option value="Health" />
-                                <option value="Subscription" />
-                                <option value="Other income" />
-                                <option value="Other expense" />
-                            </datalist>
-                            <input type="text" placeholder="Description" name="description" value={formData.description} onChange={handleChange} required />
-                            <input type="date" placeholder="Date" name="date" value={formData.date} onChange={handleChange} required />
-                            <button className='trans-btn'>Submit</button>
-                        </form>
+                        <div>
+
+                        </div>
+                          <Button
+                                variant="contained"
+                                color="primary"
+                                onClick={handleOpen}
+                                 >
+                                Add Transaction
+                         </Button>
+
+                      </div>
+
+
+
+<Modal
+    open={transactionFormVisible}
+    onClose={handleClose}
+>
+    <Box sx={modalStyle} className="transaction-modal">
+
+        <form onSubmit={handleSubmit} className="transaction-form">
+
+            <div className='transaction-form-title'>
+                <Typography variant="h6" gutterBottom>
+                    Add New Transaction
+                </Typography>
+            </div>
+
+            <select
+                name="type"
+                value={formData.type}
+                onChange={handleChange}
+                required
+            >
+                <option value="">Select Type</option>
+                <option value="Income">Income</option>
+                <option value="Expense">Expense</option>
+                <option value="Saving">Saving</option>
+                <option value="Investment">Investment</option>
+            </select>
+
+            <input
+                type="text"
+                list="account"
+                placeholder="Account"
+                name="account"
+                value={formData.account}
+                onChange={handleChange}
+                required
+            />
+
+            <datalist id="account">
+                <option value="Main Wallet" />
+                <option value="Saving Wallet" />
+                <option value="Mpesa" />
+                <option value="Bank Account" />
+                <option value="Cash" />
+                <option value="Card" />
+            </datalist>
+
+            <input
+                type="number"
+                placeholder="Amount"
+                name="amount"
+                value={formData.amount}
+                onChange={handleChange}
+                required
+            />
+
+            <input
+                type="text"
+                list="method"
+                placeholder="Method"
+                name="method"
+                value={formData.method}
+                onChange={handleChange}
+                required
+            />
+
+            <datalist id="method">
+                <option value="Cash" />
+                <option value="Card" />
+                <option value="Bank Transfer" />
+                <option value="Mobile Money" />
+            </datalist>
+
+            <input
+                type="text"
+                list="category"
+                placeholder="Category"
+                name="category"
+                value={formData.category}
+                onChange={handleChange}
+                required
+            />
+
+            <datalist id="category">
+                <option value="Food" />
+                <option value="Transportation" />
+                <option value="Utilities" />
+                <option value="Entertainment" />
+                <option value="Shopping" />
+                <option value="Salary" />
+                <option value="Freelance" />
+            </datalist>
+
+            <input
+                type="text"
+                placeholder="Description"
+                name="description"
+                value={formData.description}
+                onChange={handleChange}
+                required
+            />
+
+            <input
+                type="date"
+                name="date"
+                value={formData.date}
+                onChange={handleChange}
+                required
+            />
+
+            <button className='trans-btn'>
+                Submit
+            </button>
+
+                     </form>
+
+                 </Box>
+                    </Modal>
                     </div>
 
                     {!loading && !error && (
@@ -271,7 +390,7 @@ function Transactions() {
     </p>
 </div>
             </div>
-        </div>
+        
     );
 }
 

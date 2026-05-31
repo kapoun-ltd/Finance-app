@@ -414,6 +414,54 @@
     margin: 0;
 }
 
+.transaction-modal{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+
+    width: 400px;
+    max-width: 90%;
+}
+
+.transaction-form{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.transaction-form input,
+.transaction-form select {
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #d1d5db;
+    outline: none;
+    font-size: 14px;
+}
+
+.transaction-form input:focus,
+.transaction-form select:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+    background: white;
+}
+
+.transaction-form button {
+    border: none;
+    padding: 12px 20px;
+    border-radius: 6px;
+    background: linear-gradient(135deg, #16a34a, #4ade80);
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+
 /* ================================
    RESPONSIVE DESIGN
 ================================ */

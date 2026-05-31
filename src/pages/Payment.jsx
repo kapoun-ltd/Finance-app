@@ -7,6 +7,7 @@ function Payment() {
     const [amount, setAmount] = useState("");
     const [phone, setPhone] = useState("");
     const [transactions, setTransactions] = useState([]);
+    const [transactionFormVisible, setTransactionFormVisible] = useState(false);
 
     const handlePayment = async (e) => {
         e.preventDefault();
