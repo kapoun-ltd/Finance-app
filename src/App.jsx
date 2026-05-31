@@ -14,7 +14,7 @@ import Logout from "./components/logout";
 import Frontpage from "./pages/frontpage";
 import AccountsPage from "./pages/Accounts";
 import ForgotPassword from "./pages/ForgotPassword";
-import ResetPassword from "./pages/resetPassword";
+import ResetPassword from "./pages/ResetPassword";
 
 export default function App() {
   return (
