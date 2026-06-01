@@ -216,9 +216,7 @@ const modalStyle = {
                 
                 <div className='transaction-mini-container'>
                     <div className='transaction-form'>
-                        <div>
-
-                        </div>
+                       
                           <Button
                                 variant="contained"
                                 color="primary"
@@ -226,18 +224,15 @@ const modalStyle = {
                                  >
                                 Add Transaction
                          </Button>
+                     </div>
 
-                      </div>
+            <Modal
+                 open={transactionFormVisible}
+                 onClose={handleClose}
+            >
+             <Box sx={modalStyle} className="transaction-modal">
 
-
-
-<Modal
-    open={transactionFormVisible}
-    onClose={handleClose}
->
-    <Box sx={modalStyle} className="transaction-modal">
-
-        <form onSubmit={handleSubmit} className="transaction-form">
+            <form onSubmit={handleSubmit} className="transaction-form">
 
             <div className='transaction-form-title'>
                 <Typography variant="h6" gutterBottom>
@@ -379,19 +374,20 @@ const modalStyle = {
                             </table>
                         </div>
                     )}
+
+                    <div className="ai-card">
+                    <h2>AI Insight</h2>
+                    <button onClick={getAISpendingAnalysis} className="trans-btn ai-btn">
+                     Ask AI Assistant
+                    </button>
+                    <p className="ai-insight-text">
+                     {insight || "No feedback generated yet. Click above to analyze."}
+                     </p>
+                    </div>
                 </div>
-<div className="ai-card">
-    <h2>AI Insight</h2>
-    <button onClick={getAISpendingAnalysis} className="trans-btn ai-btn">
-        Ask AI Assistant
-    </button>
-    <p className="ai-insight-text">
-        {insight || "No feedback generated yet. Click above to analyze."}
-    </p>
+
 </div>
-</div>
-        
-    );
+);
 }
 
 export default Transactions;
