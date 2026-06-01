@@ -85,9 +85,7 @@ body {
 .card-console-balance-expense,
 .card-console-balance-balance {
   min-height: 180px;
-
   border-radius: var(--radius);
-
   padding: 24px;
 
   display: flex;
@@ -108,17 +106,20 @@ body {
 
 .card-console-balance {
   background:
-   transparent
+   transparent;
+  color: var(--primary);
 }
 
 .card-console-balance-expense {
   background:
-  transparent
+  transparent;
+  color: var(--danger);
 }
 
 .card-console-balance-balance {
   background:
-    transparent
+    transparent;
+  color: var(--success);
 }
 
 .card-console-balance svg,

@@ -12,7 +12,7 @@ export default function Logout() {
             return;
         }
 
-        // 🔥 clean SPA logout
+    
         navigate("/login", { replace: true });
     };
 
