@@ -112,6 +112,15 @@ const handleSubmit = async (e) => {
           required
         />
 
+        <input
+          type="password"
+          name="confirm_password"
+          placeholder="Confirm Password"
+          value={user.confirm_password}
+          onChange={handleChange}
+          required
+        />
+
         <button type="submit">Register</button>
 
         <p>
