@@ -117,7 +117,7 @@ function Profile() {
                     <label className='info-header'>Personal Information</label>
                     <div className='profile-info-console'>
                         <div className='profile-info-one'>
-                            <label>Username:{userName} 👋</label>
+                            <label>Username:{userName}</label>
                         </div>
                         <div className='profile-info-one'>
                             <label>Email :{email} </label>
