@@ -14,7 +14,7 @@ export default function useRegistration() {
 
     useEffect(() => {
         let isMounted = true;
-
+        
         const fetchUserData = async () => {
             try {
                 if (!user?.id) return;
@@ -29,7 +29,8 @@ export default function useRegistration() {
 
                 if (data && isMounted) {
                     setRegistrationData(data);
-                    setUserName(data.full_name);
+                    setUserName(data.username);
+                    setFullName(data.full_name);
                     setEmail(data.email);
                     setPhone(data.phone_number);
                 }
@@ -53,7 +54,9 @@ export default function useRegistration() {
         loading,
         email,
         fullName,
-        phone
-
+        phone,
+       
     };
 }
+
+

@@ -8,8 +8,6 @@ import { getActiveBudget } from "../Api/budget";
 
 
 
-
-
 function Profile() {
     const [incomeTotal, setIncomeTotal] = useState(0);
     const [investmentTotal, setInvestmentTotal] = useState(0);
@@ -107,7 +105,7 @@ function Profile() {
 
     }, []);
 
-
+  
     return (
         <div className="profile">
             <Sidebar />

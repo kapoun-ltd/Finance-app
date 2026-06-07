@@ -156,8 +156,6 @@ function Transactions() {
     
 // handle transaction form visibility
 
-
-
 const handleOpen = () => {
     setTransactionFormVisible(true);
 };

@@ -13,6 +13,7 @@ function Register() {
     phone_number: "",
     email: "",
     password: "",
+    confirm_password: "",
   });
 
   const handleChange = (e) => {
@@ -24,6 +25,11 @@ function Register() {
 
 const handleSubmit = async (e) => {
   e.preventDefault();
+
+  if (user.password !== user.confirm_password) {
+    toast.error("Passwords do not match.");
+    return;
+  }
 
   const { data, error } = await supabase.auth.signUp({
     email: user.email,
