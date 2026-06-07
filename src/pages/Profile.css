@@ -1,3 +1,6 @@
+/* =========================================
+   BASE
+========================================= */
 .profile {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: #0f172a;
@@ -8,178 +11,299 @@
 }
 
 /* =========================================
-   MAIN PROFILE CONTAINER 
+   MAIN CONTAINER
 ========================================= */
-
 .profile-container {
-    box-sizing: border-box; /* Forces padding to stay inside the boundary */
+    box-sizing: border-box;
     width: 100%;
     max-width: 1080px;
     margin: 2rem auto;
     padding: 1.5rem;
-    color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
 }
 
+/* =========================================
+   HEADER
+========================================= */
 .profile-header {
     display: flex;
     align-items: center;
-    gap: 1.5rem;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
     font-size: 1.5rem;
-    font-weight: 700;
+    font-weight: 600;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+/* =========================================
+   PERSONAL INFO
+========================================= */
 .console-profile {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-    margin-bottom: 2rem;
-    background: white;
-    padding: 1rem;
-    border-radius: 8px;
-    color: #0f172a;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 1.5rem;
 }
 
 .info-header {
-    gap: 1rem;
-    font-size: 1.2rem;
+    display: block;
+    font-size: 0.75rem;
     font-weight: 600;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.45);
+    margin-bottom: 1rem;
 }
 
-.goal-container {
+.profile-info-console {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1.5rem;
-    background: rgba(15, 23, 42, 0.85);
-    box-sizing: border-box;
-    border: 1px solid rgba(255,255,255,0.1);
-    padding: 1.5rem;
-    border-radius: 8px;
-  
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
 }
 
-.goal-container label {
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-} 
+.profile-info-one {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.85);
+}
 
-.goal-container input {
+/* =========================================
+   STATS ROW
+========================================= */
+.transaction-container {
     width: 100%;
-    padding: 0.75rem;
+}
+
+.transaction-balance-all-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+}
+
+.balance-container,
+.expense-container,
+.saving-container,
+.income-container {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.balance-label,
+.expense-label,
+.investment-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: rgba(255, 255, 255, 0.45);
+}
+
+.net   { font-size: 1.4rem; font-weight: 600; color: #60a5fa; }
+.expense-values { font-size: 1.4rem; font-weight: 600; color: #f87171; }
+.investment-values { font-size: 1.4rem; font-weight: 600; color: #34d399; }
+
+/* =========================================
+   GOALS
+========================================= */
+.goal-container {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 1.5rem;
+}
+
+.goal-container > label {
+    display: block;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 1.25rem;
+}
+
+.add-goal-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+}
+
+.add-goal-container input {
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.12);
     border-radius: 8px;
-    border: none;
-    margin-bottom: 1rem;
-    padding: 1rem;
- 
+    padding: 0.65rem 0.9rem;
+    color: white;
+    font-size: 0.875rem;
+    width: 100%;
+    box-sizing: border-box;
 }
 
-.goal-container INPUT::placeholder {
-    color: rgba(14, 14, 14, 0.75);
+.add-goal-container input::placeholder {
+    color: rgba(255, 255, 255, 0.35);
 }
 
-.goal-container INPUT:focus {
+.add-goal-container input:focus {
     outline: none;
-    box-shadow: 0 0 0 2px #3b82f6;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
 }
 
-.goal-container button {
+.add-goal-container button:first-of-type {
     background: #3b82f6;
     color: white;
-    padding: 0.75rem 1.5rem;
+    padding: 0.65rem 1.25rem;
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    transition: background 0.3s ease;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: opacity 0.2s;
 }
 
-.goal-container p {
-    color: rgba(255,255,255,0.75);
-    margin-bottom: 1rem;
-}
-
-.goal-container .goal-item {
-    background: rgba(255,255,255,0.1);
-    padding: 1rem;
+.add-goal-container button:last-of-type {
+    background: rgba(239, 68, 68, 0.1);
+    color: #f87171;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    padding: 0.65rem 1.25rem;
     border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: opacity 0.2s;
 }
 
+.add-goal-container button:hover:not(:disabled) { opacity: 0.85; }
+.add-goal-container button:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.goals-list-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 0.75rem;
+}
+
+.goal-item {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 1rem;
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+}
+
+.goal-item:hover {
+    border-color: rgba(59, 130, 246, 0.4);
+    background: rgba(59, 130, 246, 0.05);
+}
+
+.goal-item.goal-selected {
+    border-color: #3b82f6;
+    background: rgba(59, 130, 246, 0.1);
+}
 
 .goal-item h3 {
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
     color: white;
 }
 
 .goal-item p {
-    color: rgba(255,255,255,0.75);
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.55);
+    margin-bottom: 0.25rem;
 }
 
-
+/* =========================================
+   UPDATE PASSWORD
+========================================= */
 .profile-info-update {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-     background: rgba(15, 23, 42, 0.85);
-    box-sizing: border-box;
-    border: 1px solid rgba(255,255,255,0.1);
-    padding: 1rem;
-    border-radius: 8px;
-    margin-top: 2rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 1.5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    align-items: start;
 }
 
-.profile-info-update label {
+.info-update-header {
+    grid-column: 1 / -1;
     font-size: 1rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
 }
 
 .profile-info-update input {
-    display: flex;
-    width: 50%;
-    padding: 0.5rem;
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.12);
     border-radius: 8px;
-    border: none;
-    margin-bottom: 1rem;
-    padding: 1rem;
-    align-items: center;
+    padding: 0.65rem 0.9rem;
+    color: white;
+    font-size: 0.875rem;
+    width: 100%;
+    box-sizing: border-box;
 }
 
-.profile-info-update INPUT::placeholder {
-    color: rgba(14, 14, 14, 0.75);
+.profile-info-update input:first-of-type {
+    grid-column: 1 / -1;
 }
 
-.profile-info-update INPUT:focus {
+.profile-info-update input::placeholder {
+    color: rgba(255, 255, 255, 0.35);
+}
+
+.profile-info-update input:focus {
     outline: none;
-    box-shadow: 0 0 0 2px #3b82f6;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
 }
 
 .profile-info-update button {
-     background: #3b82f6;
+    grid-column: 1 / -1;
+    justify-self: start;
+    background: #3b82f6;
     color: white;
-    padding: 0.75rem 1.5rem;
+    padding: 0.65rem 1.5rem;
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    transition: background 0.3s ease;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: opacity 0.2s;
 }
 
-
-
+.profile-info-update button:hover { opacity: 0.85; }
 
 /* =========================================
    MOBILE
 ========================================= */
-
 @media (max-width: 640px) {
+    .profile { margin-left: 0; }
 
-    .profile-container {
-        margin-left: 0;
-        padding: 1.2rem;
+    .profile-container { padding: 1rem; }
+
+    .transaction-balance-all-container {
+        grid-template-columns: repeat(2, 1fr);
     }
 
-    .add-goal-container {
+    .profile-info-console,
+    .add-goal-container,
+    .profile-info-update {
         grid-template-columns: 1fr;
+    }
+
+    .add-goal-container button,
+    .profile-info-update input:first-of-type,
+    .info-update-header {
+        grid-column: 1;
     }
 }

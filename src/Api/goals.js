@@ -26,7 +26,8 @@ export const getActiveGoals = async (currentDate = new Date()) => {
 
 
 export const addGoal = async (goalsData) => {
-    const { goal_name, goal_amount, start_date, end_date } = goalsData;
+    const { data: { user }, error: userError } = await supabase.auth.getUser();
+    const { goal_name, goal_amount, start_date, end_date, user_id } = goalsData;
 
     if (!goal_name || !goal_amount || !start_date || !end_date) {
         toast.error("Please fill in all required goal fields.");
@@ -41,6 +42,7 @@ export const addGoal = async (goalsData) => {
                 goal_amount: Number(goal_amount),
                 start_date,
                 end_date,
+                user_id: user.id
             }
         ])
         .select()
@@ -53,5 +55,39 @@ export const addGoal = async (goalsData) => {
     }
 
     toast.success("Goal added successfully!");
+    return data;
+};
+
+
+export const deleteGoal = async (goalsData) => {
+    const { data: { user }, error: userError } = await supabase.auth.getUser();
+    const { goal_name, goal_amount, start_date, end_date, user_id } = goalsData;
+
+    if (!goal_name || !goal_amount || !start_date || !end_date) {
+        toast.error("Please fill in all required goal fields.");
+        return null;
+    }
+
+    const { data, error } = await supabase
+        .from("goals")
+        .delete([
+            {
+                goal_name,
+                goal_amount: Number(goal_amount),
+                start_date,
+                end_date,
+                user_id: user.id
+            }
+        ])
+        .select()
+        .single();
+
+    if (error) {
+        console.error(`Error deleting goal for ${goal_name}:`, error.message);
+        toast.error(`Error deleting goal: ${error.message}`);
+        return null;
+    }
+
+    toast.success("Goal deleted successfully!");
     return data;
 };

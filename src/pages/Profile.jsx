@@ -5,7 +5,9 @@ import useRegistration from "../Api/user";
 import { fetchTransactions } from "../Api/transaction";
 import { getActiveGoals, addGoal } from "../Api/goals";
 import { getActiveBudget } from "../Api/budget";
-
+import { updatepassword } from "../Api/updatepassword";
+import { toast } from "react-toastify";         // ✅ FIX 1: toast was missing
+import supabase from '../services/supabase';
 
 
 function Profile() {
@@ -22,54 +24,107 @@ function Profile() {
     const [endDate, setEndDate] = useState("");
     const [goals, setGoals] = useState([]);
     const [budget, setBudget] = useState([]);
-    const handleAddGoal = () => {
+    const [selectedGoalId, setSelectedGoalId] = useState(null);
+
+    // ✅ FIX 2: Password fields now have state
+    const [currentPassword, setCurrentPassword] = useState("");
+    const [newPassword, setNewPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+
+    /* =========================================
+         DELETE GOAL
+    ========================================= */
+    const deleteGoal = async (goalId) => {
+        const { error } = await supabase
+            .from("goals")
+            .delete()
+            .eq("id", goalId);
+
+        if (error) {
+            toast.error("Failed to delete goal.");
+            return;
+        }
+
+        setGoals((prev) => prev.filter((g) => g.id !== goalId));
+        setSelectedGoalId(null);
+        toast.success("Goal deleted.");
+    };
+
+    /* =========================================
+         ADD GOAL
+    ========================================= */
+    // ✅ FIX 3: Now async, passes user_id, and updates goals list immediately
+    const handleAddGoal = async () => {
+        if (!goalName || !goalAmount || !startDate || !endDate) {
+            toast.error("Please fill in all goal fields.");
+            return;
+        }
+
+        const { data: { user } } = await supabase.auth.getUser();
+
         const newGoal = {
             goal_name: goalName,
             goal_amount: goalAmount,
             start_date: startDate,
             end_date: endDate,
+            user_id: user.id,
         };
-        addGoal(newGoal);
-        setGoalName("");
-        setGoalAmount("");
-        setStartDate("");
-        setEndDate("");
+
+        const added = await addGoal(newGoal);
+        if (added) {
+            setGoals((prev) => [...prev, added]);
+            setGoalName("");
+            setGoalAmount("");
+            setStartDate("");
+            setEndDate("");
+        }
     };
 
     /* =========================================
-         FETCH BUDGETS
-     ========================================= */
+         UPDATE PASSWORD
+    ========================================= */
+   
+    const handleUpdatePassword = async () => {
+        if (!currentPassword || !newPassword || !confirmPassword) {
+            toast.error("Please fill in all password fields.");
+            return;
+        }
+        if (newPassword !== confirmPassword) {
+            toast.error("New passwords do not match.");
+            return;
+        }
+        await updatepassword(newPassword);
+    };
+
+    /* =========================================
+         FETCH BUDGETS & GOALS
+    ========================================= */
     useEffect(() => {
         const fetchBudgetData = async () => {
             const today = new Date().toISOString().split("T")[0];
             const data = await getActiveBudget(today);
-            if (data) {
-                setBudget(data);
-            }
+            if (data) setBudget(data);
         };
         fetchBudgetData();
 
         const loadGoals = async () => {
             setLoading(true);
             const data = await getActiveGoals();
-            if (data) {
-                setGoals(data);
-            }
+            if (data) setGoals(data);
             setLoading(false);
         };
         loadGoals();
     }, []);
 
-
     const { userName, fullName, phone, email, registrationData, loading: userLoading } = useRegistration();
+
     /* =========================================
          FETCH TRANSACTIONS
-     ========================================= */
+    ========================================= */
     useEffect(() => {
         const loadTransactions = async () => {
             setLoading(true);
-
-            const data = await fetchTransactions(); // 👈 always all
+            const data = await fetchTransactions();
 
             if (data) {
                 setTransactions(data);
@@ -97,65 +152,62 @@ function Profile() {
                 setSavingTotal(saving);
             }
 
-
             setLoading(false);
         };
 
         loadTransactions();
-
     }, []);
 
-  
     return (
         <div className="profile">
             <Sidebar />
             <div className='profile-container'>
-                <hi className="profile-header">My Profile</hi>
+
+                
+                <h1 className="profile-header">My Profile</h1>
+
+
                 <div className='console-profile'>
                     <label className='info-header'>Personal Information</label>
                     <div className='profile-info-console'>
                         <div className='profile-info-one'>
-                            <label>Username:{userName}</label>
+                            <label>Username: {userName}</label>
                         </div>
                         <div className='profile-info-one'>
-                            <label>Email :{email} </label>
+                            <label>Email: {email}</label>
                         </div>
                         <div className='profile-info-one'>
-                            <label>FullName :{fullName} </label>
+                            <label>Full Name: {fullName}</label>
                         </div>
                         <div className='profile-info-one'>
-                            <label>Phone :{phone} </label>
+                            <label>Phone: {phone}</label>
                         </div>
-                        
                     </div>
-
                 </div>
 
+          
                 <div className="transaction-title-container">
                     <div className="transaction-balance-all-container">
                         <div className="transaction-balance-container">
-                            <label className='balance-label'>Balance </label>
-                            <label className='net-balance'> {balance.toLocaleString()}</label>
-
+                            <label className='balance-label'>Balance</label>
+                            <label className='net-balance'>{balance.toLocaleString()}</label>
                         </div>
-
                         <div className="transaction-expense-container">
-                            <label className='expense-label'>Expense </label>
+                            <label className='expense-label'>Expense</label>
                             <label className='expense-value'>{expenceTotal.toLocaleString()}</label>
                         </div>
-
                         <div className="transaction-income-container">
-                            <label className='investment-label'>Investment </label>
+                            <label className='investment-label'>Investment</label>
                             <label className='investment-value'>{investmentTotal.toLocaleString()}</label>
                         </div>
-
                         <div className="transaction-income-container">
-                            <label className='investment-label'>Saving </label>
+                            <label className='investment-label'>Saving</label>
                             <label className='investment-value'>{savingTotal.toLocaleString()}</label>
                         </div>
                     </div>
-
                 </div>
+
+               
                 <div className='goal-container'>
                     <label>Financial Goals</label>
                     <div className="add-goal-container">
@@ -184,25 +236,61 @@ function Profile() {
                             onChange={(e) => setEndDate(e.target.value)}
                         />
                         <button onClick={handleAddGoal}>Add Goal</button>
-                    </div>
-                    <div className="goals-list-container">
-                        {goals.map((goal) => (
-                            <div className="goal-item" key={goal.id}>
-                                <h3>{goal.goal_name}</h3>
-                                <p>Target: {goal.goal_amount}</p>
-                                <p>Deadline: {goal.end_date}</p>
-                            </div>
-                        ))}
+                        <button
+                            onClick={() => deleteGoal(selectedGoalId)}
+                            disabled={!selectedGoalId}
+                        >
+                            Delete Goal
+                        </button>
                     </div>
 
+                  
+                    <div className="goals-list-container">
+                        {loading ? (
+                            <p>Loading goals...</p>
+                        ) : goals.length === 0 ? (
+                            <p>No active goals. Add one above!</p>
+                        ) : (
+                            goals.map((goal) => (
+                                <div
+                                    className={`goal-item ${selectedGoalId === goal.id ? "goal-selected" : ""}`}
+                                    key={goal.id}
+                                    onClick={() => setSelectedGoalId(
+                                        selectedGoalId === goal.id ? null : goal.id  // ✅ toggle off on second click
+                                    )}
+                                >
+                                    <h3>{goal.goal_name}</h3>
+                                    <p>Target: {Number(goal.goal_amount).toLocaleString()}</p>
+                                    <p>Deadline: {goal.end_date}</p>
+                                </div>
+                            ))
+                        )}
+                    </div>
                 </div>
-                 <div className='profile-info-update'>
-                            <label className='info-update-header'>Update Password </label>
-                            <input type="password" placeholder='Current Password' />
-                            <input type="password" placeholder='Confirm Password' />
-                            <input type="password" placeholder='New Password' />
-                            <button>Update</button>
-                        </div>
+
+                <div className='profile-info-update'>
+                    <label className='info-update-header'>Update Password</label>
+                    <input
+                        type="password"
+                        placeholder="Current Password"
+                        value={currentPassword}
+                        onChange={(e) => setCurrentPassword(e.target.value)}
+                    />
+                    <input
+                        type="password"
+                        placeholder="New Password"
+                        value={newPassword}
+                        onChange={(e) => setNewPassword(e.target.value)}
+                    />
+                    <input
+                        type="password"
+                        placeholder="Confirm New Password"
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                    />
+                    <button onClick={handleUpdatePassword}>Update</button>
+                </div>
+
             </div>
         </div>
     );
