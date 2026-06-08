@@ -1,6 +1,5 @@
 import supabase from "../services/supabase";
 
-// 🔄 SUBSCRIBE to real-time transaction updates
 export const subscribeToTransactions = (onUpdate) => {
     return supabase
         .channel('realtime-transactions')
@@ -44,7 +43,7 @@ export const addTransaction = async (formData) => {
     return data[0];
 };
 
-// 📥 FETCH transactions
+
 export const fetchTransactions = async (type = "") => {
     let query = supabase
         .from("transactions")

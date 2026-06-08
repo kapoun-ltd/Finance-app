@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 
 export const getActiveGoals = async (currentDate = new Date()) => {
 
-    // Convert Date object → YYYY-MM-DD
+   
     const formattedDate = currentDate instanceof Date
         ? currentDate.toISOString().split('T')[0]
         : currentDate;

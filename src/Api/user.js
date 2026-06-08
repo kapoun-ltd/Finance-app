@@ -3,7 +3,7 @@ import supabase from "../services/supabase";
 import { useAuth } from "../Context/AuthContext.jsx";
 
 export default function useRegistration() {
-    const { user } = useAuth();
+    const { user, loading: authLoading } = useAuth(); // 👈 get auth loading state
 
     const [registrationData, setRegistrationData] = useState(null);
     const [userName, setUserName] = useState("");
@@ -14,11 +14,15 @@ export default function useRegistration() {
 
     useEffect(() => {
         let isMounted = true;
-        
-        const fetchUserData = async () => {
-            try {
-                if (!user?.id) return;
 
+        const fetchUserData = async () => {
+            if (authLoading) return;      // 👈 wait for auth to finish
+            if (!user?.id) {              // 👈 if auth done but no user, stop loading
+                setLoading(false);
+                return;
+            }
+
+            try {
                 const { data, error } = await supabase
                     .from("registration")
                     .select("*")
@@ -33,6 +37,7 @@ export default function useRegistration() {
                     setFullName(data.full_name);
                     setEmail(data.email);
                     setPhone(data.phone_number);
+                    // setuserid(data.user_id); // ❌ this was also missing from your state/return
                 }
             } catch (err) {
                 console.error(err);
@@ -43,20 +48,9 @@ export default function useRegistration() {
 
         fetchUserData();
 
-        return () => {
-            isMounted = false;
-        };
-    }, [user?.id]);
+        return () => { isMounted = false; };
 
-    return {
-        registrationData,
-        userName,
-        loading,
-        email,
-        fullName,
-        phone,
-       
-    };
+    }, [user?.id, authLoading]); // 👈 re-run when authLoading changes
+
+    return { registrationData, userName, loading, email, fullName, phone };
 }
-
-

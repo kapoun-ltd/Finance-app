@@ -22,7 +22,6 @@ function Register() {
       [e.target.name]: e.target.value,
     });
   };
-
 const handleSubmit = async (e) => {
   e.preventDefault();
 
@@ -42,21 +41,18 @@ const handleSubmit = async (e) => {
   }
 
   if (!data.user) {
-    toast.error("This email is already registered. Please log in instead.");
+    toast.error("Signup failed. Please try again.");
     return;
   }
 
-  if (!data.user.email_confirmed_at) {
-    toast.info("Account created! Please check your email to confirm your account.");
-    return;
-  }
-
+  // ✅ Insert immediately after signup, before email is confirmed
   const { error: dbError } = await supabase.from("registration").insert({
     id: data.user.id,
     username: user.username,
     full_name: user.full_name,
     phone_number: user.phone_number,
     email: user.email,
+    user_id: data.user.id,
   });
 
   if (dbError) {
@@ -64,7 +60,7 @@ const handleSubmit = async (e) => {
     return;
   }
 
-  toast.success("Registration successful!");
+  toast.info("Account created! Please check your email to confirm your account.");
   navigate("/login");
 };
 

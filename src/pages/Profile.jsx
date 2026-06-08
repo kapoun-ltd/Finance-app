@@ -6,7 +6,7 @@ import { fetchTransactions } from "../Api/transaction";
 import { getActiveGoals, addGoal } from "../Api/goals";
 import { getActiveBudget } from "../Api/budget";
 import { updatepassword } from "../Api/updatepassword";
-import { toast } from "react-toastify";         // ✅ FIX 1: toast was missing
+import { toast } from "react-toastify";         
 import supabase from '../services/supabase';
 
 
@@ -26,7 +26,7 @@ function Profile() {
     const [budget, setBudget] = useState([]);
     const [selectedGoalId, setSelectedGoalId] = useState(null);
 
-    // ✅ FIX 2: Password fields now have state
+    
     const [currentPassword, setCurrentPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
@@ -53,7 +53,7 @@ function Profile() {
     /* =========================================
          ADD GOAL
     ========================================= */
-    // ✅ FIX 3: Now async, passes user_id, and updates goals list immediately
+   
     const handleAddGoal = async () => {
         if (!goalName || !goalAmount || !startDate || !endDate) {
             toast.error("Please fill in all goal fields.");
@@ -166,7 +166,6 @@ function Profile() {
                 
                 <h1 className="profile-header">My Profile</h1>
 
-
                 <div className='console-profile'>
                     <label className='info-header'>Personal Information</label>
                     <div className='profile-info-console'>
@@ -188,19 +187,19 @@ function Profile() {
           
                 <div className="transaction-title-container">
                     <div className="transaction-balance-all-container">
-                        <div className="transaction-balance-container">
+                        <div className="balance-container">
                             <label className='balance-label'>Balance</label>
                             <label className='net-balance'>{balance.toLocaleString()}</label>
                         </div>
-                        <div className="transaction-expense-container">
+                        <div className="expense-container">
                             <label className='expense-label'>Expense</label>
                             <label className='expense-value'>{expenceTotal.toLocaleString()}</label>
                         </div>
-                        <div className="transaction-income-container">
+                        <div className="income-container">
                             <label className='investment-label'>Investment</label>
                             <label className='investment-value'>{investmentTotal.toLocaleString()}</label>
                         </div>
-                        <div className="transaction-income-container">
+                        <div className="income-container">
                             <label className='investment-label'>Saving</label>
                             <label className='investment-value'>{savingTotal.toLocaleString()}</label>
                         </div>
