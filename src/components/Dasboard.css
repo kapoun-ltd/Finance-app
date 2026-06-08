@@ -42,7 +42,7 @@ body {
   min-height: 100vh;
   margin-left: 180px;
   padding: 30px;
-  color: #111827;
+  color: #bcc1cb;
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -50,12 +50,7 @@ body {
   background: var(--bg);
 
   transition: 0.3s ease;
-  background: linear-gradient(
-        135deg,
-        #2673de,
-        #dac8bf,
-        #60a5fa
-    );
+  background: #0f172a;
 }
 
 /* ================================
@@ -108,18 +103,21 @@ body {
   background:
    transparent;
   color: var(--primary);
+  border: 1px solid #1a3776;
 }
 
 .card-console-balance-expense {
   background:
   transparent;
   color: var(--danger);
+   border: 1px solid #1a3776;
 }
 
 .card-console-balance-balance {
   background:
     transparent;
   color: var(--success);
+   border: 1px solid #1a3776;
 }
 
 .card-console-balance svg,
@@ -142,7 +140,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: white;
+  background: #0f172a;
   border-radius: var(--radius);
   padding: 24px;
 }
@@ -174,7 +172,7 @@ body {
 ================================ */
 
 .budget-list-container {
-  background: var(--card);
+  background: #0f172a;
 
   border-radius: var(--radius);
 
@@ -300,7 +298,6 @@ body {
   font-size: 32px;
   font-weight: 700;
   color: var(--success);
-
   margin-top: 10px;
 }
 
@@ -312,7 +309,7 @@ body {
   width: 100%;
   height: 12px;
 
-  background: #e5e7eb;
+  background: #0f172a;
 
   border-radius: 999px;
 
@@ -339,17 +336,18 @@ body {
 .card-console-other-container {
   display: flex;
   gap: 20px;
-
   align-items: stretch;
+  border: 1px solid #e8ecf5;
+  border-radius: 12px;
 }
 
 .card-console-other,
 .card-console-other-pending {
   flex: 1;
+  color: #bcc1cb;
+  background: #0f172a;
 
-  background: white;
-
-  border-radius: var(--radius);
+  border-radius:#4c77de;
 
   padding: 24px;
 
@@ -373,7 +371,7 @@ body {
     margin-top: 2rem;
     padding: 2rem;
     border-radius: 20px;
-    background: #ffffff;
+    background: #0f172a;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
 }
 
@@ -381,7 +379,7 @@ body {
 .transaction-listing-title {
     font-size: 1.8rem;
     font-weight: 700;
-    color: #1e293b;
+    color: #90a9cf;
     margin-bottom: 1.5rem;
     letter-spacing: 0.5px;
 }
@@ -391,11 +389,13 @@ body {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 1.2rem;
+    border:#e8ecf5 solid 1px;
+    border-radius: 12px;
 }
 
 /* Transaction Card */
 .transaction-item {
-    background: #f8fafc;
+    background: #1e293b;
     border-radius: 18px;
     padding: 1.2rem;
     border: 1px solid #e2e8f0;
@@ -439,7 +439,7 @@ body {
 
 /* Income Badge */
 .transaction-type.income {
-    background: rgba(34, 197, 94, 0.12);
+    background: #0f172a;
     color: #15803d;
 }
 
