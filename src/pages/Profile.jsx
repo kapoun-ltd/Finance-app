@@ -3,7 +3,7 @@ import "./Profile.css";
 import Sidebar from '../components/Sidebar';
 import useRegistration from "../Api/user";
 import { fetchTransactions } from "../Api/transaction";
-import { getActiveGoals, addGoal } from "../Api/goals";
+import { getActiveGoals, addGoal , deleteGoal } from "../Api/goals";
 import { getActiveBudget } from "../Api/budget";
 import { updatepassword } from "../Api/updatepassword";
 import { toast } from "react-toastify";         
@@ -34,22 +34,13 @@ function Profile() {
     /* =========================================
          DELETE GOAL
     ========================================= */
-    const deleteGoal = async (goalId) => {
-        const { error } = await supabase
-            .from("goals")
-            .delete()
-            .eq("id", goalId);
-
-        if (error) {
-            toast.error("Failed to delete goal.");
-            return;
-        }
-
-        setGoals((prev) => prev.filter((g) => g.id !== goalId));
+  const handleDelete = async () => {
+    const success = await deleteGoal(selectedGoalId);
+    if (success) {
+        setGoals((prev) => prev.filter((g) => g.id !== selectedGoalId));
         setSelectedGoalId(null);
-        toast.success("Goal deleted.");
-    };
-
+    }
+};
     /* =========================================
          ADD GOAL
     ========================================= */

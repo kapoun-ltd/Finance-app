@@ -3,8 +3,6 @@ import { toast } from "react-toastify";
 
 
 export const getActiveGoals = async (currentDate = new Date()) => {
-
-   
     const formattedDate = currentDate instanceof Date
         ? currentDate.toISOString().split('T')[0]
         : currentDate;
@@ -26,8 +24,8 @@ export const getActiveGoals = async (currentDate = new Date()) => {
 
 
 export const addGoal = async (goalsData) => {
-    const { data: { user }, error: userError } = await supabase.auth.getUser();
-    const { goal_name, goal_amount, start_date, end_date, user_id } = goalsData;
+    const { data: { user } } = await supabase.auth.getUser();
+    const { goal_name, goal_amount, start_date, end_date } = goalsData;
 
     if (!goal_name || !goal_amount || !start_date || !end_date) {
         toast.error("Please fill in all required goal fields.");
@@ -36,15 +34,13 @@ export const addGoal = async (goalsData) => {
 
     const { data, error } = await supabase
         .from("goals")
-        .insert([
-            {
-                goal_name,
-                goal_amount: Number(goal_amount),
-                start_date,
-                end_date,
-                user_id: user.id
-            }
-        ])
+        .insert([{
+            goal_name,
+            goal_amount: Number(goal_amount),
+            start_date,
+            end_date,
+            user_id: user.id,
+        }])
         .select()
         .single();
 
@@ -59,35 +55,22 @@ export const addGoal = async (goalsData) => {
 };
 
 
-export const deleteGoal = async (goalsData) => {
-    const { data: { user }, error: userError } = await supabase.auth.getUser();
-    const { goal_name, goal_amount, start_date, end_date, user_id } = goalsData;
+export const deleteGoal = async (goalId) => {
+    const { data: { user } } = await supabase.auth.getUser();
 
-    if (!goal_name || !goal_amount || !start_date || !end_date) {
-        toast.error("Please fill in all required goal fields.");
-        return null;
-    }
-
-    const { data, error } = await supabase
+    
+    const { error } = await supabase
         .from("goals")
-        .delete([
-            {
-                goal_name,
-                goal_amount: Number(goal_amount),
-                start_date,
-                end_date,
-                user_id: user.id
-            }
-        ])
-        .select()
-        .single();
+        .delete()
+        .eq("id", goalId)
+        .eq("user_id", user.id);  // matches composite PK and satisfies RLS
 
     if (error) {
-        console.error(`Error deleting goal for ${goal_name}:`, error.message);
+        console.error("Error deleting goal:", error.message);
         toast.error(`Error deleting goal: ${error.message}`);
-        return null;
+        return false;
     }
 
     toast.success("Goal deleted successfully!");
-    return data;
+    return true;
 };
