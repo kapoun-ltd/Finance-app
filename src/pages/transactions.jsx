@@ -30,7 +30,7 @@ function Transactions() {
     const [open, setOpen] = useState(false);
     const[close, setClose] = useState(false);
     const [transactionFormVisible, setTransactionFormVisible] = useState(false);
-    const [analyzeSpending, setAnalyzeSpending] = useState(false);
+    // const [analyzeSpending, setAnalyzeSpending] = useState(false);
     const [formData, setFormData] = useState({
         description: "",
         amount: "",
@@ -156,6 +156,50 @@ function Transactions() {
         }
     };
 
+    const importFromExcel = async (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+
+  reader.onload = async (event) => {
+    try {
+      const data = new Uint8Array(event.target.result);
+      const workbook = XLSX.read(data, { type: 'array' });
+
+      const sheetName = workbook.SheetNames[0];
+      const worksheet = workbook.Sheets[sheetName];
+      const importedData = XLSX.utils.sheet_to_json(worksheet);
+
+      if (importedData.length === 0) {
+        toast.warning("File is empty or unreadable");
+        return;
+      }
+
+      for (const row of importedData) {
+        await addTransaction({
+          description: row.Description,
+          amount: row.Amount,
+          type: row.Type,
+          account: row.Account,
+          method: row.Method,
+          date: row.Date,
+        });
+      }
+
+      const updated = await fetchTransactions();
+      setTransactions(updated);
+
+      toast.success(`${importedData.length} transactions imported! 📥`);
+    } catch (err) {
+      console.error(err);
+      toast.error("Failed to import file 🚨");
+    }
+  };
+
+  reader.readAsArrayBuffer(file);
+};
+
     
 // handle transaction form visibility
 
@@ -186,7 +230,20 @@ const modalStyle = {
             <Sidebar />
             <div className='container'>
                 <div className="transaction-btn-container">
-                        <button className="trans-btn">Import</button>
+                        <input
+  type="file"
+  id="import-input"
+  accept=".xlsx, .xls, .csv"
+  style={{ display: 'none' }}
+  onChange={importFromExcel}
+/>
+
+<button
+  className="trans-btn"
+  onClick={() => document.getElementById('import-input').click()}
+>
+  Import
+</button>
                         <button onClick={() => exportToExcel(transactions)} className="trans-btn">Export</button>   
                     </div>
                 <div className="transaction-title-container">

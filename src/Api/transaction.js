@@ -20,7 +20,11 @@ export const addTransaction = async (formData) => {
     const { data: { user }, error: userError } = await supabase.auth.getUser();
     const { amount, type, account, method, description, category, date } = formData;
 
-    await analyzeSpending();
+     if (userError || !user) {
+        console.error("User not authenticated:", userError);
+        return null;
+    }
+    // await analyzeSpending();
     const { data, error } = await supabase
         .from("transactions")
         .insert([{
