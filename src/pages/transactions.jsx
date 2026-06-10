@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import './transactions.css';
 import { toast } from "react-toastify";
 import Sidebar from '../components/Sidebar.jsx';
+import * as XLSX from 'xlsx';
+import exportToExcel from './export.jsx'
 import { addTransaction, fetchTransactions } from "../Api/transaction";
 import {
     Box,
@@ -39,6 +41,7 @@ function Transactions() {
         date: "",
         user_id: ""
     });
+
 
     const filteredTransactions = type
         ? transactions.filter((tx) => tx.type === type)
@@ -184,7 +187,7 @@ const modalStyle = {
             <div className='container'>
                 <div className="transaction-btn-container">
                         <button className="trans-btn">Import</button>
-                        <button className="trans-btn">Export</button>
+                        <button onClick={() => exportToExcel(transactions)} className="trans-btn">Export</button>   
                     </div>
                 <div className="transaction-title-container">
                     
