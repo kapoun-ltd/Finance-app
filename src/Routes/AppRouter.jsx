@@ -36,7 +36,7 @@ function AppRouter() {
             <Route path="/accounts" element={<Accountspage />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/transactions" element={<Transactions />} />
-            <Route path="/payment" element={<Payment />} />
+            {/* <Route path="/payment" element={<Payment />} /> */}
             <Route path="/reports" element={<Reports />} />
             <Route path="/logout" element={<Logout />} />
             <Route path="/reset-password" element={<resetPassword />} />

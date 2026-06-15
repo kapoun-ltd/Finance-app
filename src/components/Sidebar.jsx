@@ -26,7 +26,7 @@ function Sidebar() {
       <Link to="/dashboard">Dashboard</Link>
       <Link to="/accounts">Accounts</Link>
       <Link to="/transactions">Transactions</Link>
-      <Link to="/payment">Payment</Link>
+      {/* <Link to="/payment">Payment</Link> */}
       <Link to="/profile">Profile</Link>
     
 
