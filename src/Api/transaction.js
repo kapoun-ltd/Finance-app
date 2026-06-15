@@ -8,7 +8,6 @@ export const subscribeToTransactions = (onUpdate) => {
             { event: '*', scheme: 'public', table: 'transactions' },
             (payload) => {
                 // This callback runs whenever a row is INSERTED, UPDATED, or DELETED
-                console.log('Change received!', payload);
                 onUpdate(payload);
             }
         )

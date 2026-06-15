@@ -66,7 +66,6 @@ export const deleteGoal = async (goalId) => {
         .eq("user_id", user.id);  // matches composite PK and satisfies RLS
 
     if (error) {
-        console.error("Error deleting goal:", error.message);
         toast.error(`Error deleting goal: ${error.message}`);
         return false;
     }

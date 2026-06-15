@@ -49,8 +49,6 @@ function IncomeChart({ transactions = [] }) {
 
 function TransactionPieChart({ transactions = [], settings = {} }) {
 
-  console.log(transactions);
-
   const totalIncome = transactions
     .filter((tx) => tx.type?.trim().toLowerCase() === "income")
     .reduce((sum, tx) => sum + Number(tx.amount), 0);
@@ -63,8 +61,6 @@ function TransactionPieChart({ transactions = [], settings = {} }) {
     { id: 0, value: totalIncome, label: 'Income', color: '#2e7d32' },
     { id: 1, value: totalExpense, label: 'Expense', color: '#d32f2f' },
   ];
-
-  console.log(chartData);
 
   return (
     <MuiPieChart
