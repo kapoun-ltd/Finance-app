@@ -187,7 +187,7 @@ function Dashboard() {
                         <p>Spent: <span className="spent-amt">Ksh {consumed.toLocaleString()}</span></p>
                         <p>
                           Remaining:
-                          <strong style={{ color: isOverBudget ? '#d32f2f' : '#2e7d32' }}>
+                          <strong style={{ color: isOverBudget ? '#787474' : '#2e7d32' }}>
                             Ksh {remaining.toLocaleString()}
                           </strong>
                         </p>
