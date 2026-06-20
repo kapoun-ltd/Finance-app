@@ -154,11 +154,6 @@ function Dashboard() {
 
         {/* BUDGET SECTION */}
         <div className='main-budget-container'>
-          <div className='budget-container'>
-            <div className='budget'>
-             
-            </div>
-
             <div className="budget-list-container">
               <div className="budget-header">
                 <h3>Budget Overview</h3>
@@ -212,8 +207,6 @@ function Dashboard() {
                 })}
               </div>
 
-
-            </div>
           </div>
         </div>
 
