@@ -242,7 +242,7 @@ function Dashboard() {
       <table className="transaction-table">
         <thead>
           <tr>
-            <th>#</th>
+            <th>No</th>
             <th>Category</th>
             <th>Type</th>
             <th>Date</th>

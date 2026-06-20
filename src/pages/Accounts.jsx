@@ -89,7 +89,7 @@ function AccountsPage() {
         <h1>Accounts</h1>
 
         {/* Optional: Global Overview Summary Card */}
-        <div className='global-overview-card' style={{ marginBottom: '20px', padding: '15px', background: 'rgba(255,255,255,0.05)', borderRadius: '8px' }}>
+        <div className='global-overview-card' style={{ marginBottom: '20px', padding: '15px', background: '#B72818', borderRadius: '8px' }}>
           <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold' }}>Net Overview</label>
           <div style={{ display: 'flex', gap: '20px' }}>
             <span>Total Balance: $ {totalBalance.toLocaleString()}</span>

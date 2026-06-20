@@ -10,12 +10,7 @@
     margin-left: 180px;
 
     padding: 30px;
-  background: linear-gradient(
-        135deg,
-        #2673de,
-        #dac8bf,
-        #60a5fa
-    );
+    background: #111827;
 
     display: flex;
     flex-direction: column;
@@ -34,14 +29,12 @@
     justify-content: space-between;
     align-items: center;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-
     margin-bottom: 10px;
 }
 
 .transaction-title-container h1 {
     font-size: 32px;
     font-weight: 700;
-
     color: #111827;
 }
 
@@ -52,22 +45,14 @@
 .transaction-btn-container {
     display: flex;
     gap: 12px;
-
     flex-wrap: wrap;
 }
 
 .transaction-btn-container button {
     border: none;
-
     padding: 12px 20px;
-
     border-radius: 14px;
-
-    background:
-        linear-gradient(135deg,
-            #2563eb,
-            #60a5fa);
-
+    background: #348ECF;
     color: white;
 
     font-weight: 600;
@@ -94,7 +79,7 @@
 .transaction-balance-all-container {
     display: grid;
     flex-direction: row;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 20px;
 }
 
@@ -105,7 +90,8 @@
 .transaction-balance-container,
 .transaction-expense-container,
 .transaction-income-container {
-    background: white;
+    background: transparent;
+    border: #0b65bf 1px solid;
     border-radius: 24px;
     padding: 24px;
     box-shadow:
@@ -200,7 +186,6 @@
 .transaction-form-title-label {
     font-size: 26px;
     font-weight: 700;
-
     color: #111827;
 }
 
@@ -293,7 +278,7 @@
 ================================ */
 
 .transaction-listing {
-    background: white;
+    background: #E6AF00;
 
     border-radius: 24px;
 
@@ -351,7 +336,7 @@
     margin-top: 20px;
     background: linear-gradient(145deg, #ffffff, #f1f5f9);
     border: 1px solid #e2e8f0;
-    border-left: 5px solid #6366f1; /* Nice purple/indigo accent bar */
+    border-left: 5px solid #6366f1; 
     border-radius: 12px;
     padding: 24px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
@@ -359,7 +344,7 @@
     color: #1e293b;
 }
 
-/* Subtle lift effect when hovering over the card */
+
 .ai-card:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(99, 102, 241, 0.1); /* Indigo glow */
@@ -505,6 +490,7 @@
     .transaction-listing th,
     .transaction-listing td {
         padding: 5px;
+        font-size: 4px;
     }
 
 

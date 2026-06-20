@@ -140,7 +140,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #b2b6bf;
+  background: transparent;
   border-radius: var(--radius);
   padding: 24px;
 }
@@ -172,7 +172,7 @@ body {
 ================================ */
 
 .budget-list-container {
-  background: #b2b6bf;
+  background: #348ECF;
   color: var(--text);
   border-radius: var(--radius);
 
@@ -343,7 +343,7 @@ body {
 .card-console-other-pending {
   flex: 1;
   color: #030303;
-  background: #b2b6bf;
+  background: transparent;
 
   border-radius: var(--radius);
 
@@ -390,7 +390,7 @@ body {
 }
 
 .transaction-table tbody tr:hover {
-    background: rgba(255, 255, 255, 0.03);
+    background: #4eea70;
 }
 
 /* reuse your existing type badge styles */
@@ -415,22 +415,31 @@ body {
 
     .card-console-transaction-listing {
         padding: 1rem;
+        font-size: 4px;
+        overflow-x: none;
+        gap: 2px;
     }
 
-    .transaction-listing-title {
-        font-size: 1.4rem;
-    }
-
-    .transaction-listing-container {
+      .transaction-form form {
         grid-template-columns: 1fr;
     }
 
-    .transaction-item {
-        padding: 1rem;
+    .transaction-listing {
+        overflow-x: none;
+        font-size: 5px;
+        padding: 5px;
+
     }
 
-    .transaction-item-header h3 {
-        font-size: 1rem;
+    .transaction-listing table {
+        font-size: 8px;
+        padding: 5px;
+    }
+
+    .transaction-listing th,
+    .transaction-listing td {
+        padding: 5px;
+        font-size: 4px;
     }
 
 }
