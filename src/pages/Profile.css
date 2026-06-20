@@ -286,7 +286,7 @@
 /* =========================================
    MOBILE
 ========================================= */
-@media (max-width: 640px) {
+@media (max-width: 1040px) {
     .profile { margin-left: 0; }
 
     .profile-container { padding: 1rem; }
