@@ -76,17 +76,33 @@ function Profile() {
          UPDATE PASSWORD
     ========================================= */
    
-    const handleUpdatePassword = async () => {
-        if (!currentPassword || !newPassword || !confirmPassword) {
-            toast.error("Please fill in all password fields.");
-            return;
-        }
-        if (newPassword !== confirmPassword) {
-            toast.error("New passwords do not match.");
-            return;
-        }
-        await updatepassword(newPassword);
-    };
+  const updatePassword = async () => {
+    if (newPassword !== confirmPassword) {
+        toast.error("Passwords do not match.");
+        return;
+    }
+
+    if (newPassword.length < 6) {
+        toast.error("Password must be at least 6 characters.");
+        return;
+    }
+
+    setLoading(true);
+
+    const { error } = await supabase.auth.updateUser({
+        password: newPassword,
+    });
+
+    setLoading(false);
+
+    if (error) {
+        toast.error(error.message);
+    } else {
+        toast.success("Password updated successfully!");
+        setNewPassword("");
+        setConfirmPassword("");
+    }
+};
 
     /* =========================================
          FETCH BUDGETS & GOALS
@@ -279,7 +295,9 @@ function Profile() {
                         value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
                     />
-                    <button onClick={handleUpdatePassword}>Update</button>
+                    <button onClick={updatePassword} disabled={loading}>
+                        {loading ? "Updating..." : "Update"}
+                    </button>
                 </div>
 
             </div>

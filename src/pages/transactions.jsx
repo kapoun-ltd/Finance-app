@@ -374,6 +374,8 @@ const modalStyle = {
                 <option value="Shopping" />
                 <option value="Salary" />
                 <option value="Freelance" />
+                <option value="Test" />
+                <option value="RENT" />
             </datalist>
 
             <input

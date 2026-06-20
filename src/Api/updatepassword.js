@@ -1,24 +1,14 @@
-import React from "react";
+import { toast } from "react-toastify";
+import supabase from "../services/supabase";
 
-export const updatepassword = async (newPassword) => {
-    
- const lodding = true;
-    try {
-        const {data , error} = await supabase.auth.updateUser({
-            password: newPassword,
-        });
-        if (error) {
-            return { success: false, message: error.message };
-        }
-        return { success: true, message: "Password updated successfully" };
-    }
-    catch (error) {
-        console.error("Unexpected error:", error);
-        return { success: false, message: "An unexpected error occurred" };
-    }
+export async function updatepassword(newPassword) {
+    const { error } = await supabase.auth.updateUser({
+        password: newPassword,
+    });
 
-    finally {
-        lodding = false;
+    if (error) {
+        toast.error(error.message);
+    } else {
+        toast.success("Password updated successfully");
     }
-
-};
+}
