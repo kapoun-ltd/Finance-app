@@ -17,10 +17,11 @@ function Frontpage() {
         <div className="front-container">
     <div className="log-options">
            <label>Get Started</label>
-
+        <div className="button-group">
         <Link to="/register"> <button>Register</button> </Link>
 
         <Link to="/login"><button>Log In</button> </Link>
+        </div>
         </div>
             <div className="front-text">
                 <img className="company-logo" src={myLogo} alt="comapany logo" />

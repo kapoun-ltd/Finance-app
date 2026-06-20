@@ -12,7 +12,6 @@
 .log-options {
     display: flex;
     justify-content: flex-end;
-    align-items: center;
     gap: 15px;
     margin-bottom: 50px;
     flex-wrap: wrap;
@@ -168,7 +167,7 @@
 }
 
 /* ===== MOBILE RESPONSIVE ===== */
-@media (max-width: 768px) {
+@media (max-width: 1040px) {
 
     .front-text h1 {
         font-size: 2.5rem;
