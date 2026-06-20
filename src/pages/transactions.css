@@ -310,7 +310,6 @@
 
 .transaction-listing table {
     width: 100%;
-
     border-collapse: collapse;
 }
 
@@ -469,16 +468,13 @@
 
     .container {
         margin-left: 0;
-
         padding: 16px;
     }
 
-    .transaction-title-container {
-        flex-direction: column;
-        align-items: flex-start;
-
-        gap: 16px;
+    .transaction-balance-all-container {
+        grid-template-columns: repeat(2, 1fr);
     }
+    
 
     .transaction-btn-container {
         width: 100%;
@@ -494,10 +490,21 @@
     }
 
     .transaction-listing {
-        overflow-x: scroll;
+        overflow-x: none;
+        font-size: 5px;
+        padding: 5px;
+
     }
 
     .transaction-listing table {
-        min-width: 700px;
+        font-size: 8px;
+        padding: 5px;
     }
+
+    .transaction-listing th,
+    .transaction-listing td {
+        padding: 5px;
+    }
+
+
 }

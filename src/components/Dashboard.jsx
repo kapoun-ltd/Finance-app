@@ -231,30 +231,44 @@ function Dashboard() {
         </div>
 
         <div className="card-console-transaction-listing">
-          <h1 className='transaction-listing-title'>Transaction Listing</h1>
-          <div className="transaction-listing-container">
-            {loading ? (
-              <p>Loading transactions...</p>  
-            ) : transactions.length === 0 ? (
-              <p>No transactions found.</p>
-            ) : (
-              transactions.map((tx) => (
-                <div key={tx.id} className="transaction-item">
-                  <div className="transaction-item-header">
-                    <h3>{tx.category}</h3>
-                    <span className={`transaction-type ${tx.type.toLowerCase()}`}>
-                      {tx.type}
-                    </span>
-                  </div>
-                  <p>{new Date(tx.date).toLocaleDateString()}</p>
-                  <p>Ksh {Number(tx.amount).toLocaleString()}</p>
-                </div>
-              ))
-            )}
-            </div>
+  <h1 className='transaction-listing-title'>Transaction Listing</h1>
 
-            
-        </div>
+  {loading ? (
+    <p>Loading transactions...</p>
+  ) : transactions.length === 0 ? (
+    <p>No transactions found.</p>
+  ) : (
+    <div className="transaction-listing-container">
+      <table className="transaction-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Category</th>
+            <th>Type</th>
+            <th>Date</th>
+            <th>Amount (Ksh)</th>
+          </tr>
+        </thead>
+        <tbody>
+          {transactions.map((tx, index) => (
+            <tr key={tx.id}>
+              <td>{index + 1}</td>
+              <td>{tx.category}</td>
+              <td>
+                <span className={`transaction-type ${tx.type.toLowerCase()}`}>
+                  {tx.type}
+                </span>
+              </td>
+              <td>{new Date(tx.date).toLocaleDateString()}</td>
+              <td>Ksh {Number(tx.amount).toLocaleString()}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  )}
+</div>
+
       </div>
     </div >
   );

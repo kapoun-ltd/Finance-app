@@ -193,7 +193,7 @@ function Profile() {
                 </div>
 
           
-                <div className="transaction-title-container">
+                     {/* <label className='balance-header'>Financial Overview</label> */}
                     <div className="transaction-balance-all-container">
                         <div className="balance-container">
                             <label className='balance-label'>Balance</label>
@@ -212,7 +212,7 @@ function Profile() {
                             <label className='investment-value'>{savingTotal.toLocaleString()}</label>
                         </div>
                     </div>
-                </div>
+                
 
                
                 <div className='goal-container'>

@@ -1,3 +1,29 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --primary: #2563eb;
+  --success: #16a34a;
+  --danger: #dc2626;
+  --warning: #f59e0b;
+
+  --bg: #f5f7fb;
+  --card: #ffffff;
+  --text: #111827;
+  --muted: #6b7280;
+
+  --shadow:
+    0 4px 20px rgba(0, 0, 0, 0.08);
+
+  --radius: 24px;
+}
+
+
 /* =========================================
    BASE
 ========================================= */
@@ -78,23 +104,25 @@
     width: 100%;
 }
 
-.transaction-balance-all-container {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1rem;
-}
 
 .balance-container,
 .expense-container,
 .saving-container,
 .income-container {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    padding: 1.25rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+ min-height: 180px;
+  border-radius: var(--radius);
+  padding: 24px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.15);
+
+  transition: all 0.3s ease;
+  color: var(--primary);
+  border: 1px solid #1a3776;
 }
 
 .balance-label,
@@ -284,11 +312,23 @@
 .profile-info-update button:hover { opacity: 0.85; }
 
 /* =========================================
+   STATS ROW
+========================================= */
+.transaction-container {
+    width: 100%;
+}
+
+.transaction-balance-all-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+}
+
+/* =========================================
    MOBILE
 ========================================= */
 @media (max-width: 1040px) {
     .profile { margin-left: 0; }
-
     .profile-container { padding: 1rem; }
 
     .transaction-balance-all-container {
@@ -305,5 +345,11 @@
     .profile-info-update input:first-of-type,
     .info-update-header {
         grid-column: 1;
+    }
+}
+
+@media (max-width: 640px) {
+    .transaction-balance-all-container {
+        grid-template-columns: 1fr;
     }
 }

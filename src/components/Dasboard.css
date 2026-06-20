@@ -117,7 +117,7 @@ body {
   background:
     transparent;
   color: var(--success);
-   border: 1px solid #1a3776;
+  border: 1px solid #1a3776;
 }
 
 .card-console-balance svg,
@@ -363,110 +363,49 @@ body {
 /* =========================
    TRANSACTION SECTION
 ========================= */
-
-.card-console-transaction-listing {
-    margin-top: 2rem;
-    padding: 2rem;
-    border-radius: 20px;
-    background: #2f5794;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-} */
-
-Title
-.transaction-listing-title {
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: #90a9cf;
-    margin-bottom: 1.5rem;
-    letter-spacing: 0.5px;
+.transaction-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
 }
 
-/* Grid Layout */
-.transaction-listing-container {
-    display: flex;
-    flex-direction: column;
-    border:#e8ecf5 solid 1px;
-    border-radius: 12px;
-} 
-
-/* Transaction Card  */
-.transaction-item {
-    background: #1e293b;
-    border-radius: 18px;
-    padding: 0.5rem;
-    border: 1px solid #e2e8f0;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
+.transaction-table thead tr {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Hover Glow */
-.transaction-item:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
-    border-color: #cbd5e1;
-}
-
-/* Header */
-.transaction-item-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
-}
-
-/* Category */
-.transaction-item-header h3 {
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: #0f172a;
-    margin: 0;
-}
-
-/* Transaction Type Badge */
-.transaction-type {
-    /* padding: 0.4rem 0.8rem; */
-    border-radius: 999px;
-    font-size: 0.8rem;
+.transaction-table th {
+    text-align: left;
+    padding: 0.75rem 1rem;
+    font-size: 0.75rem;
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.05em;
+    color: rgba(255, 255, 255, 0.45);
 }
 
-/* Income Badge */
-.transaction-type.income {
-    background: #0f172a;
-    color: #15803d;
+.transaction-table td {
+    padding: 0.85rem 1rem;
+    color: rgba(255, 255, 255, 0.85);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-/* Expense Badge */
-.transaction-type.expense {
-    background: rgba(239, 68, 68, 0.12);
-    color: #dc2626;
+.transaction-table tbody tr:hover {
+    background: rgba(255, 255, 255, 0.03);
 }
 
-/* Date & Amount */
-.transaction-item p {
-    margin: 0.4rem 0;
-    color: #475569;
-    font-size: 0.95rem;
+/* reuse your existing type badge styles */
+.transaction-type {
+    padding: 0.25rem 0.65rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: capitalize;
 }
 
-/* Amount Styling */
-.transaction-item p:last-child {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: #111827;
-    margin-top: 0.8rem;
-}
-
-/* Empty / Loading State */
-.transaction-listing-container p {
-    font-size: 1rem;
-    color: #64748b;
-    text-align: center;
-    padding: 2rem;
-}
+.transaction-type.expense  { background: rgba(248, 113, 113, 0.15); color: #f87171; }
+.transaction-type.income   { background: rgba(52, 211, 153, 0.15);  color: #34d399; }
+.transaction-type.saving   { background: rgba(96, 165, 250, 0.15);  color: #60a5fa; }
+.transaction-type.investment { background: rgba(251, 191, 36, 0.15); color: #fbbf24; }
 
 /* =========================
    MOBILE RESPONSIVE
@@ -538,6 +477,11 @@ Title
     margin-left: 0;
     padding: 16px;
 
+  }
+
+  .transaction-table {
+    font-size: 0.75rem;
+    width: auto;
   }
 
   .budget-container {
