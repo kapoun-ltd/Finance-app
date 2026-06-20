@@ -115,10 +115,15 @@
 }
 
 /* Responsive Scaling fixes */
-@media (max-width: 768px) {
+@media (max-width: 1040px) {
   .accounts-container {
+    margin-left: 0;
     padding: 20px;
   }
+  .main-container {
+    margin-left: 0;
+  }
+
   
   .global-overview-card div {
     flex-direction: column;
