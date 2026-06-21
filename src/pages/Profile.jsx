@@ -7,7 +7,6 @@ import { getActiveGoals, addGoal , deleteGoal } from "../Api/goals";
 import { getActiveBudget } from "../Api/budget";
 import { updatepassword } from "../Api/updatepassword";
 import { toast } from "react-toastify";         
-import supabase from '../services/supabase';
 
 
 function Profile() {
@@ -263,7 +262,7 @@ function Profile() {
                                     className={`goal-item ${selectedGoalId === goal.id ? "goal-selected" : ""}`}
                                     key={goal.id}
                                     onClick={() => setSelectedGoalId(
-                                        selectedGoalId === goal.id ? null : goal.id  // ✅ toggle off on second click
+                                        selectedGoalId === goal.id ? null : goal.id  
                                     )}
                                 >
                                     <h3>{goal.goal_name}</h3>

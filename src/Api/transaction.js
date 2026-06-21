@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import supabase from "../services/supabase";
 
 export const subscribeToTransactions = (onUpdate) => {
@@ -65,6 +66,25 @@ export const fetchTransactions = async (type = "") => {
     }
 
     return data;
+};
+
+
+export const deletetransaction = async (transactionId) => {
+    const {data: {user} } = await supabase.auth.getUser();
+
+    const {error} = await supabase
+        .from("transactions")
+        .delete()
+        .eq("id" , transactionId)
+        .eq("user_id" , user.id)
+
+        if (error) {
+        toast.error(`Error deleting goal: ${error.message}`);
+        return false;
+    }
+
+    toast.success("Goal deleted successfully!");
+    return true;
 };
 
 

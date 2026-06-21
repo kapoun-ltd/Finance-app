@@ -63,7 +63,7 @@ export const deleteGoal = async (goalId) => {
         .from("goals")
         .delete()
         .eq("id", goalId)
-        .eq("user_id", user.id);  // matches composite PK and satisfies RLS
+        .eq("user_id", user.id);  
 
     if (error) {
         toast.error(`Error deleting goal: ${error.message}`);

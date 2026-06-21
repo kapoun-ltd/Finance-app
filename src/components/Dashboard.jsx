@@ -3,13 +3,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faWallet, faChartLine } from '@fortawesome/free-solid-svg-icons';
 import Sidebar from './Sidebar';
 import './Dasboard.css';
-import { fetchTransactions } from "../Api/transaction";
+import { fetchTransactions , deletetransaction } from "../Api/transaction";
 import { IncomeChart, PieChart } from '../charts/charts';
 import BudgetModel from '../pages/module';
 import { getActiveBudget } from '../Api/budget';
 import { calculateBudgetRemaining } from '../utils/budgetfunction';
 import { checkBudgetStatus } from '../utils/budgetchecker';
 import useRegistration from '../Api/user';
+import supabase from '../services/supabase';
 
 
 function Dashboard() {
@@ -20,8 +21,7 @@ function Dashboard() {
   const [expenseTotal, setExpenseTotal] = useState(0);
   const [budget, setBudget] = useState([]);
   const [settings, setSettings] = useState([]);
-
-
+  const [selectedId, setSelectedId] = useState([]);
   const { userName, registrationData, loading: userLoading } = useRegistration();
 
 
@@ -102,6 +102,23 @@ function Dashboard() {
     { id: 0, value: incomeTotal, label: 'Income', color: '#2e7d32' },
     { id: 1, value: expenseTotal, label: 'Expenses', color: '#d32f2f' }
   ], [incomeTotal, expenseTotal]);
+
+
+ // toggle one item
+const handleSelect = (id) => {
+  setSelectedId((prev) =>
+    prev.includes(id) ? prev.filter((i) => i !== id) : [...prev, id]
+  );
+};
+
+const handleDeleteSelected = async () => {
+  const success = await deletetransaction(selectedId);
+
+  if (success) {
+        setGoals((prev) => prev.filter((g) => g.id !== selectedGoalId));
+        setSelectedGoalId(null);
+    }
+}
 
 
 
@@ -224,42 +241,67 @@ function Dashboard() {
         </div>
 
         <div className="card-console-transaction-listing">
-  <h1 className='transaction-listing-title'>Transaction Listing</h1>
+ <h1 className='transaction-listing-title'>Transaction Listing</h1>
 
-  {loading ? (
-    <p>Loading transactions...</p>
-  ) : transactions.length === 0 ? (
-    <p>No transactions found.</p>
-  ) : (
-    <div className="transaction-listing-container">
-      <table className="transaction-table">
-        <thead>
-          <tr>
-            <th>No</th>
-            <th>Category</th>
-            <th>Type</th>
-            <th>Date</th>
-            <th>Amount (Ksh)</th>
+{loading ? (
+  <p>Loading transactions...</p>
+) : transactions.length === 0 ? (
+  <p>No transactions found.</p>
+) : (
+  <div className="transaction-listing-container">
+
+    {/* Delete bar - only shows when something is checked */}
+    {selectedId.length > 0 && (
+      <div className="bulk-action-bar">
+        <span>{selectedId.length} selected</span>
+        <button onClick={handleDeleteSelected} className="delete-selected-btn">
+          Delete Selected
+        </button>
+      </div>
+    )}
+
+    <table className="transaction-table">
+      <thead>
+        <tr>
+          <th>
+            <input
+              type="checkbox"
+              // onChange={handleSelectAll}
+              checked={selectedId.length === transactions.length && transactions.length > 0}
+            />
+          </th>
+          <th>No</th>
+          <th>Category</th>
+          <th>Type</th>
+          <th>Date</th>
+          <th>Amount (Ksh)</th>
+        </tr>
+      </thead>
+      <tbody>
+        {transactions.map((tx, index) => (
+          <tr key={tx.id} className={selectedId.includes(tx.id) ? 'row-selected' : ''}>
+            <td>
+              <input
+                type="checkbox"
+                checked={selectedId.includes(tx.id)}
+                onChange={() => handleSelect(tx.id)}
+              />
+            </td>
+            <td>{index + 1}</td>
+            <td>{tx.category}</td>
+            <td>
+              <span className={`transaction-type ${tx.type.toLowerCase()}`}>
+                {tx.type}
+              </span>
+            </td>
+            <td>{new Date(tx.date).toLocaleDateString()}</td>
+            <td>Ksh {Number(tx.amount).toLocaleString()}</td>
           </tr>
-        </thead>
-        <tbody>
-          {transactions.map((tx, index) => (
-            <tr key={tx.id}>
-              <td>{index + 1}</td>
-              <td>{tx.category}</td>
-              <td>
-                <span className={`transaction-type ${tx.type.toLowerCase()}`}>
-                  {tx.type}
-                </span>
-              </td>
-              <td>{new Date(tx.date).toLocaleDateString()}</td>
-              <td>Ksh {Number(tx.amount).toLocaleString()}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  )}
+        ))}
+      </tbody>
+    </table>
+  </div>
+)}
 </div>
 
       </div>
