@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { fetchTransactions } from "../Api/transaction"
+import './potfolio.css'
 
 const Portfolio = () => {
     const [transactions, setTransactions] = useState([])
