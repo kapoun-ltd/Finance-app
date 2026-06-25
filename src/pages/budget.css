@@ -1,0 +1,134 @@
+
+.main-budget-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 400px;
+}
+
+.budget-container {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  
+}
+
+
+/* ================================
+   BUDGET LIST CONTAINER
+================================ */
+
+.budget-list-container {
+  background: #356f98;
+  color: var(--text);
+  border-radius: var(--radius);
+
+  padding: 24px;
+
+  box-shadow: var(--shadow);
+}
+
+.budget-list-container h3 {
+  font-size: 24px;
+  font-weight: 700;
+
+  margin-bottom: 24px;
+
+  color: var(--text);
+}
+
+
+/* ================================
+   BUDGET CARD
+================================ */
+
+.budget-card {
+
+  border-radius: 20px;
+
+  padding: 20px;
+
+  box-shadow: var(--shadow);
+
+  border: 1px solid #a7ccf1;
+  
+  gap: 18px;
+
+  transition: all 0.3s ease;
+}
+
+.budget-card:hover {
+  transform: translateY(-4px);
+
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* ================================
+   BUDGET CARD TOP
+================================ */
+
+.budget-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.budget-card-top h2 {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.budget-card-top span {
+  color: var(--primary);
+
+  padding: 6px 12px;
+
+  border-radius: 999px;
+
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* ================================
+   BUDGET MONEY SECTION
+================================ */
+
+.budget-money {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.budget-money div {
+  flex: 1;
+}
+
+.budget-money label {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.budget-money h3 {
+  margin-top: 6px;
+
+  font-size: 20px;
+  font-weight: 700;
+}
+
+/* ================================
+   BUDGET LABELS
+================================ */
+
+.budget-label {
+  font-size: 14px;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.budget-amount {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--success);
+  margin-top: 10px;
+}

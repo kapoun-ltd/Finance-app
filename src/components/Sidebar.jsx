@@ -40,7 +40,7 @@ function Sidebar() {
       {/* Desktop sidebar — hidden on mobile */}
       <div className="sidebar">
         <h2>Tracker</h2>
-        <Link to="/dashboard">Dashboard</Link>
+        <Link to="/dashboard">Home</Link>
         <Link to="/accounts">Accounts</Link>
         <Link to="/transactions">Transactions</Link>
         <Link to="/profile">Profile</Link>

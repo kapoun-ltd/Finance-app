@@ -10,6 +10,7 @@ import { getActiveBudget } from '../Api/budget';
 import { calculateBudgetRemaining } from '../utils/budgetfunction';
 import { checkBudgetStatus } from '../utils/budgetchecker';
 import useRegistration from '../Api/user';
+import Budget from '../pages/budget';
 import supabase from '../services/supabase';
 
 
@@ -126,7 +127,7 @@ const handleDeleteSelected = async () => {
     <div>
       <Sidebar />
       <div className='dashboard-container'>
-        <label>Welcome, {userName} </label>
+        <label>Welcome back, {userName} </label>
 
         {/* TOP CARDS */}
         <div className='main-dashboard'>
@@ -170,61 +171,13 @@ const handleDeleteSelected = async () => {
         </div>
 
         {/* BUDGET SECTION */}
-        <div className='main-budget-container'>
-            <div className="budget-list-container">
-              <div className="budget-header">
-                <h3>Budget Overview</h3>
-                <BudgetModel />
-              </div>
+        <div className='analysis-container'>
 
-              <div className="budget-grid">
-                {budget.map((b) => {
-                  // Uses the first memoized function which filters by "Expense" type
-                  const consumed = expenseByCategory[b.category] || 0;
-                  const remaining = b.budget_limit - consumed;
+      <Budget />
 
-                  const percentage = b.budget_limit > 0
-                    ? (consumed / b.budget_limit) * 100
-                    : 0;
 
-                  // Determine color based on status
-                  const isOverBudget = remaining < 0;
-
-                  return (
-                    <div key={b.id || b.category} className="budget-card">
-                      <h3>{b.category}</h3>
-
-                      <div className="budget-stats">
-                        <p>Limit: <strong>Ksh {Number(b.budget_limit).toLocaleString()}</strong></p>
-                        <p>Spent: <span className="spent-amt">Ksh {consumed.toLocaleString()}</span></p>
-                        <p>
-                          Remaining:
-                          <strong style={{ color: isOverBudget ? '#787474' : '#2e7d32' }}>
-                            Ksh {remaining.toLocaleString()}
-                          </strong>
-                        </p>
-                      </div>
-
-                      {/* Progress Bar */}
-                      <div className="progress-container" style={{ background: '#eee', height: '10px', borderRadius: '5px', marginTop: '10px' }}>
-                        <div
-                          className="progress-bar"
-                          style={{
-                            width: `${Math.min(percentage, 100)}%`,
-                            backgroundColor: percentage > 90 ? '#d32f2f' : '#2e7d32',
-                            height: '100%',
-                            borderRadius: '5px',
-                            transition: 'width 0.3s ease'
-                          }}
-                        />
-                      </div>
-                      <small>{percentage.toFixed(0)}% of budget used</small>
-                    </div>
-                  );
-                })}
-              </div>
-
-          </div>
+          
+        
         </div>
 
         {/* CHARTS */}
