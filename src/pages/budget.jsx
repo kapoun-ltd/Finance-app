@@ -83,7 +83,7 @@ const expenseByCategory = useMemo(() => {
     
     return (
         <div className='main-budget-container'>
-            <div className="budget-list-container">
+          
                 <div className="budget-header">
                     <h3>Budget Overview</h3>
                     <BudgetModel />
@@ -129,6 +129,6 @@ const expenseByCategory = useMemo(() => {
                     })}
                 </div>
             </div>
-        </div>
+        
     );
 }

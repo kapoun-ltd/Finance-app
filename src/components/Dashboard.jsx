@@ -128,12 +128,21 @@ const handleDeleteSelected = async () => {
         {/* BUDGET SECTION */}
         <div className='analysis-container'>
 
-      <Budget />
-
-
+          <div className='budget-card'>
+            <Budget /> 
+          </div>
           
-        
+          <div className='speeding-card'>
+            <label className='cards-lable'>Spending</label>
+          </div>
+
+          <div className='pendingBills-card'>
+            <label className='cards-lable'>Portfolio</label>
+          </div>
+
         </div>
+
+        
 
         {/* CHARTS */}
         <div className="card-console-other-container">
@@ -174,7 +183,7 @@ const handleDeleteSelected = async () => {
           <th>
             <input
               type="checkbox"
-              // onChange={handleSelectAll}
+              
               checked={selectedId.length === transactions.length && transactions.length > 0}
             />
           </th>
