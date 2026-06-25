@@ -12,6 +12,8 @@ import { checkBudgetStatus } from '../utils/budgetchecker';
 import useRegistration from '../Api/user';
 import Budget from '../pages/budget';
 import supabase from '../services/supabase';
+import Expense from '../pages/Expence'
+
 
 
 function Dashboard() {
@@ -133,7 +135,8 @@ const handleDeleteSelected = async () => {
           </div>
           
           <div className='speeding-card'>
-            <label className='cards-lable'>Spending</label>
+              <Expense />
+                
           </div>
 
           <div className='pendingBills-card'>

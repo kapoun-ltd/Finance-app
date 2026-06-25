@@ -1,111 +1,69 @@
-.withdrawal-container {
-    display: flex;
-    justify-content: flex-end;
-    padding: 40px;
-    min-height: 100vh;
-}
-
-/* main card */
-.withdrawal-mini-container {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    padding: 25px;
-    background: linear-gradient(145deg, #1f2933, #111827);
-    width: 100%;
-    max-width: 900px;
-    border-radius: 16px;
-    color: #fff;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-}
-
-/* inputs */
-.withdrawal-mini-container input {
-    background: #2c2f36;
-    color: #fff;
-    border: 1px solid transparent;
-    padding: 12px 15px;
-    border-radius: 8px;
-    font-family: "Poppins", sans-serif;
-    font-size: 14px;
-    width: 96%;
-    transition: 0.2s ease;
-    margin-bottom: 10px;
-}
-
-/* input focus */
-.withdrawal-mini-container input:focus {
-    outline: none;
-    border: 1px solid #4caf50;
-    background: #32343b;
-}
-
-/* button */
-.withdrawal-btn {
-    background: #4caf50;
-    color: #fff;
-    border: none;
-    padding: 12px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-family: "Poppins", sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    transition: 0.2s ease;
-}
-
-/* button hover */
-.withdrawal-btn:hover {
-    background: #43a047;
-    transform: translateY(-2px);
-}
-
-/* footer card */
-.withdrawal-content-footer {
-    padding: 15px;
-    background: #2c2f36;
+/* Spending Panel */
+.spending-panel {
+    background: #ffffff;
     border-radius: 12px;
-    margin-top: 10px;
-}
-
-/* balance text */
-.account-balance {
-    font-size: 22px;
-    font-weight: bold;
-    color: #4caf50;
-}
-
-/* transaction section */
-.recent-transaction-listing {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    padding: 20px;
-    background: #1e1f25;
-    border-radius: 12px;
-}
-
-.transaction-listing table {
+    padding: 24px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     width: 100%;
-    border-collapse: collapse;
 }
 
-.transaction-listing th,
-.transaction-listing td {
-    padding: 10px;
-    border-bottom: 1px solid #2c2f36;
+.spending-panel h2 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #1a1a2e;
+    margin-bottom: 16px;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 10px;
 }
 
-.transaction-item {
+/* Individual Expense Item */
+.expense-item {
     display: flex;
     justify-content: space-between;
-    padding: 10px;
-    background: #2c2f36;
-    border-radius: 8px;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #f5f5f5;
+    transition: background 0.2s ease;
 }
 
-.transaction-item span {
-    font-size: 14px;
+.expense-item:last-child {
+    border-bottom: none;
+}
+
+.expense-item:hover {
+    background: #f9f9fb;
+    border-radius: 8px;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+/* Expense Description */
+.expense-item span:first-child {
+    font-size: 0.95rem;
+    color: #333;
     font-weight: 500;
-    color: #fff;
+    flex: 1;
+}
+
+/* Expense Amount */
+.expense-item span:nth-child(2) {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #e63946;        /* red for spending */
+    margin: 0 16px;
+}
+
+/* Expense Date */
+.expense-item span:nth-child(3) {
+    font-size: 0.8rem;
+    color: #999;
+    white-space: nowrap;
+}
+
+/* Empty State */
+.spending-panel p {
+    text-align: center;
+    color: #aaa;
+    font-size: 0.9rem;
+    padding: 24px 0;
 }
