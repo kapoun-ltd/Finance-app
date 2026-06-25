@@ -147,11 +147,6 @@ body {
 
 
 /* ================================
-   BUDGET SECTION
-================================ */
-
-
-/* ================================
    PROGRESS BAR
 ================================ */
 
@@ -357,10 +352,6 @@ body {
     width: auto;
   }
 
-  .budget-container {
-    grid-template-columns: 1fr;
-  }
-
   .card-console-other-container {
     flex-direction: column;
   }
@@ -371,16 +362,6 @@ body {
     max-width: 100%;
   }
 
-  .budget-money {
-    flex-direction: column;
-    gap: 16px;
-  }
-
-  .budget-card-top {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-  }
 
   .trans-widrawal-listing-btn,
   .trans-deposite-listing-btn,

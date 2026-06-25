@@ -53,50 +53,6 @@ function Dashboard() {
     loadTransactions();
   }, []);
 
-  /* =========================================
-      FETCH BUDGETS
-  ========================================= */
-  useEffect(() => {
-    const fetchBudgetData = async () => {
-      const today = new Date().toISOString().split("T")[0];
-      const data = await getActiveBudget(today);
-      if (data) {
-        setBudget(data);
-      }
-    };
-    fetchBudgetData();
-  }, []);
-
-  /* =========================================
-      DERIVED DATA (Logic inside function)
-  ========================================= */
-
-  // Calculate expenses per category memoized for performance
-  const expenseByCategory = useMemo(() => {
-    const mapping = {};
-    transactions.forEach((item) => {
-      if (item.type === "Expense") {
-        const category = item.category?.trim();
-        mapping[category] = (mapping[category] || 0) + Number(item.amount);
-      }
-    });
-    return mapping;
-  }, [transactions]);
-
-  // Calculate the consumed per category
-  const consumedByCategory = useMemo(() => {
-    const mapping = {};
-
-    transactions.forEach((item) => {
-      const category = item.category;
-      const amount = Number(item.amount);
-
-      mapping[category] = (mapping[category] || 0) + amount;
-    });
-
-    return mapping;
-  }, [transactions]);
-
 
   // Format data for the Pie Chart
   const pieChartData = useMemo(() => [
@@ -120,7 +76,6 @@ const handleDeleteSelected = async () => {
         setSelectedGoalId(null);
     }
 }
-
 
 
   return (
