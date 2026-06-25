@@ -13,6 +13,7 @@ import useRegistration from '../Api/user';
 import Budget from '../pages/budget';
 import supabase from '../services/supabase';
 import Expense from '../pages/Expence'
+import Portfolio from '../pages/potfolio';
 
 
 
@@ -79,7 +80,6 @@ const handleDeleteSelected = async () => {
     }
 }
 
-
   return (
     <div>
       <Sidebar />
@@ -140,13 +140,12 @@ const handleDeleteSelected = async () => {
           </div>
 
           <div className='pendingBills-card'>
-            <label className='cards-lable'>Portfolio</label>
+             <Portfolio />
           </div>
 
         </div>
 
         
-
         {/* CHARTS */}
         <div className="card-console-other-container">
           <div className="card-console-other">
